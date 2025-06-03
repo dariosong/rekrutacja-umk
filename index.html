@@ -245,23 +245,85 @@
             margin: 5px;
         }
 
-        @media (max-width: 768px) {
-            nav .container > div {
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 3px;
-                padding: 0 4px;
-            }
-            
-            nav button {
-                font-size: 0.7rem;
-                padding: 8px 3px;
-                min-width: 30%;
-                max-width: 32%;
-                text-align: center;
-                margin: 2px 1px;
-                line-height: 1.2;
-            }
+       @media (max-width: 768px) {
+    nav .container > div {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+        padding: 0 8px;
+    }
+    
+    nav button {
+        font-size: 0.6rem !important;
+        padding: 6px 4px !important;
+        width: 100% !important;
+        min-width: auto !important;
+        max-width: none !important;
+        text-align: center;
+        margin: 0 !important;
+        line-height: 1.1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+    }
+    
+    nav button i {
+        font-size: 0.8rem !important;
+        margin-bottom: 2px;
+    }
+
+    nav button span {
+        font-size: 0.55rem !important;
+    }
+    
+    .mobile-title {
+        font-size: 1.5rem !important;
+        line-height: 1.3;
+        padding: 0 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .countdown-box {
+        min-width: 55px;
+        max-width: 65px;
+        padding: 8px 6px;
+        margin: 3px;
+    }
+    
+    .countdown-box .text-3xl {
+        font-size: 1.5rem !important;
+    }
+    
+    .countdown-box .text-sm {
+        font-size: 0.7rem !important;
+    }
+    
+    /* Poprawka wysokości dla iPhone */
+    section {
+        min-height: auto !important;
+    }
+    
+    #home {
+        min-height: 100vh !important;
+        padding: 1rem 0;
+    }
+}
+
+@media (max-width: 400px) {
+    nav .container > div {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+    
+    nav button {
+        font-size: 0.55rem !important;
+        height: 45px;
+    }
+}
+
+
             
             nav button i {
                 display: block;
