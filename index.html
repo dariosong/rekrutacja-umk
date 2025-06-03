@@ -341,23 +341,73 @@
             }
         }
           
-/* AGRESYWNE poprawki dla iPhone - DODANE */
+/* AGRESYWNE poprawki dla iPhone - POPRAWIONE */
 @media (max-width: 768px) {
-    .section.active {
+    /* POPRAWKA 1: Prawidłowe ukrywanie sekcji */
+    .section {
+        display: none !important;
         height: auto !important;
         min-height: auto !important;
         max-height: none !important;
         overflow: visible !important;
+        padding-bottom: 4rem !important;
     }
     
-    #home.section {
-        height: auto !important;
+    .section.active {
+        display: block !important;
+    }
+    
+    /* POPRAWKA dla sekcji HOME */
+    #home.section.active {
         display: flex !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
         align-items: center !important;
         padding: 1rem 0 3rem 0 !important;
+        min-height: auto !important;
     }
+    
+    /* POPRAWKA 2: Przyciski w quiz obok siebie */
+    .bg-gray-100.rounded-lg.p-2 {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 4px !important;
+        padding: 8px !important;
+        width: 100% !important;
+        max-width: 400px !important;
+        margin: 0 auto !important;
+    }
+    
+    .program-tab {
+        flex: 1 !important;
+        text-align: center !important;
+        padding: 8px 12px !important;
+        font-size: 0.8rem !important;
+        white-space: nowrap !important;
+        margin: 0 !important;
+    }
+    
+    /* Wymuś widoczność wszystkich elementów */
+    .grid, .space-y-2, .space-y-3, .space-y-4 {
+        margin-bottom: 1rem !important;
+    }
+    
+    .umk-blue.min-h-screen {
+        min-height: auto !important;
+    }
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+    html {
+        height: auto !important;
+    }
+    
+    body {
+        height: auto !important;
+        min-height: auto !important;
+    }
+}
+
     
     .umk-blue.min-h-screen {
         min-height: auto !important;
