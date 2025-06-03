@@ -340,6 +340,51 @@
                 font-size: 0.65rem;
             }
         }
+          
+/* AGRESYWNE poprawki dla iPhone - DODANE */
+@media (max-width: 768px) {
+    .section.active {
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    
+    #home.section {
+        height: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        padding: 1rem 0 3rem 0 !important;
+    }
+    
+    .umk-blue.min-h-screen {
+        min-height: auto !important;
+    }
+    
+    /* Wymuś widoczność wszystkich elementów */
+    .grid, .space-y-2, .space-y-3, .space-y-4 {
+        margin-bottom: 1rem !important;
+    }
+    
+    /* Dodatkowy padding na dole każdej sekcji */
+    .section {
+        padding-bottom: 4rem !important;
+    }
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+    html {
+        height: auto !important;
+    }
+    
+    body {
+        height: auto !important;
+        min-height: auto !important;
+    }
+}
+
     </style>
 </head>
 <body>
