@@ -1442,6 +1442,61 @@
             updateCountdown();
             setInterval(updateCountdown, 1000);
         });
+        
+// System automatycznego dostosowywania wysokości iframe
+function updateParentHeight() {
+    if (window.parent && window.parent !== window) {
+        setTimeout(() => {
+            const body = document.body;
+            const html = document.documentElement;
+            
+            const height = Math.max(
+                body.scrollHeight,
+                body.offsetHeight,
+                html.clientHeight,
+                html.scrollHeight,
+                html.offsetHeight,
+                document.documentElement.scrollHeight
+            );
+            
+            // Wysyłaj wysokość do rodzica
+            window.parent.postMessage({
+                type: 'umk-resize',
+                height: height,
+                section: document.querySelector('.section.active')?.id || 'home'
+            }, '*');
+        }, 300);
+    }
+}
+
+// Słuchaj zmian wysokości
+const observer = new MutationObserver(updateParentHeight);
+observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true
+});
+
+// Aktualizuj wysokość przy zmianie sekcji
+const originalShowSection = showSection;
+showSection = function(sectionId) {
+    originalShowSection(sectionId);
+    updateParentHeight();
+};
+
+// Aktualizuj przy zmianie rozmiaru okna
+window.addEventListener('resize', updateParentHeight);
+
+// Pierwsza aktualizacja
+setTimeout(updateParentHeight, 1000);
+
+// Odpowiedz na prośby o wysokość
+window.addEventListener('message', function(event) {
+    if (event.data.type === 'getHeight') {
+        updateParentHeight();
+    }
+});
+
     </script>
 </body>
 </html>
