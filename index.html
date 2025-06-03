@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Rekrutacja UMK - Studia teologiczne i o rodzinie</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --umk-blue: #1F4F96;
+            --umk-green: #00A651;
+            --umk-light-blue: #E8F0FF;
+        }
+
+        html, body {
+            overflow-x: hidden !important;
+            max-width: 100vw !important;
+            background: #f9fafb;
+            margin: 0;
+            padding: 0;
+        }
+
+        .app-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+
+        .main-content {
+            flex: 1 0 auto;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .umk-blue { background-color: var(--umk-blue); }
+        .umk-green { background-color: var(--umk-green); }
+        .umk-light-blue { background-color: var(--umk-light-blue); }
+        .text-umk-blue { color: var(--umk-blue); }
+        .text-umk-green { color: var(--umk-green); }
+        .border-umk-blue { border-color: var(--umk-blue); }
+        .border-umk-green { border-color: var(--umk-green); }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            flex-shrink: 0;
+        }
+
+        .countdown-box {
+            background: var(--umk-green);
+            border-radius: 15px;
+            padding: 15px 10px;
+            color: white;
+            text-align: center;
+            margin: 6px;
+            min-width: 70px;
+            flex: 1;
+            max-width: 80px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .section { 
+            display: none; 
+        }
+        .section.active { 
+            display: block; 
+        }
+
+        .program-content {
+            display: none;
+        }
+        .program-content.active {
+            display: block;
+        }
+
+        .btn-umk {
+            background: var(--umk-blue);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .btn-umk:hover {
+            background: #1a4380;
+            transform: translateY(-2px);
+        }
+
+        .btn-green {
+            background: var(--umk-green);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+            display: inline-block;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .btn-green:hover {
+            background: #008f46;
+        }
+
+        .mobile-title {
+            font-size: 2.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .pulse-card {
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(31, 79, 150, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(31, 79, 150, 0.6); }
+        }
+
+        .quiz-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--umk-blue);
+            background-color: var(--umk-light-blue);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--umk-green);
+            background-color: #f0f9ff;
+        }
+
+        .quiz-option.correct {
+            border-color: var(--umk-green);
+            background-color: #dcfce7;
+        }
+
+        .quiz-option.incorrect {
+            border-color: #dc2626;
+            background-color: #fef2f2;
+        }
+
+        .faq-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background: #f8fafc;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--umk-light-blue);
+        }
+
+        .faq-answer {
+            padding: 20px;
+            display: none;
+            background: white;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            overflow: hidden;
+        }
+
+        .faq-answer.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { 
+                max-height: 0; 
+                opacity: 0; 
+            }
+            to { 
+                max-height: 300px; 
+                opacity: 1; 
+            }
+        }
+
+        .specialization-card {
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .specialization-card:hover {
+            border-color: var(--umk-blue);
+            box-shadow: 0 5px 15px rgba(31, 79, 150, 0.1);
+        }
+
+        .calendar-event {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-left: 4px solid var(--umk-green);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
+        .simulator-screen {
+            background: #1e293b;
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            min-height: 300px;
+        }
+
+        .student-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--umk-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin: 5px;
+        }
+
+        @media (max-width: 768px) {
+            nav .container > div {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 3px;
+                padding: 0 4px;
+            }
+            
+            nav button {
+                font-size: 0.7rem;
+                padding: 8px 3px;
+                min-width: 30%;
+                max-width: 32%;
+                text-align: center;
+                margin: 2px 1px;
+                line-height: 1.2;
+            }
+            
+            nav button i {
+                display: block;
+                margin-bottom: 2px;
+                font-size: 0.9rem;
+            }
+
+            nav button span {
+                display: block;
+                font-size: 0.65rem;
+            }
+            
+            .mobile-title {
+                font-size: 1.75rem;
+                line-height: 1.2;
+                padding: 0 0.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .countdown-box {
+                min-width: 60px;
+                max-width: 70px;
+                padding: 12px 8px;
+                margin: 4px;
+            }
+            
+            .btn-umk, .btn-green {
+                width: 100%;
+                max-width: 300px;
+                margin: 5px auto;
+                display: block;
+            }
+        }
+
+        @media (max-width: 400px) {
+            nav button {
+                min-width: 48%;
+                max-width: 48%;
+                margin: 1px;
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="umk-blue text-white p-4">
+            <div class="container mx-auto">
+                <div class="flex justify-center space-x-2 md:space-x-8">
+                    <button onclick="showSection('home')" class="nav-btn px-2 md:px-4 py-2 rounded hover:bg-blue-600 transition text-center">
+                        <i class="fas fa-home mb-1 block"></i>
+                        <span class="text-xs">START</span>
+                    </button>
+                    <button onclick="showSection('programs')" class="nav-btn px-2 md:px-4 py-2 rounded hover:bg-blue-600 transition text-center">
+                        <i class="fas fa-graduation-cap mb-1 block"></i>
+                        <span class="text-xs">KIERUNKI</span>
+                    </button>
+                    <button onclick="showSection('quiz')" class="nav-btn px-2 md:px-4 py-2 rounded hover:bg-blue-600 transition text-center">
+                        <i class="fas fa-brain mb-1 block"></i>
+                        <span class="text-xs">QUIZ</span>
+                    </button>
+                    <button onclick="showSection('recruitment')" class="nav-btn px-2 md:px-4 py-2 rounded hover:bg-blue-600 transition text-center">
+                        <i class="fas fa-calendar mb-1 block"></i>
+                        <span class="text-xs">REKRUTACJA</span>
+                    </button>
+                    <button onclick="showSection('simulator')" class="nav-btn px-2 md:px-4 py-2 rounded hover:bg-blue-600 transition text-center">
+                        <i class="fas fa-laptop mb-1 block"></i>
+                        <span class="text-xs">SYMULATOR</span>
+                    </button>
+                    <button onclick="showSection('faq')" class="nav-btn px-2 md:px-4 py-2 rounded hover:bg-blue-600 transition text-center">
+                        <i class="fas fa-question-circle mb-1 block"></i>
+                        <span class="text-xs">FAQ</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Home Section -->
+            <section id="home" class="section active umk-blue min-h-screen flex flex-col justify-center items-center text-white">
+                <div class="container mx-auto px-4 text-center">
+                    <h1 class="mobile-title">
+                        Studiuj na najlepszym Wydziale Teologicznym w Polsce
+                    </h1>
+                    
+                    <div class="inline-block bg-white bg-opacity-20 rounded-2xl px-6 py-3 mb-8">
+                        <p class="text-lg md:text-xl font-semibold text-white">
+                            🏆 Oficjalnie #1<br>
+                            w Rankingu Perspektyw 2024
+                        </p>
+                    </div>
+
+                    <!-- Licznik tutaj - wewnątrz niebieskiej sekcji -->
+                    <div class="mb-12">
+                        <h2 class="text-xl md:text-2xl text-center text-white mb-6">⏰ Do końca rekrutacji pozostało:</h2>
+                        <div class="flex justify-center flex-wrap" id="countdown">
+                            <div class="countdown-box">
+                                <div class="text-3xl font-bold" id="days">0</div>
+                                <div class="text-sm">dni</div>
+                            </div>
+                            <div class="countdown-box">
+                                <div class="text-3xl font-bold" id="hours">0</div>
+                                <div class="text-sm">godzin</div>
+                            </div>
+                            <div class="countdown-box">
+                                <div class="text-3xl font-bold" id="minutes">0</div>
+                                <div class="text-sm">minut</div>
+                            </div>
+                            <div class="countdown-box">
+                                <div class="text-3xl font-bold" id="seconds">0</div>
+                                <div class="text-sm">sekund</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-8">
+                        <!-- Teologia Card -->
+                        <div class="pulse-card bg-white rounded-2xl p-8 text-gray-800 transform hover:scale-105 transition-all duration-300 cursor-pointer" onclick="showProgram('theology')">
+                            <div class="mb-6">
+                                <img src="https://www.teologia.umk.pl/panel/wp-content/uploads/teologia.jpg" 
+                                     alt="Studenci teologii" 
+                                     class="w-full h-48 object-cover rounded-lg">
+                            </div>
+                            <h3 class="text-2xl font-bold text-umk-blue mb-2">Teologia</h3>
+                            <p class="text-gray-600 mb-4">Jednolite studia magisterskie</p>
+                            <div class="space-y-2 mb-6">
+                                <div class="flex items-center">
+                                    <i class="fas fa-check text-umk-green mr-2"></i>
+                                    <span>3 specjalności</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-check text-umk-green mr-2"></i>
+                                    <span>10-12 semestrów</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-check text-umk-green mr-2"></i>
+                                    <span>Tryb hybrydowy</span>
+                                </div>
+                            </div>
+                            <button class="btn-umk w-full">
+                                <i class="fas fa-arrow-right mr-2"></i>
+                                Dowiedz się więcej
+                            </button>
+                        </div>
+
+                        <!-- Nauki o rodzinie Card -->
+                        <div class="pulse-card bg-white rounded-2xl p-8 text-gray-800 transform hover:scale-105 transition-all duration-300 cursor-pointer" onclick="showProgram('family')">
+                            <div class="mb-6">
+                                <img src="https://www.teologia.umk.pl/panel/wp-content/uploads/nauki_o_rodzinie.jpg" 
+                                     alt="Nauki o rodzinie" 
+                                     class="w-full h-48 object-cover rounded-lg">
+                            </div>
+                            <h3 class="text-2xl font-bold text-umk-blue mb-2">Nauki o rodzinie</h3>
+                            <p class="text-gray-600 mb-4">Studia I i II stopnia</p>
+                            <div class="space-y-2 mb-6">
+                                <div class="flex items-center">
+                                    <i class="fas fa-check text-umk-green mr-2"></i>
+                                    <span>Licencjat (3 lata)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-check text-umk-green mr-2"></i>
+                                    <span>Magister (2 lata)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-check text-umk-green mr-2"></i>
+                                    <span>Praktyczne umiejętności</span>
+                                </div>
+                            </div>
+                            <button class="btn-umk w-full">
+                                <i class="fas fa-arrow-right mr-2"></i>
+                                Dowiedz się więcej
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-4 justify-center">
+                        <a href="https://irk.umk.pl/pl/offer/RP2025s1n1/programme/15510135-KRK/?from=field:TEO" target="_blank" class="btn-umk" style="border: 2px solid white;">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            Zapisz się na Teologię
+                        </a>
+                        <a href="https://irk.umk.pl/pl/offer/RP2025s1n1/programme/15510276-KRK/?from=field:NOR" target="_blank" class="btn-green">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            Zapisz się na Nauki o rodzinie
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Programs Section -->
+            <section id="programs" class="section py-16 bg-white">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-4xl font-bold text-center text-umk-blue mb-12">Kierunki studiów</h2>
+                    
+                    <div class="flex justify-center mb-8">
+                        <div class="bg-gray-100 rounded-lg p-2">
+                            <button onclick="switchProgram('theology')" id="theology-tab" class="program-tab px-6 py-3 rounded-lg mr-2 bg-white text-umk-blue font-semibold border-2 border-umk-blue">
+                                Teologia
+                            </button>
+                            <button onclick="switchProgram('family')" id="family-tab" class="program-tab px-6 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+                                Nauki o rodzinie
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Theology Program -->
+                    <div id="theology-content" class="program-content active">
+                        <div class="text-center mb-8">
+                            <h3 class="text-2xl font-bold text-umk-blue mb-2">#1 w Polsce - Perspektywy 2024: 100 pkt</h3>
+                            <p class="text-gray-600">Jednolite studia magisterskie</p>
+                        </div>
+
+                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                            <div class="specialization-card">
+                                <h4 class="text-xl font-bold text-umk-blue mb-4">Teologia ogólna</h4>
+                                <div class="space-y-2 mb-4">
+                                    <p><strong>Czas trwania:</strong> 10 semestrów</p>
+                                    <p><strong>Dla:</strong> osób świeckich</p>
+                                </div>
+                                <p class="text-gray-600">Kompleksowe przygotowanie teologiczne z szerokim spektrum zastosowań zawodowych</p>
+                            </div>
+
+                            <div class="specialization-card">
+                                <h4 class="text-xl font-bold text-umk-blue mb-4">Katechetyczno-pastoralna</h4>
+                                <div class="space-y-2 mb-4">
+                                    <p><strong>Czas trwania:</strong> 10 semestrów</p>
+                                    <p><strong>Dla:</strong> osób świeckich</p>
+                                </div>
+                                <p class="text-gray-600">Przygotowanie do pracy w szkole jako nauczyciel religii</p>
+                            </div>
+
+                            <div class="specialization-card">
+                                <h4 class="text-xl font-bold text-umk-blue mb-4">Kapłańska</h4>
+                                <div class="space-y-2 mb-4">
+                                    <p><strong>Czas trwania:</strong> 12 semestrów</p>
+                                    <p><strong>Dla:</strong> kandydatów do kapłaństwa</p>
+                                </div>
+                                <p class="text-gray-600">Wymaga rozmowy kwalifikacyjnej</p>
+                                <p class="text-umk-green font-semibold mt-2">Termin rekrutacji: do 11 lipca 2025</p>
+                                <p class="text-umk-blue font-semibold">Termin rozmowy kwalifikacyjnej: 15 lipca o godz. 9:00</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-umk-light-blue rounded-lg p-6 mb-8">
+                            <h4 class="text-xl font-bold text-umk-blue mb-4">Perspektywy zawodowe:</h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-chalkboard-teacher text-umk-green mr-3"></i>
+                                    <span>Nauczyciel religii w szkołach</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-building text-umk-green mr-3"></i>
+                                    <span>Instytucje rządowe i samorządowe</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-newspaper text-umk-green mr-3"></i>
+                                    <span>Media i PR</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-university text-umk-green mr-3"></i>
+                                    <span>Banki i przedsiębiorstwa prywatne</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-hands-helping text-umk-green mr-3"></i>
+                                    <span>Organizacje chrześcijańskie</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-microphone text-umk-green mr-3"></i>
+                                    <span>Eksperci medialni</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <a href="https://irk.umk.pl/pl/offer/RP2025s1n1/programme/15510135-KRK/?from=field:TEO" target="_blank" class="btn-green text-lg">
+                                <i class="fas fa-external-link-alt mr-2"></i>
+                                Zapisz się teraz
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Family Studies Program -->
+                    <div id="family-content" class="program-content">
+                        <div class="text-center mb-8">
+                            <h3 class="text-2xl font-bold text-umk-blue mb-2">Nauki o rodzinie</h3>
+                            <p class="text-gray-600">Studia I i II stopnia</p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <div class="specialization-card">
+                                <h4 class="text-xl font-bold text-umk-blue mb-4">Studia I stopnia (Licencjat)</h4>
+                                <div class="space-y-2 mb-4">
+                                    <p><strong>Czas trwania:</strong> 3 lata (6 semestrów)</p>
+                                </div>
+                                <div class="space-y-3">
+                                    <div>
+                                        <strong>Integralne wsparcie rodziny</strong>
+                                        <p class="text-gray-600 text-sm">Kompleksowe przygotowanie do pracy z rodziną w kryzysie</p>
+                                    </div>
+                                    <div>
+                                        <strong>Nauczycielska</strong>
+                                        <p class="text-gray-600 text-sm">Wychowanie do życia w rodzinie i etyka</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="specialization-card">
+                                <h4 class="text-xl font-bold text-umk-blue mb-4">Studia II stopnia (Magister)</h4>
+                                <div class="space-y-2 mb-4">
+                                    <p><strong>Czas trwania:</strong> 2 lata (4 semestry)</p>
+                                    <p class="text-umk-green font-semibold">Termin rekrutacji: do 22 lipca 2025</p>
+                                </div>
+                                <div>
+                                    <strong>Coaching rodzinny i mediacje</strong>
+                                    <p class="text-gray-600 text-sm">Specjalistyczne przygotowanie do pracy terapeutycznej</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-umk-light-blue rounded-lg p-6 mb-8">
+                            <h4 class="text-xl font-bold text-umk-blue mb-4">Perspektywy zawodowe:</h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-home text-umk-green mr-3"></i>
+                                    <span>Asystent rodziny</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-chalkboard-teacher text-umk-green mr-3"></i>
+                                    <span>Nauczyciel</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-gavel text-umk-green mr-3"></i>
+                                    <span>Kurator sądowy</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-user-friends text-umk-green mr-3"></i>
+                                    <span>Doradca rodzinny</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-comments text-umk-green mr-3"></i>
+                                    <span>Coach rodzinny</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-handshake text-umk-green mr-3"></i>
+                                    <span>Mediator</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-heart text-umk-green mr-3"></i>
+                                    <span>Opiekun paliatywny</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <a href="https://irk.umk.pl/pl/offer/RP2025s1n1/programme/15510276-KRK/?from=field:NOR" target="_blank" class="btn-green text-lg">
+                                <i class="fas fa-external-link-alt mr-2"></i>
+                                Zapisz się teraz
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz Section -->
+            <section id="quiz" class="section py-16 bg-gray-50">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-4xl font-bold text-center text-umk-blue mb-12">Quiz: Obalamy mity</h2>
+                    
+                    <div class="max-w-3xl mx-auto">
+                        <div class="bg-white rounded-lg p-8 shadow-lg">
+                            <div class="flex justify-center mb-8">
+                                <div class="bg-gray-100 rounded-lg p-2">
+                                    <button onclick="startQuiz('theology')" id="quiz-theology-tab" class="program-tab px-6 py-3 rounded-lg mr-2 bg-white text-umk-blue font-semibold border-2 border-umk-blue">
+                                        Teologia
+                                    </button>
+                                    <button onclick="startQuiz('family')" id="quiz-family-tab" class="program-tab px-6 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+                                        Nauki o rodzinie
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="quiz-container">
+                                <div class="text-center py-12">
+                                    <i class="fas fa-brain text-6xl text-umk-blue mb-4"></i>
+                                    <p class="text-xl text-gray-600">Wybierz kierunek, aby rozpocząć quiz</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-8">
+                            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                                <a href="https://irk.umk.pl/pl/offer/RP2025s1n1/programme/15510135-KRK/?from=field:TEO" target="_blank" class="btn-umk">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    Zapisz się na Teologię
+                                </a>
+                                <a href="https://irk.umk.pl/pl/offer/RP2025s1n1/programme/15510276-KRK/?from=field:NOR" target="_blank" class="btn-green">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    Zapisz się na Nauki o rodzinie
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recruitment Section -->
+            <section id="recruitment" class="section py-16 bg-white">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-4xl font-bold text-center text-umk-blue mb-12">Informacje o rekrutacji</h2>
+                    
+                    <div class="max-w-4xl mx-auto">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <!-- Ważne terminy -->
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <h3 class="text-2xl font-bold text-umk-blue mb-6">
+                                    <i class="fas fa-calendar-alt mr-3"></i>
+                                    Ważne terminy
+                                </h3>
+                                
+                                <div class="calendar-event">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-play text-umk-green mr-3"></i>
+                                        <strong class="text-umk-blue">3 czerwca 2025</strong>
+                                    </div>
+                                    <p>Start rekrutacji</p>
+                                </div>
+
+                                <div class="calendar-event">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-stop text-orange-500 mr-3"></i>
+                                        <strong class="text-umk-blue">11 lipca 2025, 23:59</strong>
+                                    </div>
+                                    <p>Koniec rekrutacji (specjalność kapłańska)</p>
+                                </div>
+
+                                <div class="calendar-event">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-stop text-red-500 mr-3"></i>
+                                        <strong class="text-umk-blue">14 lipca 2025, 23:59</strong>
+                                    </div>
+                                    <p>Koniec rekrutacji (pozostałe kierunki)</p>
+                                </div>
+
+                                <div class="calendar-event">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-stop text-purple-500 mr-3"></i>
+                                        <strong class="text-umk-blue">22 lipca 2025, 23:59</strong>
+                                    </div>
+                                    <p>Koniec rekrutacji (studia II stopnia - Nauki o rodzinie)</p>
+                                </div>
+
+                                <div class="calendar-event">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-bullhorn text-umk-green mr-3"></i>
+                                        <strong class="text-umk-blue">Lipiec 2025</strong>
+                                    </div>
+                                    <p>Ogłoszenie wyników</p>
+                                </div>
+                            </div>
+
+                            <!-- Opłata rekrutacyjna -->
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <h3 class="text-2xl font-bold text-umk-blue mb-6">
+                                    <i class="fas fa-credit-card mr-3"></i>
+                                    Opłata rekrutacyjna
+                                </h3>
+                                
+                                <div class="text-center py-8">
+                                    <div class="text-6xl font-bold text-umk-green mb-4">85 zł</div>
+                                    <p class="text-xl text-gray-600 mb-4">za kierunek</p>
+                                    <div class="bg-umk-light-blue rounded-lg p-4">
+                                        <i class="fas fa-credit-card text-umk-blue mr-2"></i>
+                                        <span>Płatność online podczas składania dokumentów</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-8 space-y-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-check text-umk-green mr-3"></i>
+                                        <span>Bezpieczna płatność online</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-check text-umk-green mr-3"></i>
+                                        <span>Potwierdzenie automatyczne</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-check text-umk-green mr-3"></i>
+                                        <span>Obsługa kart płatniczych</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-12">
+                            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                                <a href="https://irk.umk.pl/pl/offer/RP2025s1n1/programme/15510135-KRK/?from=field:TEO" target="_blank" class="btn-umk text-lg">
+                                    <i class="fas fa-graduation-cap mr-2"></i>
+                                    Zapisz się na Teologię
+                                </a>
+                                <a href="https://irk.umk.pl/pl/offer/RP2025s1n1/programme/15510276-KRK/?from=field:NOR" target="_blank" class="btn-green text-lg">
+                                    <i class="fas fa-users mr-2"></i>
+                                    Zapisz się na Nauki o rodzinie
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Simulator Section -->
+            <section id="simulator" class="section py-16 bg-gray-50">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-4xl font-bold text-center text-umk-blue mb-12">Symulator trybu hybrydowego</h2>
+                    
+                    <!-- Info box -->
+                    <div class="max-w-4xl mx-auto mb-8">
+                        <div class="bg-gradient-to-r from-blue-50 to-green-50 border-l-4 border-umk-blue rounded-lg p-6">
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                <strong>Studiuj z nami – z dowolnego miejsca na świecie!</strong> Od nowego roku akademickiego wprowadzamy elastyczny tryb hybrydowy, który pozwala uczestniczyć w zajęciach zarówno na miejscu, jak i online – również dla Polaków mieszkających poza granicami kraju.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="max-w-6xl mx-auto">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <!-- Sala wykładowa -->
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <h3 class="text-xl font-bold text-umk-blue mb-4">
+                                    <i class="fas fa-chalkboard mr-2"></i>
+                                    Sala wykładowa
+                                </h3>
+                                
+                                <!-- Profesor -->
+                                <div class="simulator-screen mb-4">
+                                    <div class="text-center mb-4">
+                                        <div class="text-4xl mb-2">👨‍🏫</div>
+                                        <p>Prof. dr hab. Jan Kowalski</p>
+                                        <p class="text-sm opacity-75">Wykład: "Podstawy teologii moralnej"</p>
+                                    </div>
+                                    <div class="bg-gray-700 rounded p-4 text-sm">
+                                        <p>"Dzisiaj omówimy fundamentalne zasady etyki chrześcijańskiej..."</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Studenci w sali -->
+                                <div class="bg-gray-100 rounded-lg p-4">
+                                    <h4 class="text-lg font-semibold text-umk-blue mb-3">Studenci w sali wykładowej</h4>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div class="flex items-center p-2 bg-blue-50 rounded">
+                                            <span class="text-2xl mr-2">👨</span>
+                                            <span class="text-sm">Michał Górski</span>
+                                        </div>
+                                        <div class="flex items-center p-2 bg-purple-50 rounded">
+                                            <span class="text-2xl mr-2">👩</span>
+                                            <span class="text-sm">Magdalena Lewandowska</span>
+                                        </div>
+                                        <div class="flex items-center p-2 bg-green-50 rounded">
+                                            <span class="text-2xl mr-2">👨</span>
+                                            <span class="text-sm">Jakub Dąbrowski</span>
+                                        </div>
+                                        <div class="flex items-center p-2 bg-yellow-50 rounded">
+                                            <span class="text-2xl mr-2">👩</span>
+                                            <span class="text-sm">Aleksandra Kozłowska</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Studenci online -->
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <h3 class="text-xl font-bold text-umk-blue mb-4">
+                                    <i class="fas fa-laptop mr-2"></i>
+                                    Studenci online
+                                </h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                                        <div class="student-avatar">A</div>
+                                        <div>
+                                            <p class="font-semibold">Anna Nowak</p>
+                                            <p class="text-sm text-gray-600">📍 Warszawa - słucha wykładu</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center p-3 bg-blue-50 rounded-lg">
+                                        <div class="student-avatar">T</div>
+                                        <div>
+                                            <p class="font-semibold">Tomasz Wiśniewski</p>
+                                            <p class="text-sm text-gray-600">📍 Gdańsk - zadaje pytanie</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center p-3 bg-purple-50 rounded-lg">
+                                        <div class="student-avatar">M</div>
+                                        <div>
+                                            <p class="font-semibold">Maria Kowalczyk</p>
+                                            <p class="text-sm text-gray-600">📍 Kraków - robi notatki</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center p-3 bg-yellow-50 rounded-lg">
+                                        <div class="student-avatar">P</div>
+                                        <div>
+                                            <p class="font-semibold">Paweł Zieliński</p>
+                                            <p class="text-sm text-gray-600">📍 Wrocław - uczestniczy w dyskusji</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-12">
+                            <h3 class="text-2xl font-bold text-center text-umk-blue mb-8">Korzyści trybu hybrydowego</h3>
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <div class="bg-white rounded-lg p-6 text-center shadow-lg">
+                                    <i class="fas fa-clock text-4xl text-umk-blue mb-4"></i>
+                                    <h4 class="text-xl font-bold mb-2">Elastyczność</h4>
+                                    <p class="text-gray-600">Możliwość nauki w dogodnym czasie i miejscu</p>
+                                </div>
+                                <div class="bg-white rounded-lg p-6 text-center shadow-lg">
+                                    <i class="fas fa-video text-4xl text-umk-green mb-4"></i>
+                                    <h4 class="text-xl font-bold mb-2">Nagrania</h4>
+                                    <p class="text-gray-600">Dostęp do nagrań wykładów przez cały semestr</p>
+                                </div>
+                                <div class="bg-white rounded-lg p-6 text-center shadow-lg">
+                                    <i class="fas fa-comments text-4xl text-umk-blue mb-4"></i>
+                                    <h4 class="text-xl font-bold mb-2">Interakcja</h4>
+                                    <p class="text-gray-600">Czat, pytania i dyskusje w czasie rzeczywistym</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-8">
+                            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                                <a href="https://irk.umk.pl/pl/offer/RP2025s1n1/programme/15510135-KRK/?from=field:TEO" target="_blank" class="btn-umk">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    Zapisz się na Teologię
+                                </a>
+                                <a href="https://irk.umk.pl/pl/offer/RP2025s1n1/programme/15510276-KRK/?from=field:NOR" target="_blank" class="btn-green">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    Zapisz się na Nauki o rodzinie
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section id="faq" class="section py-16 bg-white">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-4xl font-bold text-center text-umk-blue mb-12">Najczęściej zadawane pytania</h2>
+                    
+                    <div class="max-w-4xl mx-auto">
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(0)">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="text-lg font-semibold">Czy mogę studiować teologię nie będąc osobą wierzącą?</h3>
+                                    <i class="fas fa-chevron-down transform transition-transform" id="icon-0"></i>
+                                </div>
+                            </div>
+                            <div class="faq-answer" id="answer-0">
+                                <p>Tak, studia teologiczne są otwarte dla wszystkich. Teologia to nauka akademicka, która bada fenomeny religijne z perspektywy naukowej. Wiele osób studiuje teologię z powodów kulturowych, historycznych czy filozoficznych.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(1)">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="text-lg font-semibold">Jakie są wymagania wstępne dla kierunku Nauki o rodzinie?</h3>
+                                    <i class="fas fa-chevron-down transform transition-transform" id="icon-1"></i>
+                                </div>
+                            </div>
+                            <div class="faq-answer" id="answer-1">
+                                <p>Na studia I stopnia wystarczy matura. Na studia II stopnia wymagana jest licencjat z kierunków związanych z naukami społecznymi, humanistycznymi lub pedagogicznymi.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(2)">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="text-lg font-semibold">Czy tryb hybrydowy oznacza gorsze wykształcenie?</h3>
+                                    <i class="fas fa-chevron-down transform transition-transform" id="icon-2"></i>
+                                </div>
+                            </div>
+                            <div class="faq-answer" id="answer-2">
+                                <p>Nie, jakość kształcenia pozostaje taka sama. Tryb hybrydowy daje elastyczność, ale wymaga również większej dyscypliny i samodzielności. Studenci mają dostęp do tych samych materiałów i wykładowców.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(3)">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="text-lg font-semibold">Czy mogę pracować podczas studiów?</h3>
+                                    <i class="fas fa-chevron-down transform transition-transform" id="icon-3"></i>
+                                </div>
+                            </div>
+                            <div class="faq-answer" id="answer-3">
+                                <p>Tak, szczególnie w trybie hybrydowym jest to możliwe. Wiele zajęć odbywa się online, co daje elastyczność w planowaniu czasu. Pracę ułatwia również dostęp do nagrań wykładów.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(4)">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="text-lg font-semibold">Jakie są perspektywy zawodowe po studiach teologicznych?</h3>
+                                    <i class="fas fa-chevron-down transform transition-transform" id="icon-4"></i>
+                                </div>
+                            </div>
+                            <div class="faq-answer" id="answer-4">
+                                <p>Absolwenci teologii pracują jako nauczyciele religii, w instytucjach rządowych, mediach, bankach, organizacjach chrześcijańskich oraz jako eksperci medialni. Studia teologiczne rozwijają umiejętności analityczne, komunikacyjne i etyczne cenione w wielu branżach.</p>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-8">
+                            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                                <a href="https://irk.umk.pl/pl/offer/RP2025s1n1/programme/15510135-KRK/?from=field:TEO" target="_blank" class="btn-umk">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    Zapisz się na Teologię
+                                </a>
+                                <a href="https://irk.umk.pl/pl/offer/RP2025s1n1/programme/15510276-KRK/?from=field:NOR" target="_blank" class="btn-green">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    Zapisz się na Nauki o rodzinie
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Dane aplikacji
+        const appData = {
+            quizzes: {
+                theology: [
+                    {
+                        question: "Teologia to nauka, która:",
+                        options: [
+                            "Zajmuje się tylko wierzeniami religijnymi",
+                            "Bada Boga i rzeczy boskie metodami naukowymi",
+                            "Jest dostępna tylko dla duchownych",
+                            "Nie ma zastosowania w życiu codziennym"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Absolwent teologii może pracować jako:",
+                        options: [
+                            "Tylko ksiądz lub nauczyciel religii",
+                            "Jedynie w instytucjach kościelnych",
+                            "W mediach, NGO, instytucjach publicznych i biznesie",
+                            "Tylko w zawodach związanych z religią"
+                        ],
+                        correct: 2
+                    },
+                    {
+                        question: "Wydział Teologiczny UMK w rankingu Perspektywy 2024:",
+                        options: [
+                            "Zajął 3 miejsce w Polsce",
+                            "Otrzymał 100 punktów i zajął 1 miejsce",
+                            "Nie był oceniany",
+                            "Zajął 2 miejsce"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Tryb hybrydowy oznacza:",
+                        options: [
+                            "Tylko zajęcia online",
+                            "Tylko zajęcia stacjonarne",
+                            "Kombinację zajęć stacjonarnych i online",
+                            "Zajęcia weekendowe"
+                        ],
+                        correct: 2
+                    }
+                ],
+                family: [
+                    {
+                        question: "Nauki o rodzinie to kierunek, który:",
+                        options: [
+                            "Przygotowuje tylko do pracy z dziećmi",
+                            "Łączy wiedzę z psychologii, socjologii i prawa rodzinnego",
+                            "Jest przeznaczony tylko dla kobiet",
+                            "Nie ma praktycznego zastosowania"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Absolwent nauk o rodzinie może zostać:",
+                        options: [
+                            "Tylko nauczycielem",
+                            "Asystentem rodziny, kuratorem, mediatorem lub coachem",
+                            "Jedynie pracownikiem opieki społecznej",
+                            "Tylko psychologiem"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Studia I stopnia na kierunku Nauki o rodzinie trwają:",
+                        options: [
+                            "2 lata",
+                            "4 lata",
+                            "3 lata",
+                            "5 lat"
+                        ],
+                        correct: 2
+                    }
+                ]
+            }
+        };
+
+        // Zmienne globalne
+        let currentQuizProgram = null;
+        let currentQuestionIndex = 0;
+        let quizScore = 0;
+        let quizAnswered = false;
+
+        // Funkcje nawigacji
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600');
+            });
+            document.querySelector(`[onclick="showSection('${sectionId}')"]`).classList.add('bg-blue-600');
+        }
+
+        function showProgram(programId) {
+            showSection('programs');
+            switchProgram(programId);
+        }
+
+        function switchProgram(programId) {
+            document.querySelectorAll('.program-tab').forEach(tab => {
+                tab.classList.remove('bg-white', 'text-umk-blue', 'font-semibold', 'border-2', 'border-umk-blue');
+                tab.classList.add('text-gray-600', 'hover:bg-gray-200');
+            });
+            
+            document.getElementById(programId + '-tab').classList.remove('text-gray-600', 'hover:bg-gray-200');
+            document.getElementById(programId + '-tab').classList.add('bg-white', 'text-umk-blue', 'font-semibold', 'border-2', 'border-umk-blue');
+            
+            document.querySelectorAll('.program-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(programId + '-content').classList.add('active');
+        }
+
+        // Funkcje quizu
+        function startQuiz(programId) {
+            currentQuizProgram = programId;
+            currentQuestionIndex = 0;
+            quizScore = 0;
+            quizAnswered = false;
+            
+            document.querySelectorAll('#quiz .program-tab').forEach(tab => {
+                tab.classList.remove('bg-white', 'text-umk-blue', 'font-semibold', 'border-2', 'border-umk-blue');
+                tab.classList.add('text-gray-600', 'hover:bg-gray-200');
+            });
+            
+            document.getElementById('quiz-' + programId + '-tab').classList.remove('text-gray-600', 'hover:bg-gray-200');
+            document.getElementById('quiz-' + programId + '-tab').classList.add('bg-white', 'text-umk-blue', 'font-semibold', 'border-2', 'border-umk-blue');
+            
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const quiz = appData.quizzes[currentQuizProgram];
+            const question = quiz[currentQuestionIndex];
+            
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = `
+                <div class="mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-sm text-gray-500">Pytanie ${currentQuestionIndex + 1} z ${quiz.length}</span>
+                        <span class="text-sm text-umk-blue font-semibold">Wynik: ${quizScore}/${quiz.length}</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="umk-blue h-2 rounded-full" style="width: ${((currentQuestionIndex) / quiz.length) * 100}%"></div>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-bold text-umk-blue mb-6">${question.question}</h3>
+                
+                <div class="space-y-3 mb-6">
+                    ${question.options.map((option, index) => `
+                        <div class="quiz-option" onclick="selectAnswer(${index})">
+                            <div class="flex items-center">
+                                <div class="w-6 h-6 border-2 border-gray-300 rounded-full mr-3 flex items-center justify-center" id="radio-${index}">
+                                    <div class="w-3 h-3 rounded-full hidden" id="dot-${index}" style="background-color: var(--umk-blue);"></div>
+                                </div>
+                                <span>${option}</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="flex justify-between">
+                    <button onclick="showQuizResults()" class="text-gray-600 hover:text-gray-800" ${currentQuestionIndex === 0 ? 'style="visibility: hidden;"' : ''}>
+                        <i class="fas fa-arrow-left mr-2"></i>Zobacz wyniki
+                    </button>
+                    <button id="next-btn" onclick="nextQuestion()" class="btn-umk opacity-50" disabled>
+                        ${currentQuestionIndex === quiz.length - 1 ? 'Zakończ quiz' : 'Następne pytanie'}
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            `;
+            
+            quizAnswered = false;
+        }
+
+        function selectAnswer(selectedIndex) {
+            if (quizAnswered) return;
+            
+            const quiz = appData.quizzes[currentQuizProgram];
+            const question = quiz[currentQuestionIndex];
+            
+            document.querySelectorAll('.quiz-option').forEach((option, index) => {
+                option.classList.remove('selected');
+                document.getElementById(`dot-${index}`).classList.add('hidden');
+            });
+            
+            document.querySelectorAll('.quiz-option')[selectedIndex].classList.add('selected');
+            document.getElementById(`dot-${selectedIndex}`).classList.remove('hidden');
+            
+            document.getElementById('next-btn').disabled = false;
+            document.getElementById('next-btn').classList.remove('opacity-50');
+            
+            setTimeout(() => {
+                quizAnswered = true;
+                
+                document.querySelectorAll('.quiz-option').forEach((option, index) => {
+                    if (index === question.correct) {
+                        option.classList.add('correct');
+                    } else if (index === selectedIndex && index !== question.correct) {
+                        option.classList.add('incorrect');
+                    }
+                });
+                
+                if (selectedIndex === question.correct) {
+                    quizScore++;
+                }
+            }, 500);
+        }
+
+        function nextQuestion() {
+            if (!quizAnswered) return;
+            
+            currentQuestionIndex++;
+            const quiz = appData.quizzes[currentQuizProgram];
+            
+            if (currentQuestionIndex >= quiz.length) {
+                showQuizResults();
+            } else {
+                showQuestion();
+            }
+        }
+
+        function showQuizResults() {
+            const quiz = appData.quizzes[currentQuizProgram];
+            const percentage = Math.round((quizScore / quiz.length) * 100);
+            let message, icon, color;
+            
+            if (percentage >= 80) {
+                message = "Świetny wynik! Masz dobry ogląd na ten kierunek studiów.";
+                icon = "fas fa-trophy";
+                color = "text-yellow-500";
+            } else if (percentage >= 60) {
+                message = "Dobry wynik! Warto zgłębić więcej informacji o tym kierunku.";
+                icon = "fas fa-thumbs-up";
+                color = "text-umk-green";
+            } else {
+                message = "Quiz pokazał obszary do zgłębienia. Zachęcamy do przeczytania więcej!";
+                icon = "fas fa-lightbulb";
+                color = "text-umk-blue";
+            }
+            
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = `
+                <div class="text-center py-8">
+                    <i class="${icon} text-6xl ${color} mb-6"></i>
+                    <h3 class="text-2xl font-bold text-umk-blue mb-4">Wynik quizu</h3>
+                    <div class="text-4xl font-bold text-umk-green mb-4">${quizScore}/${quiz.length}</div>
+                    <div class="text-xl text-gray-600 mb-6">${percentage}%</div>
+                    <p class="text-lg text-gray-700 mb-8">${message}</p>
+                    
+                    <div class="space-y-4">
+                        <button onclick="startQuiz('${currentQuizProgram}')" class="btn-umk">
+                            <i class="fas fa-redo mr-2"></i>Spróbuj ponownie
+                        </button>
+                        <div>
+                            <a href="${currentQuizProgram === 'theology' ? 'https://irk.umk.pl/pl/offer/RP2025s1n1/programme/15510135-KRK/?from=field:TEO' : 'https://irk.umk.pl/pl/offer/RP2025s1n1/programme/15510276-KRK/?from=field:NOR'}" 
+                               target="_blank" class="btn-green">
+                                <i class="fas fa-external-link-alt mr-2"></i>Zapisz się na studia
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Funkcje FAQ
+        function toggleFaq(index) {
+            const answer = document.getElementById(`answer-${index}`);
+            const icon = document.getElementById(`icon-${index}`);
+            
+            if (answer.classList.contains('active')) {
+                answer.classList.remove('active');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                document.querySelectorAll('.faq-answer').forEach(ans => ans.classList.remove('active'));
+                document.querySelectorAll('.faq-question i').forEach(ic => ic.style.transform = 'rotate(0deg)');
+                
+                answer.classList.add('active');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Funkcja licznika
+        function updateCountdown() {
+            const targetDate = new Date('2025-07-14T23:59:00');
+            const now = new Date();
+            const timeDiff = targetDate - now;
+            
+            if (timeDiff > 0) {
+                const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours;
+                document.getElementById('minutes').textContent = minutes;
+                document.getElementById('seconds').textContent = seconds;
+            } else {
+                document.getElementById('countdown').innerHTML = `
+                    <div class="text-xl text-center text-white bg-red-500 rounded-lg p-4 w-full">
+                        Rekrutacja zakończona!
+                    </div>`;
+            }
+        }
+
+        // Inicjalizacja
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
+    </script>
+</body>
+</html>
