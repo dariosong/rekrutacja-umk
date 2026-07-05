@@ -163,13 +163,17 @@
       <article class="trip-card reveal">
         <a class="trip-media" href="${t.url}" aria-label="${t.nazwa} — zobacz szczegóły">
           <span class="zoom ${t.klasaObrazka}"></span>
+          <span class="trip-date">${t.termin}</span>
         </a>
         <div class="trip-body">
-          <div class="trip-date">${t.termin}</div>
           <h3>${t.nazwa}</h3>
-          <div class="trip-meta">${t.dni} dni · ${t.kraj}${t.cena.startsWith("zapytaj") ? "" : ` · <span class="trip-price">${t.cena}</span>`}</div>
+          <div class="trip-meta">${t.dni} dni &nbsp;◆&nbsp; ${t.kraj}</div>
           <p class="trip-sum">${t.podtytul}.</p>
-          <a class="trip-cta" href="${t.url}">Zobacz szczegóły</a>
+          <ul class="trip-highlights">${(t.atuty || []).map(a => `<li>${a}</li>`).join("")}</ul>
+          <div class="trip-foot">
+            <span class="trip-price${t.cena.startsWith("zapytaj") ? " ask" : ""}">${t.cena}</span>
+            <a class="trip-cta" href="${t.url}">Szczegóły</a>
+          </div>
         </div>
       </article>`).join("");
   </script>

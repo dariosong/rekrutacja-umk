@@ -17,6 +17,7 @@ const PALMIERI_TRIPS = [
     kraj: "Izrael",
     cena: "3 700 PLN + 990 USD",
     url: "pielgrzymki/ziemia-swieta.html",
+    atuty: ["Bazylika Grobu Pańskiego i Golgota", "Rejs po Jeziorze Galilejskim", "Prowadzi biblista z UMK"],
     klasaObrazka: "img-ziemia-swieta"
   },
   {
@@ -28,6 +29,7 @@ const PALMIERI_TRIPS = [
     kraj: "Etiopia",
     cena: "zapytaj o cenę",
     url: "pielgrzymki/ziemia-swieta.html#kontakt",
+    atuty: ["Skalne kościoły Lalibeli", "Aksum — legenda Arki Przymierza", "Mistyczna, chrześcijańska Afryka"],
     klasaObrazka: "img-etiopia"
   },
   {
@@ -39,6 +41,7 @@ const PALMIERI_TRIPS = [
     kraj: "Malta",
     cena: "zapytaj o cenę",
     url: "pielgrzymki/ziemia-swieta.html#kontakt",
+    atuty: ["Grota i droga św. Pawła", "Caravaggio w konkatedrze św. Jana", "Valletta i lazurowe zatoki"],
     klasaObrazka: "img-malta"
   },
   {
@@ -50,6 +53,7 @@ const PALMIERI_TRIPS = [
     kraj: "Indie",
     cena: "zapytaj o cenę",
     url: "pielgrzymki/indie.html",
+    atuty: ["Tadź Mahal o wschodzie słońca", "Wjazd na Fort Amber na słoniu", "Relaks na plażach Goa"],
     klasaObrazka: "img-indie"
   },
   {
@@ -61,6 +65,7 @@ const PALMIERI_TRIPS = [
     kraj: "Peru",
     cena: "zapytaj o cenę",
     url: "pielgrzymki/indie.html#kontakt",
+    atuty: ["Machu Picchu i Święta Dolina", "Sanktuarium Matki Bożej z Chapi", "Spotkania w polskich misjach"],
     klasaObrazka: "img-peru"
   },
   {
@@ -72,6 +77,7 @@ const PALMIERI_TRIPS = [
     kraj: "Wietnam",
     cena: "zapytaj o cenę",
     url: "pielgrzymki/indie.html#kontakt",
+    atuty: ["Rejs po Zatoce Ha Long", "Sanktuarium Matki Bożej La Vang", "Hanoi i Sajgon — dwa światy"],
     klasaObrazka: "img-wietnam"
   }
 ];
