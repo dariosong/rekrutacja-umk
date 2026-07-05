@@ -171,8 +171,7 @@
           <p class="trip-sum">${t.podtytul}.</p>
           <ul class="trip-highlights">${(t.atuty || []).map(a => `<li>${a}</li>`).join("")}</ul>
           <div class="trip-foot">
-            <span class="trip-price${t.cena.startsWith("zapytaj") ? " ask" : ""}">${t.cena}</span>
-            <a class="trip-cta" href="${t.url}">Szczegóły</a>
+            <a class="trip-cta" href="${t.url}">Poznaj program</a>
           </div>
         </div>
       </article>`).join("");
