@@ -8,10 +8,10 @@
   <meta property="og:title" content="Palmieri — butikowe biuro pielgrzymkowe">
   <meta property="og:description" content="Kameralne pielgrzymki dla wymagających. Ziemia Święta, Etiopia, Malta, Indie, Peru, Wietnam.">
   <meta property="og:type" content="website">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 48 48%27%3E%3Crect width=%2748%27 height=%2748%27 rx=%2710%27 fill=%27%231d4077%27/%3E%3Cg fill=%27%23eda14a%27%3E%3Cpath d=%27M24 20C24 12 17 7 9 8c2 7 8 12 15 12z%27/%3E%3Cpath d=%27M24 20c0-8 7-13 15-12-2 7-8 12-15 12z%27 opacity=%27.75%27/%3E%3Cpath d=%27M24 14C23 8 18 4 12 4c1 5 6 9 12 10z%27 opacity=%27.55%27/%3E%3Cpath d=%27M24 14c1-6 6-10 12-10-1 5-6 9-12 10z%27 opacity=%27.4%27/%3E%3C/g%3E%3Cpath d=%27M24 44V20%27 stroke=%27%23eda14a%27 stroke-width=%273%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+  <link rel="icon" href="images/godlo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script type="application/ld+json">
   {
@@ -33,143 +33,125 @@
 </head>
 <body>
   <a class="skip-link" href="#tresc">Przejdź do treści</a>
+  <div class="page">
   <palmieri-header active="home"></palmieri-header>
 
   <main id="tresc">
 
-    <!-- HERO -->
+    <!-- HERO: fotografia + panel -->
     <section class="hero">
-      <div class="container hero-inner">
-        <div>
-          <span class="eyebrow">Butikowe biuro pielgrzymkowe · Toruń</span>
-          <h1>Pielgrzymki dla&nbsp;<em>wymagających</em></h1>
-          <p class="hero-lead">Kameralne wyprawy duchowe, w których każdy dzień jest dopracowany — od pierwszej rozmowy telefonicznej po powrót na lotnisko.</p>
-          <ul class="hero-checks">
-            <li><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Każdy wyjazd dopracowany w szczegółach</li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Pielgrzymi zaopiekowani od pierwszego kontaktu</li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Opieka duchowa i merytoryczna</li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Wystawiamy faktury</li>
-          </ul>
-          <div class="hero-actions">
-            <a class="btn btn-gold" href="tel:+48601976612">Zadzwoń i zapytaj o termin</a>
-            <a class="btn btn-outline" href="#pielgrzymki">Zobacz pielgrzymki 2026</a>
-          </div>
-          <p class="hero-trust">
-            <span><span class="stars" aria-hidden="true">★★★★★</span> <strong>4,9/5</strong> na podstawie 127 opinii</span>
-            <span>Licencja turystyczna</span>
-            <span>Gwarancja ubezpieczeniowa <strong>UNIQA</strong></span>
-          </p>
-        </div>
-        <figure class="hero-photo">
-          <img src="images/zespol.jpg" alt="Trzy właścicielki biura Palmieri" fetchpriority="high">
-          <figcaption>Zespół Palmieri — jesteśmy z Tobą od pierwszego telefonu</figcaption>
-        </figure>
+      <figure class="hero-photo" data-parallax>
+        <div class="ph"><img src="images/zespol.jpg" alt="Trzy właścicielki biura Palmieri" fetchpriority="high"></div>
+        <figcaption>Zespół Palmieri — jesteśmy z Tobą w kontakcie od pierwszego telefonu</figcaption>
+      </figure>
+      <div class="hero-panel">
+        <span class="kicker">Pielgrzymki dla wymagających</span>
+        <h1 class="h-serif">Duchowa podróż<br>w dobrym stylu</h1>
+        <div class="orn reveal" aria-hidden="true"><span></span><i></i><span></span></div>
+        <p class="hero-lead">Kameralne, dopracowane w każdym szczególe wyprawy do miejsc świętych — od pierwszej rozmowy telefonicznej po powrót na lotnisko.</p>
+        <a class="btn btn-gold" href="#pielgrzymki">Odkryj ofertę</a>
+        <p class="hero-trust"><span class="stars" aria-hidden="true">★★★★★</span> 4,9/5 · licencja turystyczna · gwarancja UNIQA</p>
       </div>
     </section>
 
     <!-- PIELGRZYMKI -->
     <section class="section section-alt" id="pielgrzymki">
-      <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow">Sezon 2026</span>
-          <h2>Nasze pielgrzymki</h2>
-          <p>Każda z propozycji to unikalna, limitowana edycja podróży duchowej. Kliknij, aby zobaczyć pełny program dnia po dniu.</p>
-        </div>
-        <div class="trips-grid" id="trips-grid"></div>
+      <div class="section-head">
+        <span class="kicker">Sezon 2026</span>
+        <h2 class="h-sec">Nasze pielgrzymki</h2>
+        <div class="orn reveal" aria-hidden="true"><span></span><i></i><span></span></div>
       </div>
+      <div class="trips-grid" id="trips-grid"></div>
     </section>
 
     <!-- HISTORIA NAZWY -->
     <section class="section">
-      <div class="container story">
-        <div class="reveal">
-          <span class="eyebrow">Dlaczego Palmieri?</span>
-          <h2>Nazwa z gałązką palmy w herbie</h2>
-          <p>W średniowieczu pielgrzymów wracających z Ziemi Świętej nazywano <strong>palmieri</strong> — na pamiątkę gałązki palmowej, którą przywozili znad Jordanu jako znak odbytej drogi. My tę tradycję traktujemy dosłownie: organizujemy podróże, z których wraca się odmienionym.</p>
-          <p>Jesteśmy małym, butikowym biurem z Torunia. Nie robimy wyjazdów masowych — każdą pielgrzymkę przygotowujemy indywidualnie i prowadzimy ją z najlepszymi przewodnikami: w Ziemi Świętej z biblistą, w Ameryce Południowej z ludźmi, którzy mieszkają tam od lat.</p>
-          <blockquote>Podróże kształtują wykształconych — dlatego obok duchowych przeżyć zawsze dbamy o solidną porcję wiedzy.</blockquote>
-        </div>
-        <figure class="story-photo reveal">
+      <div class="story">
+        <figure class="story-photo reveal" data-parallax>
           <img src="images/zespol2.jpg" alt="Zespół Palmieri" loading="lazy">
         </figure>
+        <div class="reveal">
+          <span class="kicker">Dlaczego Palmieri</span>
+          <h2 class="h-sec">Nazwa z gałązką palmy w herbie</h2>
+          <p>W średniowieczu pielgrzymów wracających z Ziemi Świętej nazywano <em>palmieri</em> — na pamiątkę gałązki palmowej, którą przywozili znad Jordanu jako znak odbytej drogi.</p>
+          <p>My tę tradycję traktujemy dosłownie: organizujemy podróże, z których wraca się odmienionym. Nie robimy wyjazdów masowych — każdą pielgrzymkę przygotowujemy indywidualnie i prowadzimy z najlepszymi przewodnikami: w Ziemi Świętej z biblistą, w Ameryce Południowej z ludźmi, którzy mieszkają tam od lat.</p>
+          <blockquote>Podróże kształcą wykształconych — obok duchowych przeżyć zawsze dbamy o solidną porcję wiedzy.</blockquote>
+        </div>
       </div>
     </section>
 
     <!-- OPINIE -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow">Opinie</span>
-          <h2>Co mówią nasi pielgrzymi</h2>
-          <p>Prawdziwe głosy uczestników naszych wypraw.</p>
-        </div>
-        <div class="testimonials">
-          <figure class="testimonial reveal">
-            <span class="stars" aria-label="Ocena 5 na 5">★★★★★</span>
-            <blockquote>„Przeżyliśmy wspaniały wyjazd, odjechaliśmy się od codzienności! Nie tylko wspaniałe widoki i luksusowa kuchnia, ale przede wszystkim duchowa wędrówka śladami św. Pawła. Zaangażowanie i serce organizatorów były na najwyższym poziomie — czuliśmy się jak w rodzinie."</blockquote>
-            <figcaption>— Ewa, pielgrzymka na Maltę</figcaption>
-          </figure>
-          <figure class="testimonial reveal">
-            <span class="stars" aria-label="Ocena 5 na 5">★★★★★</span>
-            <blockquote>„W styczniu byliśmy z mężem na pielgrzymce w Meksyku. Zwiedziliśmy ogromnie dużo miejsc i cały czas byliśmy pod wrażeniem profesjonalizmu organizatora. Ogromna wiedza, życzliwość i nieustająca empatia — w pełni czuliśmy się zaopiekowani i bezpieczni."</blockquote>
-            <figcaption>— Jola, pielgrzymka do Meksyku</figcaption>
-          </figure>
-          <figure class="testimonial reveal">
-            <span class="stars" aria-label="Ocena 5 na 5">★★★★★</span>
-            <blockquote>„Program był doskonale zrównoważony — udało nam się zobaczyć najważniejsze zabytki, poznać lokalną kulturę, spróbować przepysznej kuchni i znaleźć czas na relaks. Przewodnik był nie tylko kompetentny, ale też pełen pasji i humoru."</blockquote>
-            <figcaption>— Marzena, pielgrzymka do Indii</figcaption>
-          </figure>
-        </div>
+    <section class="section section-alt" id="opinie">
+      <div class="section-head">
+        <span class="kicker">Opinie</span>
+        <h2 class="h-sec">Co mówią nasi pielgrzymi</h2>
+        <div class="orn reveal" aria-hidden="true"><span></span><i></i><span></span></div>
+      </div>
+      <div class="testimonials">
+        <figure class="testimonial reveal">
+          <span class="stars" aria-label="Ocena 5 na 5">★★★★★</span>
+          <blockquote>„Przeżyliśmy wspaniały wyjazd, oderwaliśmy się od codzienności. Nie tylko widoki i luksusowa kuchnia, ale przede wszystkim duchowa wędrówka śladami św. Pawła. Czuliśmy się jak w rodzinie."</blockquote>
+          <figcaption>Ewa, pielgrzymka na Maltę</figcaption>
+        </figure>
+        <figure class="testimonial reveal">
+          <span class="stars" aria-label="Ocena 5 na 5">★★★★★</span>
+          <blockquote>„W styczniu byliśmy z mężem na pielgrzymce w Meksyku. Zwiedziliśmy ogromnie dużo miejsc, cały czas pod wrażeniem profesjonalizmu i empatii organizatorów — czuliśmy się zaopiekowani i bezpieczni."</blockquote>
+          <figcaption>Jola, pielgrzymka do Meksyku</figcaption>
+        </figure>
+        <figure class="testimonial reveal">
+          <span class="stars" aria-label="Ocena 5 na 5">★★★★★</span>
+          <blockquote>„Program był doskonale zrównoważony — najważniejsze zabytki, lokalna kultura i czas na relaks. Przewodnik kompetentny, pełen pasji i humoru."</blockquote>
+          <figcaption>Marzena, pielgrzymka do Indii</figcaption>
+        </figure>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section class="section section-alt">
-      <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow">FAQ</span>
-          <h2>Najczęściej zadawane pytania</h2>
-          <p>Rozwiewamy wątpliwości — pytaj śmiało o wszystko.</p>
-        </div>
-        <div class="faq">
-          <details>
-            <summary>Nie jestem wystarczająco religijny / religijna na pielgrzymkę…</summary>
-            <p>Nasze wyprawy łączą wymiar duchowy z solidnym zwiedzaniem i wypoczynkiem. Udział w Mszach Świętych i modlitwach jest zawsze opcjonalny — nikogo nie rozliczamy z pobożności. Jedziesz w swoim rytmie i bierzesz z programu to, co jest dla Ciebie.</p>
-          </details>
-          <details>
-            <summary>Boję się, że będzie nudno…</summary>
-            <p>Zajrzyj do programów — dzień po dniu wypełnione są zwiedzaniem, spotkaniami i lokalną kuchnią, a na wyprawach takich jak Indie czy Malta znajdziesz też czas na relaks nad wodą. Nuda to ostatnie, na co skarżą się nasi pielgrzymi.</p>
-          </details>
-          <details>
-            <summary>Czy mogę jechać sam / sama?</summary>
-            <p>Oczywiście! Duża część naszych pielgrzymów wyrusza w pojedynkę i wraca z nowymi przyjaźniami. Kameralne grupy sprzyjają integracji, a my pomagamy w doborze pokoju (za dopłatą możliwy pokój jednoosobowy).</p>
-          </details>
-          <details>
-            <summary>Jak wygląda opieka duchowa w trakcie wyprawy?</summary>
-            <p>Na całej trasie towarzyszy nam ksiądz — codziennie jest możliwość uczestnictwa we Mszy Świętej w miejscach związanych z historią biblijną, a także rozmowy i wspólnej modlitwy. W Ziemi Świętej grupę prowadzi biblista.</p>
-          </details>
-          <details>
-            <summary>Czy wystawiacie faktury i jakie mam gwarancje?</summary>
-            <p>Tak, wystawiamy faktury. Działamy na podstawie licencji turystycznej, a każda wpłata objęta jest gwarancją ubezpieczeniową UNIQA. Otrzymujesz szczegółową kalkulację bez ukrytych opłat.</p>
-          </details>
-        </div>
+    <section class="section">
+      <div class="section-head">
+        <span class="kicker">FAQ</span>
+        <h2 class="h-sec">Najczęściej zadawane pytania</h2>
+        <div class="orn reveal" aria-hidden="true"><span></span><i></i><span></span></div>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Nie jestem wystarczająco religijny / religijna na pielgrzymkę…</summary>
+          <p>Nasze wyprawy łączą wymiar duchowy z solidnym zwiedzaniem i wypoczynkiem. Udział w Mszach Świętych i modlitwach jest zawsze opcjonalny — nikogo nie rozliczamy z pobożności. Jedziesz w swoim rytmie i bierzesz z programu to, co jest dla Ciebie.</p>
+        </details>
+        <details>
+          <summary>Boję się, że będzie nudno…</summary>
+          <p>Zajrzyj do programów — dzień po dniu wypełnione są zwiedzaniem, spotkaniami i lokalną kuchnią, a na wyprawach takich jak Indie czy Malta znajdziesz też czas na relaks nad wodą. Nuda to ostatnie, na co skarżą się nasi pielgrzymi.</p>
+        </details>
+        <details>
+          <summary>Czy mogę jechać sam / sama?</summary>
+          <p>Oczywiście! Duża część naszych pielgrzymów wyrusza w pojedynkę i wraca z nowymi przyjaźniami. Kameralne grupy sprzyjają integracji, a my pomagamy w doborze pokoju (za dopłatą możliwy pokój jednoosobowy).</p>
+        </details>
+        <details>
+          <summary>Jak wygląda opieka duchowa w trakcie wyprawy?</summary>
+          <p>Na całej trasie towarzyszy nam ksiądz — codziennie jest możliwość uczestnictwa we Mszy Świętej w miejscach związanych z historią biblijną, a także rozmowy i wspólnej modlitwy. W Ziemi Świętej grupę prowadzi biblista.</p>
+        </details>
+        <details>
+          <summary>Czy wystawiacie faktury i jakie mam gwarancje?</summary>
+          <p>Tak, wystawiamy faktury. Działamy na podstawie licencji turystycznej, a każda wpłata objęta jest gwarancją ubezpieczeniową UNIQA. Otrzymujesz szczegółową kalkulację bez ukrytych opłat.</p>
+        </details>
       </div>
     </section>
 
     <!-- CTA -->
     <section class="cta-band">
-      <div class="container">
-        <h2>Nie czekaj — porozmawiajmy o Twojej pielgrzymce</h2>
-        <p>Im wcześniej zaczniemy planować, tym lepiej dopasujemy wyprawę do Twoich oczekiwań. Zadzwoń lub napisz — odpowiadamy w ciągu 24 godzin.</p>
-        <div class="hero-actions">
-          <a class="btn btn-gold" href="tel:+48601976612">Zadzwoń: 601 976 612</a>
-          <a class="btn btn-outline-light" href="mailto:biuro@palmieri.pl">Napisz e-mail</a>
-        </div>
+      <span class="kicker">Porozmawiajmy</span>
+      <h2 class="h-sec">Twoja pielgrzymka zaczyna się od rozmowy</h2>
+      <div class="orn reveal" aria-hidden="true"><span></span><i></i><span></span></div>
+      <p>Im wcześniej zaczniemy planować, tym lepiej dopasujemy wyprawę do Twoich oczekiwań. Zadzwoń lub napisz — odpowiadamy w ciągu 24 godzin.</p>
+      <div class="cta-actions">
+        <a class="btn btn-gold" href="tel:+48601976612">Zadzwoń: 601 976 612</a>
+        <a class="btn" href="mailto:biuro@palmieri.pl">Napisz e-mail</a>
       </div>
     </section>
   </main>
 
   <palmieri-footer></palmieri-footer>
+  </div>
 
   <script src="js/data.js"></script>
   <script src="js/header.js"></script>
@@ -179,19 +161,14 @@
     /* karty pielgrzymek generowane z data.js — edytujesz tylko tamten plik */
     document.getElementById("trips-grid").innerHTML = PALMIERI_TRIPS.map(t => `
       <article class="trip-card reveal">
-        <a href="${t.url}" aria-label="${t.nazwa} — zobacz szczegóły">
-          <div class="trip-media ${t.klasaObrazka}">
-            <span class="trip-date">${t.termin}</span>
-          </div>
+        <a class="trip-media" href="${t.url}" aria-label="${t.nazwa} — zobacz szczegóły">
+          <span class="zoom ${t.klasaObrazka}"></span>
         </a>
         <div class="trip-body">
+          <div class="trip-date">${t.termin}</div>
           <h3>${t.nazwa}</h3>
-          <div class="trip-meta">
-            <span class="chip">${t.dni} dni</span>
-            <span class="chip">${t.kraj}</span>
-            ${t.cena.startsWith("zapytaj") ? "" : `<span class="trip-price">${t.cena}</span>`}
-          </div>
-          <p>${t.podtytul}</p>
+          <div class="trip-meta">${t.dni} dni · ${t.kraj}${t.cena.startsWith("zapytaj") ? "" : ` · <span class="trip-price">${t.cena}</span>`}</div>
+          <p class="trip-sum">${t.podtytul}.</p>
           <a class="trip-cta" href="${t.url}">Zobacz szczegóły</a>
         </div>
       </article>`).join("");

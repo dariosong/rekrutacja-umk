@@ -57,11 +57,14 @@ w `css/style.css` — podmiana zdjęcia to podmiana pliku o tej samej nazwie.
 
 ## Design
 
-Wariant „Biel i zaufanie": cała strona jasna (białe tła, delikatne błękity,
-jasna stopka i pas CTA), przyjazny niebieski `#2563eb` / granat `#1d4077`
-w nagłówkach, miodowe przyciski `#eda14a`, prawdziwe fotografie zespołu
-i kierunków. Nagłówki Sora, tekst Inter. Wszystkie kolory to zmienne
-w `:root` na górze `css/style.css`.
+Wariant „Editorial" (wg templatki Palmieri_Propozycja_1): granatowy pasek
+marki `#16243f` z emblematem (`images/godlo.png`) i logotypem
+(`images/logotyp.png`), złoto `#b8965a`, złote ornamenty, jasne sekcje,
+typografia Cormorant Garamond (szeryfy) + Jost (wersaliki z rozstrzeleniem).
+Nowoczesne dodatki: subtelny parallax fotografii (atrybut `data-parallax`),
+stopniowane animacje odsłaniania sekcji (klasa `reveal`), animowane
+ornamenty i zwężający się przy przewijaniu pasek marki. Wszystko szanuje
+`prefers-reduced-motion`. Kolory to zmienne w `:root` w `css/style.css`.
 
 ## Uwaga
 

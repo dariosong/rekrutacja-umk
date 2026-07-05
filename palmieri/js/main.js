@@ -1,6 +1,7 @@
 /* =========================================================================
    PALMIERI — interakcje strony
-   (menu mobilne, rozwijane menu „Pielgrzymki", animacje wejścia, rok w stopce)
+   (menu mobilne, rozwijane menu „Pielgrzymki", zwężanie paska marki,
+    animacje wejścia, subtelny parallax fotografii, rok w stopce)
    ========================================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -42,16 +43,41 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* --- Cień headera po przewinięciu --- */
+  /* --- Zwężanie paska marki po przewinięciu --- */
   const header = document.querySelector(".site-header");
-  if (header) {
-    const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-  }
 
-  /* --- Animacje wejścia (szanują prefers-reduced-motion) --- */
+  /* --- Subtelny parallax fotografii ([data-parallax] > img/.zoom) --- */
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const parallaxEls = Array.from(document.querySelectorAll("[data-parallax]"));
+  let ticking = false;
+
+  function updateScrollEffects() {
+    ticking = false;
+    if (header) header.classList.toggle("is-scrolled", window.scrollY > 40);
+    if (reduced || window.innerWidth < 1024) return;
+    const vh = window.innerHeight;
+    parallaxEls.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > vh) return;
+      const target = el.querySelector("img") || el.querySelector(".zoom");
+      if (!target) return;
+      /* przesunięcie proporcjonalne do pozycji elementu w oknie: maks. ~6% */
+      const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
+      const shift = Math.max(-1, Math.min(1, progress)) * -(rect.height * 0.06);
+      target.style.transform = `translateY(${shift.toFixed(1)}px)`;
+    });
+  }
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateScrollEffects);
+    }
+  }
+  updateScrollEffects();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+
+  /* --- Animacje wejścia (odsłanianie sekcji; szanują prefers-reduced-motion) --- */
   const revealed = document.querySelectorAll(".reveal");
   if (!reduced && "IntersectionObserver" in window) {
     const io = new IntersectionObserver(entries => {
