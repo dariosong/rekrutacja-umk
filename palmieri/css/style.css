@@ -390,30 +390,6 @@ palmieri-header, palmieri-footer, palmieri-sidebar { display: block; min-width: 
 .section-head.center { margin-inline: auto; text-align: center; }
 .section-head p { color: var(--ink-600); font-size: 1.08rem; }
 
-/* ---------- pasek statystyk ---------- */
-.stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  padding-block: .4rem 0;
-}
-.stat {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: 0 10px 30px rgba(22, 50, 95, .07);
-  padding: 1.2rem 1.4rem;
-  text-align: center;
-}
-.stat strong {
-  display: block;
-  font-family: var(--font-head);
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: var(--navy-800);
-}
-.stat span { font-size: .88rem; color: var(--ink-600); }
-
 /* ---------- karty pielgrzymek ---------- */
 .trips-grid {
   display: grid;
@@ -822,7 +798,6 @@ palmieri-header, palmieri-footer, palmieri-sidebar { display: block; min-width: 
   .hero-inner { grid-template-columns: 1fr; }
   .hero-photo { max-width: 620px; }
   .trips-grid, .features-grid, .testimonials, .contact-grid { grid-template-columns: repeat(2, 1fr); }
-  .stats { grid-template-columns: repeat(2, 1fr); }
   .trip-layout { grid-template-columns: 1fr; }
   .sidebar { position: static; }
   .story, .about-grid { grid-template-columns: 1fr; }
@@ -880,7 +855,6 @@ palmieri-header, palmieri-footer, palmieri-sidebar { display: block; min-width: 
 
 @media (max-width: 620px) {
   .trips-grid, .features-grid, .testimonials, .contact-grid, .includes-grid, .price-grid { grid-template-columns: 1fr; }
-  .stats { grid-template-columns: repeat(2, 1fr); }
   .brand-text small { display: none; }
   .footer-grid { grid-template-columns: 1fr; gap: 1.8rem; }
 }
