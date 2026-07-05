@@ -57,11 +57,11 @@ w `css/style.css` — podmiana zdjęcia to podmiana pliku o tej samej nazwie.
 
 ## Design
 
-Wariant „Luxury" inspirowany bachledaluxuryhotel.pl: biel + fotografie,
-głęboki granat `#142042`, stare złoto `#85714d`, szampański beż `#d9c9ae`,
-szeryfowe nagłówki (Cormorant Garamond), wersaliki z rozstrzeleniem
-w przyciskach i etykietach. Wszystkie kolory to zmienne w `:root`
-na górze `css/style.css`.
+Wariant „Biel i zaufanie": cała strona jasna (białe tła, delikatne błękity,
+jasna stopka i pas CTA), przyjazny niebieski `#2563eb` / granat `#1d4077`
+w nagłówkach, miodowe przyciski `#eda14a`, prawdziwe fotografie zespołu
+i kierunków. Nagłówki Sora, tekst Inter. Wszystkie kolory to zmienne
+w `:root` na górze `css/style.css`.
 
 ## Uwaga
 
