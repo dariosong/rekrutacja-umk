@@ -49,9 +49,19 @@ Zmienne CSS na górze `css/style.css` (sekcja `:root`).
 
 ## Zdjęcia
 
-Kafelki kierunków używają tymczasowo gradientów CSS (klasy `img-*`
-w `css/style.css`). Aby podmienić na fotografie, dodaj w tych klasach
-`background-image: url(...)` z `background-size: cover`.
+Fotografie leżą w katalogu `images/` (zespół: `zespol.jpg`, `zespol2.jpg`;
+kierunki: `ziemia-swieta.jpg`, `etiopia.jpg`, `malta.jpg`, `indie.jpg`,
+`peru.jpg`, `wietnam.jpg` — przeniesione z dotychczasowej strony
+n-adventures.pl). Kafelki kierunków wskazują na nie klasami `img-*`
+w `css/style.css` — podmiana zdjęcia to podmiana pliku o tej samej nazwie.
+
+## Design
+
+Wariant „Luxury" inspirowany bachledaluxuryhotel.pl: biel + fotografie,
+głęboki granat `#142042`, stare złoto `#85714d`, szampański beż `#d9c9ae`,
+szeryfowe nagłówki (Cormorant Garamond), wersaliki z rozstrzeleniem
+w przyciskach i etykietach. Wszystkie kolory to zmienne w `:root`
+na górze `css/style.css`.
 
 ## Uwaga
 
