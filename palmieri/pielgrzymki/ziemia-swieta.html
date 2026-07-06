@@ -8,7 +8,7 @@
   <link rel="icon" href="../images/godlo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -17,111 +17,146 @@
   <palmieri-header root="../" active="pielgrzymki"></palmieri-header>
 
   <main id="tresc">
-    <section class="page-hero has-photo" data-parallax>
-      <div class="hero-bg zoom img-ziemia-swieta" aria-hidden="true"></div>
-      <div class="container">
-        <span class="kicker">Pielgrzymka 2026</span>
-        <h1>Ziemia Święta</h1>
-        <div class="orn reveal" aria-hidden="true"><span></span><i></i><span></span></div>
-        <p>8-dniowa pielgrzymka do miejsc świętych chrześcijaństwa. Jerozolima, Betlejem, Nazaret i Galilea z przewodnikiem biblistą.</p>
-        <div class="hero-meta">
-          <span class="chip">4 – 11 września 2026</span>
-          <span class="chip">8 dni</span>
-          <span class="chip">Izrael</span>
-          <span class="chip">przewodnik biblista</span>
+
+    <section class="dt-top">
+      <div class="dt-crumb"><a href="../index.html#pielgrzymki">Pielgrzymki</a> · Izrael</div>
+      <h1 class="dt-name">Ziemia Święta</h1>
+      <div class="dt-date">8 dni · 4–11 września 2026</div>
+      <div class="orn reveal" aria-hidden="true"><span></span><i></i><span></span></div>
+      <p class="dt-lead">Pielgrzymka do samego serca chrześcijaństwa — Jerozolima, Betlejem, Nazaret i Galilea, prowadzona przez przewodnika-biblistę, z codzienną Mszą Świętą w miejscach opisanych w Ewangelii.</p>
+    </section>
+
+    <div class="dt-hero-img" data-parallax>
+      <span class="zoom img-ziemia-swieta" role="img" aria-label="Ziemia Święta — panorama"></span>
+    </div>
+
+    <section class="dt-body">
+      <div class="dt-prog">
+        <h2 class="dt-proghead">Program szczegółowy</h2>
+        <div class="dt-day">
+          <div class="dt-dtag">Dzień 1 · 04.09</div>
+          <div class="dt-dh">Warszawa → Tel Awiw → Nazaret</div>
+          <p>Przelot LOT, spotkanie z przewodnikiem-biblistą i przejazd do Nazaretu. Wieczorna kolacja i wprowadzenie do pielgrzymki.</p>
         </div>
+        <div class="dt-day">
+          <div class="dt-dtag">Dzień 2 · 05.09</div>
+          <div class="dt-dh">Nazaret · Kana Galilejska</div>
+          <p>Bazylika Zwiastowania, kościół św. Józefa, odnowienie przyrzeczeń małżeńskich w Kanie Galilejskiej.</p>
+        </div>
+        <div class="dt-day">
+          <div class="dt-dtag">Dzień 3 · 06.09</div>
+          <div class="dt-dh">Góra Błogosławieństw · Kafarnaum · Góra Tabor</div>
+          <p>Rejs po Jeziorze Genezaret, Tabgha i Kafarnaum, wieczorem przejazd na Górę Tabor i nocleg w Betlejem.</p>
+        </div>
+        <div class="dt-day">
+          <div class="dt-dtag">Dzień 4 · 07.09</div>
+          <div class="dt-dh">Betlejem · Pole Pasterzy</div>
+          <p>Bazylika Narodzenia, Grota Mleczna i Pole Pasterzy. Czas na modlitwę w miejscu narodzin Jezusa.</p>
+        </div>
+        <div class="dt-day">
+          <div class="dt-dtag">Dzień 5 · 08.09</div>
+          <div class="dt-dh">Jerozolima: Stare Miasto i Góra Syjon</div>
+          <p>Droga Krzyżowa ulicami Jerozolimy, Bazylika Grobu Pańskiego, Wieczernik i Grób Króla Dawida.</p>
+        </div>
+        <div class="dt-day">
+          <div class="dt-dtag">Dzień 6 · 09.09</div>
+          <div class="dt-dh">Góra Oliwna · Getsemani</div>
+          <p>Kaplica Wniebowstąpienia, kościół Pater Noster, Dominus Flevit i Ogród Getsemani z bazyliką Agonii.</p>
+        </div>
+        <div class="dt-day">
+          <div class="dt-dtag">Dzień 7 · 10.09</div>
+          <div class="dt-dh">Ein Karem · Morze Martwe</div>
+          <p>Sanktuarium Nawiedzenia i Narodzenia św. Jana Chrzciciela, po południu relaks nad Morzem Martwym.</p>
+        </div>
+        <div class="dt-day">
+          <div class="dt-dtag">Dzień 8 · 11.09</div>
+          <div class="dt-dh">Betlejem → Tel Awiw → powrót</div>
+          <p>Po śniadaniu przejazd na lotnisko Ben Guriona i wylot do Warszawy. Zakończenie pielgrzymki.</p>
+        </div>
+      </div>
+      <palmieri-sidebar root="../" current="ziemia-swieta"></palmieri-sidebar>
+    </section>
+
+    <section class="dt-gal">
+      <div class="dt-galhead">
+        <span class="kicker">Galeria</span>
+        <h2>Miejsca, które zobaczysz</h2>
+      </div>
+      <div class="dt-galgrid">
+        <div class="foto wide"><span class="img-ziemia-swieta"></span></div>
+        <div class="ph">foto: Betlejem</div>
+        <div class="ph">foto: Jezioro Genezaret</div>
+        <div class="ph">foto: Góra Tabor</div>
+        <div class="ph">foto: Nazaret</div>
+        <div class="ph wide">foto: Jerozolima — Stare Miasto</div>
       </div>
     </section>
 
-    <div class="container trip-layout">
-      <div class="trip-content">
-        <h2>O pielgrzymce</h2>
-        <p class="lead">Zapraszamy na wyjątkową pielgrzymkę do Ziemi Świętej — miejsc, gdzie rozegrały się najważniejsze wydarzenia biblijne. To 8-dniowa duchowa podróż, która zabierze nas śladami Jezusa Chrystusa.</p>
-        <p>Odwiedzimy <strong>Jerozolimę</strong> z Bazyliką Grobu Pańskiego, <strong>Betlejem</strong> — miejsce narodzin Jezusa, <strong>Nazaret</strong> — gdzie żyła Święta Rodzina, oraz <strong>Galileę</strong> z Jeziorem Genezaret, gdzie Jezus nauczał i czynił cuda.</p>
-        <p>Pielgrzymkę poprowadzi <strong>ks. dr hab. Dariusz Iwański</strong> — biblista z Wydziału Teologicznego UMK w Toruniu. Codziennie będziemy uczestniczyć we Mszy Świętej i odkrywać głębię biblijnych wydarzeń w miejscach, gdzie się one rozegrały.</p>
-
-        <h2>Program szczegółowy</h2>
-        <div class="timeline">
-          <div class="timeline-item">
-            <h3><span>Dzień 1 · 04.09.2026:</span> Warszawa – Tel Aviv – Nazaret</h3>
-            <p>Wylot z Warszawy do Tel Avivu samolotem rejsowym LOT. Pielgrzymi spotykają się z przewodnikiem już na lotnisku i razem przechodzą odprawę. Przejazd z lotniska Ben Guriona do hotelu w Nazarecie, obok Bazyliki Zwiastowania NMP. Rozpoczynamy niezwykłą pielgrzymkę — po Ziemi Świętej oprowadzać nas będzie przewodnik biblista.</p>
-          </div>
-          <div class="timeline-item">
-            <h3><span>Dzień 2 · 05.09.2026:</span> Nazaret – Kana Galilejska</h3>
-            <p>Zwiedzamy Nazaret — miasteczko, gdzie wychowywał się Jezus i gdzie mieszkała Święta Rodzina. Nawiedzimy Bazylikę Zwiastowania NMP, kościółek św. Józefa i synagogę. Następnie przejazd do Kany Galilejskiej — miejsca cudu przemienienia wody w wino. Pary małżeńskie będą tu mogły odnowić przysięgę.</p>
-          </div>
-          <div class="timeline-item">
-            <h3><span>Dzień 3 · 06.09.2026:</span> Góra Błogosławieństw – Tabgha – Kafarnaum – Góra Tabor – Betlejem</h3>
-            <p>Po śniadaniu podróż po Galilei wokół Jeziora Genezaret. Dotrzemy na malowniczo położoną Górę Błogosławieństw, a następnie do Tabghi (Sanktuarium Rozmnożenia Chlebów i Ryb oraz Kościółek Prymatu). Odwiedzimy Kafarnaum — miasto Jezusa. Wreszcie niezapomniany rejs po Jeziorze Galilejskim i obiad rybny (św. Piotra). Przejazd na Górę Tabor — tradycyjne miejsce Przemienienia Pańskiego. Nocleg w hotelu w Betlejem.</p>
-          </div>
-          <div class="timeline-item">
-            <h3><span>Dzień 4 · 07.09.2026:</span> Ein Kerem – Pole Pasterzy – Betlejem</h3>
-            <p>Wyjazd do Ein Kerem — miejsca Nawiedzenia św. Elżbiety przez Maryję oraz narodzin św. Jana Chrzciciela. Zatrzymamy się przy Knesecie i pamiątkowe zdjęcie pod Menorą. Przejazd do Bet Sahur na Pole Pasterzy — zobaczymy, jak wyglądały groty pasterzy, w jednej z których urodził się Jezus. Zwiedzanie Betlejem: Bazylika Narodzenia Pańskiego, Grota Hieronima oraz Grota Mleczna, gdzie wiele osób wymodliło dar potomstwa.</p>
-          </div>
-          <div class="timeline-item">
-            <h3><span>Dzień 5 · 08.09.2026:</span> Jerozolima – Stare Miasto – Góra Syjon</h3>
-            <p>Cały dzień szczegółowo zwiedzamy Jerozolimę. Stare Miasto: Sadzawka Betesda i kościół św. Anny, Droga Krzyżowa ulicami Jerozolimy, Bazylika Grobu Pańskiego i Golgota — najważniejsze miejsce naszej pielgrzymki. Następnie Góra Syjon: Wieczernik, Grób Króla Dawida oraz Bazylika Zaśnięcia NMP.</p>
-          </div>
-          <div class="timeline-item">
-            <h3><span>Dzień 6 · 09.09.2026:</span> Jerozolima – Góra Oliwna</h3>
-            <p>Drugi dzień w Jerozolimie. Góra Oliwna: miejsce Wniebowstąpienia, kościół i klasztor Pater Noster, punkt widokowy na Jerozolimę, kościółek Dominus Flevit (Pan Zapłakał), Ogród Oliwny i przepiękna Bazylika Konania, kościół Wniebowzięcia NMP (Grób Maryi) oraz Grota Zdrady. Stare Miasto: Ściana Płaczu. Czas wolny i zakupy na arabskim targu. Powrót do hotelu.</p>
-          </div>
-          <div class="timeline-item">
-            <h3><span>Dzień 7 · 10.09.2026:</span> Betania – Jerycho – Morze Martwe</h3>
-            <p>Przejazd do Betanii, a następnie do Jerycha (zatrzymamy się pod Górą Kuszenia i przy Drzewie Zacheusza). Nawiedzenie Miejsca Chrztu Pańskiego nad rzeką Jordan — będziemy mieć okazję zanurzyć stopy w wodzie. Następnie czas na relaks: pobyt na plaży nad Morzem Martwym i kąpiel.</p>
-          </div>
-          <div class="timeline-item">
-            <h3><span>Dzień 8 · 11.09.2026:</span> Betlejem – Tel Aviv – powrót</h3>
-            <p>Po śniadaniu przejazd na lotnisko Ben Guriona w Tel Avivie. Wylot do Warszawy.</p>
-          </div>
+    <section class="dt-pricesec" id="cena">
+      <div class="dt-pricebox reveal">
+        <div class="dt-pbar">
+          <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 9-10 10L2 12V2h10zM7 7.5A1.5 1.5 0 108.5 6 1.5 1.5 0 007 7.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" transform="rotate(90 12 12)"/></svg>
+          <h3>Cena pielgrzymki</h3>
         </div>
-
-        <div class="price-box" id="cena">
-          <h2>Cena pielgrzymki</h2>
-          <p class="price-value">3 700 PLN <small>+ 990 USD</small></p>
-          <p class="price-note">możliwość rozłożenia na wygodne raty</p>
-          <div class="price-grid">
-            <ul class="price-facts">
-              <li>Termin: 4 – 11 września 2026</li>
-              <li>Czas trwania: 8 dni</li>
-              <li>Loty: LOT, Warszawa – Tel Aviv</li>
-              <li>Wpłata za pobyt jednoosobowy: 620 USD</li>
-              <li>Minimalna liczba uczestników: 30 osób</li>
-            </ul>
-            <ul>
-              <li>Przelot LOT Warszawa – Tel Aviv</li>
+        <div class="dt-pgrid">
+          <div>
+            <div class="dt-pbig">3 700 PLN <span>+ 990 USD za osobę</span></div>
+            <div class="dt-pdl">
+              <div><b>Termin:</b> 4–11 września 2026</div>
+              <div><b>Czas trwania:</b> 8 dni</div>
+              <div><b>Dopłata za pokój 1-osobowy:</b> 320 USD</div>
+              <div><b>Loty:</b> LOT Warszawa – Tel Awiw</div>
+              <div><b>Minimalna liczba uczestników:</b> 30 osób</div>
+            </div>
+          </div>
+          <div>
+            <div class="dt-pincl-h">W cenie</div>
+            <ul class="dt-pincl">
+              <li>Przelot LOT Warszawa–Tel Awiw</li>
               <li>Śniadania i obiadokolacje</li>
-              <li>Obiad rybny nad J. Galilejskim</li>
-              <li>Przewodnik biblista</li>
+              <li>Obiad nad Jeziorem Galilejskim</li>
+              <li>Przewodnik biblista i opieka kapłana</li>
               <li>Codzienna Msza Święta</li>
               <li>Wszystkie bilety wstępu</li>
             </ul>
           </div>
-          <a class="btn" href="tel:+48601976612">Zadzwoń i zarezerwuj: 601 976 612</a>
         </div>
-
-        <h2>Cena zawiera</h2>
-        <div class="includes-grid">
-          <p class="inc"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" fill="currentColor"/></svg>Przelot na trasie Warszawa – Tel Aviv i z powrotem</p>
-          <p class="inc"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 20h12M6 20a2 2 0 01-2-2V9a2 2 0 012-2h12a2 2 0 012 2v9a2 2 0 01-2 2M9 7V5a3 3 0 016 0v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Bagaż: osobista torebka / mały plecak + bagaż podręczny 8 kg + duży bagaż 23 kg</p>
-          <p class="inc"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="12.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 10.5h5M13 14.5h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Przejazdy autokarem wysokiej klasy z klimatyzacją w Izraelu</p>
-          <p class="inc"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20V8l9-5 9 5v12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 20v-6h6v6" fill="none" stroke="currentColor" stroke-width="2"/></svg>Noclegi w hotelach ***, w pokojach 2-osobowych z WC i łazienką</p>
-          <p class="inc"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v3c0 4-3 6-5 6.5V16l2 3v1H7v-1l2-3v-2.5C7 13 4 11 4 7V4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Wyżywienie: śniadania i obiadokolacje, obiad rybny nad Jeziorem Galilejskim</p>
-          <p class="inc"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l7 3v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V5l7-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Ubezpieczenie KL i NNW oraz opieka duszpasterska na całej trasie</p>
+        <div class="dt-pfoot">
+          <a class="btn btn-gold" href="tel:+48601976612">Zadzwoń: 601 976 612</a>
+          <a class="btn btn-light" href="mailto:biuro@palmieri.pl?subject=Ziemia%20%C5%9Awi%C4%99ta%202026">Zapytaj o szczegóły</a>
         </div>
       </div>
+    </section>
 
-      <palmieri-sidebar root="../" current="ziemia-swieta"></palmieri-sidebar>
-    </div>
+    <section class="dt-incl">
+      <span class="kicker">Cena zawiera</span>
+      <h2>Wszystko dopięte na ostatni guzik</h2>
+      <div class="orn reveal" aria-hidden="true"><span></span><i></i><span></span></div>
+      <div class="dt-inclgrid">
+        <div class="dt-incl-card"><span class="dt-incl-badge"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" fill="currentColor"/></svg></span><span>Przelot na trasie Warszawa – Tel Awiw i z powrotem</span></div>
+        <div class="dt-incl-card"><span class="dt-incl-badge"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="8" width="14" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 8V5a3 3 0 016 0v3M9 12v4M15 12v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span>Bagaż: torebka/mały plecak + bagaż podręczny 8 kg + duży bagaż 23 kg</span></div>
+        <div class="dt-incl-card"><span class="dt-incl-badge"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 11h16M7 20v-3M17 20v-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="8" cy="14" r="1" fill="currentColor"/><circle cx="16" cy="14" r="1" fill="currentColor"/></svg></span><span>Przejazdy autokarem wysokiej klasy z klimatyzacją w Izraelu</span></div>
+        <div class="dt-incl-card"><span class="dt-incl-badge"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18v-8M3 14h18v4M3 18h18M7 10a2 2 0 104 0 2 2 0 00-4 0zM11 12h7a3 3 0 013 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Noclegi w hotelach *** w pokojach 2-osobowych z WC i łazienką</span></div>
+        <div class="dt-incl-card"><span class="dt-incl-badge"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v7a2 2 0 002 2v9M7 3v4M11 3v4M9 3v4M17 3c-2 1-3 3.5-3 6 0 2 1 3 2 3v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span>Wyżywienie: śniadania i obiadokolacje (kuchnia lokalna, mięsna i wegetariańska)</span></div>
+        <div class="dt-incl-card"><span class="dt-incl-badge"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12s3-5 9-5c4 0 7 2.5 9 5-2 2.5-5 5-9 5-6 0-9-5-9-5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="15" cy="12" r="1.4" fill="currentColor"/><path d="M3 12l-1.5-2M3 12l-1.5 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span>Obiad (lunch) nad Jeziorem Galilejskim – ryba św. Piotra</span></div>
+        <div class="dt-incl-card"><span class="dt-incl-badge"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v4a2 2 0 000 4v2H4v-2a2 2 0 000-4V7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 7v10" stroke="currentColor" stroke-width="2" stroke-dasharray="2 3"/></svg></span><span>Bilety wstępu do wszystkich zwiedzanych obiektów</span></div>
+        <div class="dt-incl-card"><span class="dt-incl-badge"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17c1 1 2.5 1 3.5 0s2.5-1 3.5 0 2.5 1 3.5 0 2.5-1 3.5 0M6 14l-2-4h16l-2 4M12 10V5l-4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Rejs statkiem po Jeziorze Galilejskim</span></div>
+        <div class="dt-incl-card"><span class="dt-incl-badge"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16 9a4 4 0 010 6M18.5 6.5a8 8 0 010 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span>Indywidualny system nagłośnieniowy dla każdego uczestnika</span></div>
+        <div class="dt-incl-card"><span class="dt-incl-badge"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16c1.5 1.5 3.5 1.5 5 0s3.5-1.5 5 0 3.5 1.5 5 0 3-1.5 4 0M3 11c1.5 1.5 3.5 1.5 5 0s3.5-1.5 5 0 3.5 1.5 5 0 3-1.5 4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span>Pobyt na płatnej, strzeżonej plaży nad Morzem Martwym</span></div>
+        <div class="dt-incl-card"><span class="dt-incl-badge"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l7 3v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V5l7-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Podwyższone ubezpieczenie: KL 2 500 000 PLN, NNW 150 000 PLN, choroby przewlekłe, bez dopłat po 65. roku życia</span></div>
+        <div class="dt-incl-card"><span class="dt-incl-badge"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l4 4v16H6V2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 10h7M9 14h7M9 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span>Opłaty gwarancyjne do TFG i TFP</span></div>
+        <div class="dt-incl-card"><span class="dt-incl-badge"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9" r="2.6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 17h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span>Opłaty graniczne – pomagamy w wypełnieniu dokumentu ETA-IL</span></div>
+        <div class="dt-incl-card"><span class="dt-incl-badge"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 21c.7-4 3.5-6.5 7-6.5s6.3 2.5 7 6.5M12 14.5V21M10 17h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span>Opieka przewodnika – księdza biblisty – na całej trasie</span></div>
+        <div class="dt-incl-card"><span class="dt-incl-badge"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v4M10 4h4M6 22v-9l6-4 6 4v9M6 22h12M10 22v-4h4v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span><span>Codzienna Msza Święta w miejscach świętych</span></div>
+      </div>
+    </section>
 
-    <section class="cta-band" id="kontakt">
-      <div class="container">
-        <h2>Zarezerwuj miejsce na tej pielgrzymce</h2>
-        <p>Liczba miejsc jest ograniczona — zadzwoń lub napisz, a prześlemy komplet dokumentów i odpowiemy na wszystkie pytania.</p>
-        <div class="cta-actions">
-          <a class="btn btn-gold" href="tel:+48601976612">Zadzwoń: 601 976 612</a>
-          <a class="btn" href="mailto:pielgrzymki@palmieri.pl?subject=Ziemia%20%C5%9Awi%C4%99ta%202026">Zapytaj o szczegóły</a>
-        </div>
+    <section class="cta-band">
+      <h2 class="h-serif">Zarezerwuj miejsce na tej pielgrzymce</h2>
+      <p>Grupy są kameralne, a miejsca ograniczone. Skontaktuj się z nami, a pomożemy dopiąć wszystkie formalności.</p>
+      <div class="cta-actions">
+        <a class="btn btn-gold" href="tel:+48601976612">Zadzwoń do nas</a>
+        <a class="btn" href="mailto:biuro@palmieri.pl?subject=Ziemia%20%C5%9Awi%C4%99ta%202026">Napisz e-mail</a>
       </div>
     </section>
   </main>
