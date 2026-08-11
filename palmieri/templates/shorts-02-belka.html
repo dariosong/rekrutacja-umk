@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Palmieri — Shorts 02 · Belka opisowa</title>
+<link rel="stylesheet" href="../brand/fonts.css">
+<link rel="stylesheet" href="../brand/tokens.css">
+<link rel="stylesheet" href="../brand/palmieri.css">
+<script defer src="../brand/sygnet.js"></script>
+<script defer src="../content/wyjazdy.js"></script>
+<script defer src="../content/apply.js"></script>
+<style>
+  /* Nakładka na materiał wideo — tło kanwy zostaje przezroczyste,
+     żeby plik PNG dało się położyć na ujęciu w programie montażowym. */
+  .is-overlay { background: transparent; }
+  .is-overlay .p-scrim--bottom { height: 46%; top: auto; bottom: 0; }
+</style>
+</head>
+
+<!--
+  SHORTS 02 — BELKA OPISOWA (1080 × 1920)
+  Podpis rozmówcy albo temat odcinka, do położenia na ujęciu „gadającej głowy".
+  Eksportuje się z przezroczystym tłem (PNG), więc nakłada się wprost w montażu.
+  Belka siedzi tuż nad pasem opisu w aplikacji.
+-->
+
+<body data-wyjazd="ziemia-swieta">
+
+<div class="p-canvas p-canvas--9x16 is-overlay" data-export="shorts-02-belka" data-export-alpha="1" data-safe="shorts">
+
+  <div class="p-scrim p-scrim--bottom"></div>
+
+  <div class="p-stack p-stack--end p-inset-shorts p-inset-icons p-layer">
+
+    <div class="p-row" style="align-items:flex-end; gap:var(--p-space-3);">
+      <span class="p-sygnet p-sygnet--gold" style="--sygnet:11cqw;"></span>
+
+      <div style="flex:1 1 auto; min-width:0;">
+        <p class="p-eyebrow" data-p="eyebrow">Pielgrzymka · 8 dni</p>
+        <p class="p-title p-title--sm" style="margin-top:var(--p-space-1);" data-p="kierunek">
+          Ziemia Święta
+        </p>
+        <div class="p-hr" style="margin-top:var(--p-space-2); width:100%;"></div>
+        <p class="p-label" style="margin-top:var(--p-space-2); color:var(--p-cream-60);" data-p="opiekun">
+          ks. Marek Wiśniewski
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

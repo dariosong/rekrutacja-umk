@@ -1,0 +1,96 @@
+/* =========================================================================
+   PALMIERI — DESIGN TOKENS
+   Źródło: „Palmieri — Księga identyfikacji wizualnej", wersja skrócona 2026
+   Wszystkie wartości poniżej wynikają wprost z księgi znaku.
+   ========================================================================= */
+
+:root {
+  /* ---------- 01 · KOLOR ------------------------------------------------
+     Granat to kolor główny, złoto — akcent (nigdy odwrotnie).
+     Kremy i porcelanowa biel budują jasne, eleganckie tła.            */
+
+  --p-navy:        #16243F;   /* Granat Palmieri — tła, nagłówki, stopka  */
+  --p-gold:        #B8965A;   /* Złoto — logo, linie, ikony, przyciski    */
+  --p-gold-light:  #CBB079;   /* Złoto jasne — akcent na ciemnym tle      */
+  --p-cream:       #EFE7D2;   /* Krem — ciepłe tło, tekst na granacie     */
+  --p-porcelain:   #F2F3F6;   /* Porcelana — chłodne, jasne tło sekcji    */
+  --p-ink:         #1C2744;   /* Atrament — kolor tekstu na jasnym tle    */
+
+  /* Wartości pochodne — wyłącznie przezroczystości barw bazowych.
+     Nie wprowadzamy nowych barw poza paletą księgi.                  */
+  --p-gold-12:     rgba(184, 150, 90, .12);
+  --p-gold-24:     rgba(184, 150, 90, .24);
+  --p-gold-40:     rgba(184, 150, 90, .40);
+  --p-cream-60:    rgba(239, 231, 210, .60);
+  --p-cream-75:    rgba(239, 231, 210, .75);
+  --p-ink-12:      rgba(28, 39, 68, .12);
+  --p-ink-55:      rgba(28, 39, 68, .55);
+
+  /* ---------- 02 · TYPOGRAFIA ------------------------------------------
+     Cormorant Garamond — logotyp i nagłówki (400/500/600 + kursywa).
+     Jost — akapity, nawigacja, etykiety, dane. Light (300) podstawowa. */
+
+  --p-font-display: "Cormorant Garamond", "EB Garamond", Garamond, "Times New Roman", serif;
+  --p-font-text:    "Jost", "Futura", "Century Gothic", "Helvetica Neue", Arial, sans-serif;
+
+  --p-w-regular:  400;
+  --p-w-medium:   500;
+  --p-w-semibold: 600;
+  --p-w-light:    300;
+
+  /* Tracking wersalików — napis „PALMIERI" ma ≈ 0,30 em (księga, s. 07) */
+  --p-track-logo:    .30em;
+  --p-track-eyebrow: .28em;
+  --p-track-label:   .18em;
+  --p-track-caps:    .12em;
+
+  /* Interlinie */
+  --p-lh-display: 1.02;
+  --p-lh-title:   1.10;
+  --p-lh-text:    1.55;
+
+  /* ---------- 03 · SKALA (w jednostce kanwy `cq`, patrz palmieri.css) ---
+     Skala jest proporcjonalna do szerokości formatu, więc te same
+     szablony działają w 1080×1920, 1080×1080 i 1200×628.            */
+
+  --p-step--2: 1.60cqw;
+  --p-step--1: 2.00cqw;
+  --p-step-0:  2.60cqw;   /* tekst bazowy */
+  --p-step-1:  3.40cqw;
+  --p-step-2:  4.60cqw;
+  --p-step-3:  6.20cqw;
+  --p-step-4:  8.60cqw;
+  --p-step-5: 11.50cqw;
+  --p-step-6: 15.00cqw;   /* hook w Shorts */
+
+  /* ---------- 04 · SIATKA I ODSTĘPY ------------------------------------ */
+  --p-gutter:   7.4cqw;   /* margines bezpieczny kompozycji             */
+  --p-space-1:  1.2cqw;
+  --p-space-2:  2.2cqw;
+  --p-space-3:  3.4cqw;
+  --p-space-4:  5.0cqw;
+  --p-space-5:  7.4cqw;
+  --p-space-6: 11.0cqw;
+
+  /* ---------- 05 · LINIE I PROMIENIE -----------------------------------
+     Znak i system operują cienką, jednolitą kreską. Bez cieni.        */
+  --p-hairline: .18cqw;
+  --p-radius-0: 0;
+  --p-radius-1: .6cqw;
+  --p-radius-pill: 100cqw;
+
+  /* ---------- 06 · POLE OCHRONNE ---------------------------------------
+     Margines wokół znaku = wysokość litery „P" z logotypu.
+     Przy szerokości sygnetu S przyjmujemy pole ≈ 0,42 × S.           */
+  --p-clearspace: .42;
+
+  /* ---------- 07 · STREFY BEZPIECZNE PLATFORM --------------------------
+     Obszary zasłaniane przez interfejs aplikacji. Wysokości liczymy w `cqh`
+     (procent wysokości kanwy), szerokości w `cqw` — w nawiasie wartość
+     w pikselach dla kanwy 1080×1920.                                    */
+  --p-safe-shorts-top:     8cqh;    /* 154 px — tytuł kanału, awatar     */
+  --p-safe-shorts-bottom: 18cqh;    /* 346 px — opis, dźwięk, przyciski  */
+  --p-safe-shorts-right:  16cqw;    /* 173 px — kolumna ikon po prawej   */
+  --p-safe-story-top:     13cqh;    /* 250 px — awatar, pasek postępu    */
+  --p-safe-story-bottom:  13cqh;    /* 250 px — pole odpowiedzi, „więcej" */
+}

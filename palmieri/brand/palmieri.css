@@ -1,0 +1,576 @@
+/* =========================================================================
+   PALMIERI — BIBLIOTEKA KOMPONENTÓW
+   Wymaga: fonts.css, tokens.css
+   Zasada nadrzędna: wszystko wewnątrz kanwy skaluje się w `cqw`
+   (procent szerokości kanwy). Dzięki temu ten sam komponent działa
+   identycznie w 1080×1920, 1080×1350, 1080×1080 i 1200×628.
+   ========================================================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #0E1728;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* =========================================================================
+   1 · KANWA I FORMATY
+   ========================================================================= */
+
+.p-canvas {
+  position: relative;
+  width: var(--p-w);
+  height: var(--p-h);
+  overflow: hidden;
+  container-type: size;
+  container-name: canvas;
+  background: var(--p-navy);
+  color: var(--p-cream);
+  font-family: var(--p-font-text);
+  font-weight: var(--p-w-light);
+  font-size: var(--p-step-0);
+  line-height: var(--p-lh-text);
+  isolation: isolate;
+}
+
+/* Formaty produkcyjne */
+.p-canvas--9x16   { --p-w: 1080px; --p-h: 1920px; }  /* Shorts, Reels, Stories */
+.p-canvas--4x5    { --p-w: 1080px; --p-h: 1350px; }  /* feed IG/FB — reklama   */
+.p-canvas--1x1    { --p-w: 1080px; --p-h: 1080px; }  /* feed kwadrat, karuzela */
+.p-canvas--191x1  { --p-w: 1200px; --p-h:  628px; }  /* reklama linkowa FB     */
+.p-canvas--16x9   { --p-w: 1920px; --p-h: 1080px; }  /* YouTube, prezentacje   */
+
+/* Warianty tła — wyłącznie tła dopuszczone w księdze (s. 08) */
+.p-canvas--navy       { background: var(--p-navy);      color: var(--p-cream); }
+.p-canvas--cream      { background: var(--p-cream);     color: var(--p-ink);   }
+.p-canvas--porcelain  { background: var(--p-porcelain); color: var(--p-ink);   }
+.p-canvas--white      { background: #FFFFFF;            color: var(--p-ink);   }
+.p-canvas--gold       { background: var(--p-gold);      color: var(--p-navy);  }
+
+/* Podgląd: skalowanie kanwy bez zmiany jej wymiarów logicznych */
+.p-stage {
+  width: calc(var(--p-w) * var(--p-scale, 1));
+  height: calc(var(--p-h) * var(--p-scale, 1));
+}
+.p-stage > .p-canvas {
+  transform: scale(var(--p-scale, 1));
+  transform-origin: 0 0;
+}
+
+/* =========================================================================
+   2 · UKŁAD
+   ========================================================================= */
+
+.p-pad      { padding: var(--p-gutter); }
+.p-stack    { position: absolute; inset: 0; display: flex; flex-direction: column; padding: var(--p-gutter); }
+.p-stack--between { justify-content: space-between; }
+.p-stack--center  { justify-content: center; }
+.p-stack--end     { justify-content: flex-end; }
+.p-center   { align-items: center; text-align: center; }
+
+.p-grow     { flex: 1 1 auto; min-height: 0; }
+.p-spacer   { flex: 0 0 auto; }
+
+/* Wcięcia omijające interfejs platformy — patrz sekcja 8 */
+.p-stack.p-inset-shorts {
+  padding-top:    calc(var(--p-safe-shorts-top) + var(--p-space-2));
+  padding-bottom: calc(var(--p-safe-shorts-bottom) + var(--p-space-2));
+}
+.p-stack.p-inset-shorts.p-inset-icons {
+  padding-right:  calc(var(--p-safe-shorts-right) + var(--p-space-2));
+}
+.p-stack.p-inset-story {
+  padding-top:    calc(var(--p-safe-story-top) + var(--p-space-2));
+  padding-bottom: calc(var(--p-safe-story-bottom) + var(--p-space-2));
+}
+.p-row      { display: flex; align-items: center; gap: var(--p-space-3); }
+.p-row--between { justify-content: space-between; }
+
+/* Ramka wewnętrzna — motyw z okładki księgi */
+.p-frame {
+  position: absolute;
+  inset: var(--frame-inset, 3.4cqw);
+  border: var(--p-hairline) solid var(--frame-color, var(--p-gold-40));
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* =========================================================================
+   3 · ZNAK
+   Logo zawsze w jednym, jednolitym kolorze — bez cieni i przejść.
+   Minimalny rozmiar: sygnet 40 px, lockup 150 px szerokości.
+   ========================================================================= */
+
+.p-sygnet {
+  display: block;
+  width: var(--sygnet, 14cqw);
+  flex: 0 0 auto;
+  line-height: 0;
+  color: var(--p-gold);
+}
+.p-sygnet svg { display: block; width: 100%; height: auto; }
+
+/* Pole ochronne = 0,42 × szerokość sygnetu (wysokość litery „P") */
+.p-sygnet--clear { margin: calc(var(--sygnet, 14cqw) * var(--p-clearspace)); }
+
+.p-lockup {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--sygnet, 9cqw) * 0.38);
+  color: var(--p-gold);
+}
+.p-lockup .p-sygnet { width: var(--sygnet, 9cqw); }
+
+.p-lockup__word {
+  font-family: var(--p-font-display);
+  font-weight: var(--p-w-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--p-track-logo);
+  /* kompensacja światła po ostatniej literze */
+  margin-right: calc(-1 * var(--p-track-logo));
+  font-size: calc(var(--sygnet, 9cqw) * 0.50);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Lockup pionowy — wersja podstawowa znaku */
+.p-lockup--v {
+  flex-direction: column;
+  gap: calc(var(--sygnet, 20cqw) * 0.20);
+  text-align: center;
+}
+.p-lockup--v .p-sygnet { width: var(--sygnet, 20cqw); }
+.p-lockup--v .p-lockup__word { font-size: calc(var(--sygnet, 20cqw) * 0.235); }
+
+.p-lockup__sub {
+  font-family: var(--p-font-text);
+  font-weight: var(--p-w-light);
+  font-size: var(--p-step--2);
+  letter-spacing: var(--p-track-eyebrow);
+  margin-right: calc(-1 * var(--p-track-eyebrow));
+  text-transform: uppercase;
+  color: var(--p-cream-60);
+}
+
+/* Kolory znaku — jedna, płaska barwa */
+.p-lockup--gold,  .p-sygnet--gold  { color: var(--p-gold); }
+.p-lockup--light, .p-sygnet--light { color: var(--p-gold-light); }
+.p-lockup--cream, .p-sygnet--cream { color: var(--p-cream); }
+.p-lockup--navy,  .p-sygnet--navy  { color: var(--p-navy); }
+
+/* =========================================================================
+   4 · TYPOGRAFIA
+   ========================================================================= */
+
+.p-eyebrow {
+  font-family: var(--p-font-text);
+  font-weight: var(--p-w-regular);
+  font-size: var(--p-step--1);
+  letter-spacing: var(--p-track-eyebrow);
+  margin-right: calc(-1 * var(--p-track-eyebrow));
+  text-transform: uppercase;
+  color: var(--p-gold-light);
+  margin-block: 0;
+}
+.p-canvas--cream .p-eyebrow,
+.p-canvas--porcelain .p-eyebrow,
+.p-canvas--white .p-eyebrow { color: var(--p-gold); }
+.p-canvas--gold .p-eyebrow  { color: var(--p-navy); }
+
+.p-title {
+  font-family: var(--p-font-display);
+  font-weight: var(--p-w-semibold);
+  font-size: var(--p-step-4);
+  line-height: var(--p-lh-title);
+  letter-spacing: -.005em;
+  margin-block: 0;
+  text-wrap: balance;
+}
+.p-title--xl   { font-size: var(--p-step-5); line-height: var(--p-lh-display); }
+.p-title--hook { font-size: var(--p-step-6); line-height: .98; letter-spacing: -.015em; }
+.p-title--sm   { font-size: var(--p-step-3); }
+.p-title em    { font-style: italic; font-weight: var(--p-w-regular); color: var(--p-gold-light); }
+.p-canvas--cream .p-title em,
+.p-canvas--porcelain .p-title em,
+.p-canvas--white .p-title em { color: var(--p-gold); }
+
+/* Wersaliki serifowe — jak logotyp, do krótkich nazw kierunków */
+.p-display-caps {
+  font-family: var(--p-font-display);
+  font-weight: var(--p-w-semibold);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  margin-right: -.14em;
+  line-height: 1.06;
+}
+
+.p-lead {
+  font-family: var(--p-font-text);
+  font-weight: var(--p-w-light);
+  font-size: var(--p-step-1);
+  line-height: var(--p-lh-text);
+  margin-block: 0;
+  color: var(--p-cream-75);
+  text-wrap: pretty;
+}
+.p-canvas--cream .p-lead,
+.p-canvas--porcelain .p-lead,
+.p-canvas--white .p-lead { color: var(--p-ink-55); }
+
+.p-quote {
+  font-family: var(--p-font-display);
+  font-style: italic;
+  font-weight: var(--p-w-regular);
+  font-size: var(--p-step-3);
+  line-height: 1.32;
+  margin-block: 0;
+  text-wrap: balance;
+}
+
+.p-label {
+  font-family: var(--p-font-text);
+  font-weight: var(--p-w-medium);
+  font-size: var(--p-step--2);
+  letter-spacing: var(--p-track-label);
+  margin-right: calc(-1 * var(--p-track-label));
+  text-transform: uppercase;
+}
+
+.p-numeral {
+  font-family: var(--p-font-display);
+  font-weight: var(--p-w-medium);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--p-gold);
+  line-height: 1;
+}
+
+.p-gold  { color: var(--p-gold); }
+.p-light { color: var(--p-gold-light); }
+.p-cream { color: var(--p-cream); }
+.p-navy  { color: var(--p-navy); }
+
+/* =========================================================================
+   5 · LINIE I ORNAMENTY
+   ========================================================================= */
+
+.p-hr {
+  border: 0;
+  height: var(--p-hairline);
+  background: var(--p-gold-40);
+  width: 100%;
+  margin-block: 0;
+}
+
+/* Kreska z rombem — motyw ze spisu treści księgi */
+.p-rule {
+  display: flex;
+  align-items: center;
+  gap: var(--p-space-2);
+  width: var(--rule-w, 26cqw);
+}
+.p-rule::before,
+.p-rule::after {
+  content: "";
+  flex: 1 1 auto;
+  height: var(--p-hairline);
+  background: linear-gradient(90deg, transparent, var(--p-gold), transparent);
+}
+.p-rule--solid::before,
+.p-rule--solid::after  { background: var(--p-gold-40); }
+.p-rule--half::before  { display: none; }
+
+.p-diamond {
+  width: .9cqw;
+  height: .9cqw;
+  background: var(--p-gold);
+  transform: rotate(45deg);
+  flex: 0 0 auto;
+  display: inline-block;
+}
+.p-diamond--sm { width: .55cqw; height: .55cqw; }
+
+/* Łuk — echo okręgu z sygnetu. Element czysto dekoracyjny,
+   nigdy nie pojawia się pod znakiem (księga: tło pod logo ma być spokojne). */
+.p-arc {
+  position: absolute;
+  border-radius: 50%;
+  border: var(--p-hairline) solid var(--p-gold);
+  opacity: var(--arc-opacity, .18);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Delikatne ziarno — ociepla duże, płaskie tła i zdjęcia */
+.p-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .30;
+  mix-blend-mode: overlay;
+  z-index: 2;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");
+}
+
+/* =========================================================================
+   6 · ZDJĘCIA
+   Księga: na zdjęciu wymagane wystarczające przyciemnienie tła.
+   Dlatego każdy kadr dostaje przyciemnienie domyślnie.
+   ========================================================================= */
+
+.p-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background-color: var(--p-navy);
+  background-image: var(--photo, none);
+  background-size: cover;
+  background-position: var(--photo-pos, center);
+}
+
+/* Zdjęcie sprowadzone do granatowo-złotego duotonu marki */
+.p-photo--duotone::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: var(--p-navy);
+  mix-blend-mode: color;
+  opacity: .70;
+}
+.p-photo--duotone::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, var(--p-gold) 0%, transparent 62%);
+  mix-blend-mode: soft-light;
+  opacity: .55;
+}
+
+.p-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+/* Przyciemnienie od dołu — pod tekst i znak w dolnej części kadru */
+.p-scrim--bottom {
+  background: linear-gradient(
+    to top,
+    rgb(22 36 63 / .96) 0%,
+    rgb(22 36 63 / .88) 22%,
+    rgb(22 36 63 / .55) 48%,
+    rgb(22 36 63 / .10) 78%,
+    rgb(22 36 63 / 0) 100%);
+}
+/* Przyciemnienie od góry i dołu — układ „kanapka" */
+.p-scrim--both {
+  background:
+    linear-gradient(to bottom, rgb(22 36 63 / .90) 0%, rgb(22 36 63 / 0) 34%),
+    linear-gradient(to top,    rgb(22 36 63 / .94) 0%, rgb(22 36 63 / 0) 46%);
+}
+/* Równomierne przyciemnienie — gdy tekst leży na środku kadru */
+.p-scrim--full  { background: rgb(22 36 63 / .74); }
+.p-scrim--soft  { background: rgb(22 36 63 / .45); }
+
+/* Znacznik pliku zastępczego — znika po podstawieniu własnego zdjęcia */
+.p-photo-note {
+  position: absolute;
+  left: var(--p-gutter);
+  top: var(--p-space-3);
+  z-index: 5;
+  font-size: 1.35cqw;
+  letter-spacing: var(--p-track-label);
+  text-transform: uppercase;
+  color: rgb(203 176 121 / .38);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* =========================================================================
+   7 · KOMPONENTY TREŚCI
+   ========================================================================= */
+
+/* Plakietka — termin, status, wyróżnik */
+.p-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--p-space-1);
+  padding: 1.1cqw 2.4cqw;
+  border: var(--p-hairline) solid var(--p-gold);
+  border-radius: var(--p-radius-pill);
+  color: var(--p-gold-light);
+  font-weight: var(--p-w-regular);
+  font-size: var(--p-step--1);
+  letter-spacing: var(--p-track-label);
+  margin-right: calc(-1 * var(--p-track-label));
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+}
+.p-badge--solid { background: var(--p-gold); color: var(--p-navy); border-color: var(--p-gold); }
+.p-badge--cream { border-color: var(--p-cream-60); color: var(--p-cream); }
+.p-canvas--cream .p-badge,
+.p-canvas--porcelain .p-badge,
+.p-canvas--white .p-badge { color: var(--p-gold); }
+
+/* Wiersz danych wyjazdu — termin · czas trwania · wylot */
+.p-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--p-space-2);
+  font-size: var(--p-step--1);
+  letter-spacing: var(--p-track-caps);
+  text-transform: uppercase;
+  color: var(--p-cream-75);
+}
+.p-canvas--cream .p-meta,
+.p-canvas--porcelain .p-meta,
+.p-canvas--white .p-meta { color: var(--p-ink-55); }
+.p-meta > * + *::before {
+  content: "";
+  display: inline-block;
+  width: .55cqw; height: .55cqw;
+  background: var(--p-gold);
+  transform: rotate(45deg);
+  margin-right: var(--p-space-2);
+  vertical-align: .12em;
+}
+
+/* Cena */
+.p-price { display: flex; align-items: baseline; gap: var(--p-space-1); line-height: 1; }
+.p-price__from {
+  font-size: var(--p-step--1);
+  letter-spacing: var(--p-track-label);
+  text-transform: uppercase;
+  color: var(--p-cream-60);
+}
+.p-price__value {
+  font-family: var(--p-font-display);
+  font-weight: var(--p-w-semibold);
+  font-size: var(--p-step-4);
+  color: var(--p-gold-light);
+  letter-spacing: -.01em;
+}
+.p-price__unit {
+  font-family: var(--p-font-display);
+  font-weight: var(--p-w-medium);
+  font-size: var(--p-step-2);
+  color: var(--p-gold-light);
+}
+.p-canvas--cream .p-price__value, .p-canvas--cream .p-price__unit,
+.p-canvas--porcelain .p-price__value, .p-canvas--porcelain .p-price__unit,
+.p-canvas--white .p-price__value, .p-canvas--white .p-price__unit { color: var(--p-gold); }
+.p-canvas--cream .p-price__from,
+.p-canvas--porcelain .p-price__from,
+.p-canvas--white .p-price__from { color: var(--p-ink-55); }
+
+/* Wezwanie do działania */
+.p-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--p-space-2);
+  padding: 2.2cqw 4.6cqw;
+  background: var(--p-gold);
+  color: var(--p-navy);
+  font-weight: var(--p-w-medium);
+  font-size: var(--p-step-0);
+  letter-spacing: var(--p-track-label);
+  margin-right: calc(-1 * var(--p-track-label));
+  text-transform: uppercase;
+  line-height: 1;
+  border-radius: var(--p-radius-pill);
+  white-space: nowrap;
+}
+.p-cta--ghost {
+  background: transparent;
+  color: var(--p-gold-light);
+  border: var(--p-hairline) solid var(--p-gold);
+}
+.p-cta--block { display: flex; width: 100%; }
+
+/* Lista punktów z numerem lub rombem */
+.p-list { display: flex; flex-direction: column; gap: var(--p-space-3); margin: 0; padding: 0; list-style: none; }
+.p-list__item { display: flex; gap: var(--p-space-3); align-items: baseline; }
+.p-list__no {
+  font-family: var(--p-font-display);
+  font-weight: var(--p-w-medium);
+  font-size: var(--p-step-2);
+  color: var(--p-gold);
+  flex: 0 0 auto;
+  min-width: 5.4cqw;
+  line-height: 1;
+}
+.p-list__text { font-size: var(--p-step-1); font-weight: var(--p-w-light); line-height: 1.34; }
+.p-list--dotted .p-list__item::before {
+  content: "";
+  width: .8cqw; height: .8cqw;
+  background: var(--p-gold);
+  transform: rotate(45deg);
+  flex: 0 0 auto;
+  margin-top: .9cqw;
+}
+
+/* Karta na jasnym tle */
+.p-card {
+  background: var(--p-porcelain);
+  color: var(--p-ink);
+  border: var(--p-hairline) solid var(--p-ink-12);
+  padding: var(--p-space-4);
+}
+.p-card--cream { background: var(--p-cream); border-color: var(--p-gold-24); }
+.p-card--outline { background: transparent; border-color: var(--p-gold-40); color: inherit; }
+
+/* Stopka nadawcy — obecna na każdym materiale */
+.p-signature {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--p-space-3);
+  font-size: var(--p-step--2);
+  letter-spacing: var(--p-track-label);
+  text-transform: uppercase;
+  color: var(--p-cream-60);
+}
+.p-canvas--cream .p-signature,
+.p-canvas--porcelain .p-signature,
+.p-canvas--white .p-signature { color: var(--p-ink-55); }
+
+/* =========================================================================
+   8 · STREFY BEZPIECZNE
+   Widoczne po dodaniu klasy `show-safe` do <body> (albo `?safe=1`).
+   Nigdy nie trafiają do eksportu bez świadomej decyzji.
+   ========================================================================= */
+
+.p-safe { position: absolute; inset: 0; z-index: 90; pointer-events: none; display: none; }
+body.show-safe .p-safe { display: block; }
+
+.p-safe__zone {
+  position: absolute;
+  background: rgb(200 60 60 / .16);
+  border: 1px dashed rgb(255 120 120 / .55);
+}
+.p-safe__label {
+  position: absolute;
+  font-family: var(--p-font-text);
+  font-size: 1.6cqw;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgb(255 150 150 / .95);
+  padding: .6cqw;
+}
+
+.p-safe--shorts .p-safe__zone.is-top    { top: 0; left: 0; right: 0; height: var(--p-safe-shorts-top); }
+.p-safe--shorts .p-safe__zone.is-bottom { bottom: 0; left: 0; right: 0; height: var(--p-safe-shorts-bottom); }
+.p-safe--shorts .p-safe__zone.is-right  { top: var(--p-safe-shorts-top); bottom: var(--p-safe-shorts-bottom); right: 0; width: var(--p-safe-shorts-right); }
+
+.p-safe--story .p-safe__zone.is-top     { top: 0; left: 0; right: 0; height: var(--p-safe-story-top); }
+.p-safe--story .p-safe__zone.is-bottom  { bottom: 0; left: 0; right: 0; height: var(--p-safe-story-bottom); }
+
+/* Warstwy treści zawsze nad tłem i przyciemnieniem */
+.p-layer { position: relative; z-index: 4; }
+/* `.p-stack` rozpina się na całą kanwę — pozycjonowanie ma pierwszeństwo
+   przed `position: relative` z `.p-layer`, niezależnie od kolejności klas. */
+.p-stack.p-layer { position: absolute; }

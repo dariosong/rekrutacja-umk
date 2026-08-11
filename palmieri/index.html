@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palmieri — system projektowy</title>
+<link rel="stylesheet" href="brand/fonts.css">
+<link rel="stylesheet" href="brand/tokens.css">
+<script defer src="brand/sygnet.js"></script>
+<style>
+  /* Style tej strony — dokumentacja, nie materiał reklamowy.
+     Kanwy w galerii wnoszą własne style z brand/palmieri.css. */
+
+  :root { --doc-max: 1180px; }
+
+  body {
+    margin: 0;
+    background: var(--p-porcelain);
+    color: var(--p-ink);
+    font-family: var(--p-font-text);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--doc-max); margin: 0 auto; padding: 0 32px; }
+  a { color: var(--p-gold); }
+
+  /* ---- nagłówek ---- */
+  .top { background: var(--p-navy); color: var(--p-cream); padding: 72px 0 64px; }
+  .mark { display: flex; align-items: center; gap: 18px; color: var(--p-gold); }
+  .mark .p-sygnet { width: 56px; }
+  .mark .p-sygnet svg { width: 100%; height: auto; display: block; }
+  .mark b {
+    font-family: var(--p-font-display); font-weight: 600; font-size: 30px;
+    letter-spacing: .30em; margin-right: -.30em; text-transform: uppercase; line-height: 1;
+  }
+  .top h1 {
+    font-family: var(--p-font-display); font-weight: 600; font-size: clamp(38px, 6vw, 62px);
+    line-height: 1.08; margin: 40px 0 0; max-width: 18ch;
+  }
+  .top p { max-width: 62ch; margin: 20px 0 0; color: rgb(239 231 210 / .72); font-size: 18px; }
+  .kicker {
+    font-size: 12px; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--p-gold-light); margin: 0 0 8px;
+  }
+
+  nav.spis { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px; }
+  nav.spis a {
+    text-decoration: none; color: var(--p-cream); border: 1px solid rgb(184 150 90 / .5);
+    border-radius: 999px; padding: 9px 18px; font-size: 12px;
+    letter-spacing: .16em; text-transform: uppercase;
+  }
+  nav.spis a:hover { background: var(--p-gold); color: var(--p-navy); border-color: var(--p-gold); }
+
+  /* ---- sekcje ---- */
+  section { padding: 76px 0; border-bottom: 1px solid rgb(28 39 68 / .10); }
+  section > .wrap > h2 {
+    font-family: var(--p-font-display); font-weight: 600; font-size: 38px;
+    margin: 6px 0 12px; line-height: 1.1;
+  }
+  section > .wrap > p.intro { max-width: 68ch; margin: 0 0 40px; color: rgb(28 39 68 / .66); }
+  h3 {
+    font-size: 12px; letter-spacing: .2em; text-transform: uppercase;
+    color: rgb(28 39 68 / .5); margin: 44px 0 16px; font-weight: 500;
+  }
+
+  .siatka { display: grid; gap: 22px; }
+  .k2 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .k3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  /* ---- kolory ---- */
+  .barwa { border: 1px solid rgb(28 39 68 / .10); background: #fff; }
+  .barwa .probka { height: 132px; }
+  .barwa .opis { padding: 16px 18px 20px; }
+  .barwa b { font-family: var(--p-font-display); font-weight: 600; font-size: 19px; display: block; }
+  .barwa code { color: var(--p-gold); font-size: 13px; letter-spacing: .05em; }
+  .barwa small { display: block; color: rgb(28 39 68 / .55); font-size: 13px; margin-top: 8px; }
+
+  /* ---- typografia ---- */
+  .typ { background: #fff; border: 1px solid rgb(28 39 68 / .10); padding: 30px 32px; }
+  .typ .nazwa { font-family: var(--p-font-display); font-weight: 600; font-size: 30px; margin: 6px 0 4px; }
+  .typ .rola { color: rgb(28 39 68 / .55); font-size: 14px; margin: 0 0 22px; }
+  .okaz-serif {
+    font-family: var(--p-font-display); font-weight: 600; font-size: 52px;
+    letter-spacing: .30em; margin-right: -.30em; text-transform: uppercase; line-height: 1.1;
+  }
+  .okaz-sans { font-family: var(--p-font-text); font-weight: 300; font-size: 30px; }
+  .wagi { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .waga {
+    border: 1px solid rgb(28 39 68 / .14); padding: 6px 12px; font-size: 13px;
+    letter-spacing: .1em; color: rgb(28 39 68 / .7);
+  }
+
+  /* ---- zasady ---- */
+  .zasady { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .zasada { background: #fff; border: 1px solid rgb(28 39 68 / .10); padding: 22px 24px; display: flex; gap: 14px; }
+  .zasada .znak { flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; color: #fff; }
+  .tak .znak { background: #2F6B4F; }
+  .nie .znak { background: #9E3B2E; }
+  .zasada p { margin: 0; font-size: 14.5px; line-height: 1.5; }
+
+  /* ---- galeria szablonów ---- */
+  .sterowanie {
+    display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+    background: #fff; border: 1px solid rgb(28 39 68 / .10); padding: 18px 22px; margin-bottom: 34px;
+  }
+  .sterowanie label { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: rgb(28 39 68 / .55); }
+  .sterowanie select, .sterowanie button {
+    font-family: var(--p-font-text); font-size: 14px; padding: 8px 14px;
+    border: 1px solid rgb(28 39 68 / .2); background: #fff; color: var(--p-ink); cursor: pointer;
+  }
+  .sterowanie button[aria-pressed="true"] { background: var(--p-navy); color: var(--p-cream); border-color: var(--p-navy); }
+
+  .galeria { display: grid; gap: 26px; grid-template-columns: repeat(auto-fill, minmax(216px, 1fr)); }
+  .karta { background: #fff; border: 1px solid rgb(28 39 68 / .10); display: flex; flex-direction: column; }
+  .podglad { position: relative; background: var(--p-navy); overflow: hidden; }
+  .podglad iframe { border: 0; position: absolute; top: 0; left: 0; transform-origin: 0 0; }
+  .karta .stopka { padding: 14px 16px 16px; }
+  .karta .stopka b { display: block; font-family: var(--p-font-display); font-weight: 600; font-size: 17px; }
+  .karta .stopka span { display: block; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: rgb(28 39 68 / .45); margin-top: 4px; }
+  .karta .stopka a { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; display: inline-block; margin-top: 12px; }
+  .karta .stopka a::after { content: " →"; }
+
+  /* ---- terminal ---- */
+  pre {
+    background: var(--p-navy); color: var(--p-cream); padding: 20px 24px; overflow-x: auto;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; line-height: 1.7;
+  }
+  pre b { color: var(--p-gold-light); font-weight: 400; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; background: #fff; }
+  th, td { text-align: left; padding: 13px 16px; border-bottom: 1px solid rgb(28 39 68 / .09); }
+  th { font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; color: rgb(28 39 68 / .5); font-weight: 500; }
+  td code { color: var(--p-gold); font-size: 13px; }
+
+  footer { background: var(--p-navy); color: rgb(239 231 210 / .6); padding: 56px 0; font-size: 13px; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; }
+</style>
+</head>
+
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="mark"><span class="p-sygnet"></span><b>Palmieri</b></div>
+    <p class="kicker" style="margin-top:44px;">System projektowy · 2026</p>
+    <h1>Księga znaku zamieniona w gotowe szablony</h1>
+    <p>
+      Barwy, kroje pisma i zasady użycia znaku z księgi identyfikacji wizualnej Palmieri,
+      przełożone na bibliotekę komponentów i piętnaście szablonów do Shorts, relacji
+      i reklam wyjazdów. Każdy szablon eksportuje się do pliku PNG jedną komendą.
+    </p>
+    <nav class="spis">
+      <a href="#kolor">Kolor</a>
+      <a href="#typografia">Typografia</a>
+      <a href="#znak">Znak</a>
+      <a href="#komponenty">Komponenty</a>
+      <a href="#szablony">Szablony</a>
+      <a href="#uzycie">Jak używać</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= KOLOR ================= -->
+<section id="kolor">
+  <div class="wrap">
+    <p class="kicker" style="color:var(--p-gold);">01 — Kolorystyka</p>
+    <h2>Granat prowadzi, złoto akcentuje</h2>
+    <p class="intro">
+      Proporcja jest jednostronna i nieodwracalna: granat buduje tło i masę, złoto pojawia się
+      w znaku, liniach, cenie i wezwaniu do działania. Krem i porcelana są jedynymi jasnymi tłami.
+    </p>
+
+    <div class="siatka k3">
+      <div class="barwa"><div class="probka" style="background:#16243F"></div>
+        <div class="opis"><b>Granat Palmieri</b><code>#16243F</code>
+          <small>Kolor główny — tła, nagłówki, stopka.</small></div></div>
+      <div class="barwa"><div class="probka" style="background:#B8965A"></div>
+        <div class="opis"><b>Złoto</b><code>#B8965A</code>
+          <small>Akcent — logo, linie, ikony, przyciski.</small></div></div>
+      <div class="barwa"><div class="probka" style="background:#CBB079"></div>
+        <div class="opis"><b>Złoto jasne</b><code>#CBB079</code>
+          <small>Akcent na ciemnym tle.</small></div></div>
+      <div class="barwa"><div class="probka" style="background:#EFE7D2"></div>
+        <div class="opis"><b>Krem</b><code>#EFE7D2</code>
+          <small>Ciepłe tło, tekst na granacie.</small></div></div>
+      <div class="barwa"><div class="probka" style="background:#F2F3F6"></div>
+        <div class="opis"><b>Porcelana</b><code>#F2F3F6</code>
+          <small>Chłodne, jasne tło sekcji.</small></div></div>
+      <div class="barwa"><div class="probka" style="background:#1C2744"></div>
+        <div class="opis"><b>Atrament</b><code>#1C2744</code>
+          <small>Kolor tekstu na jasnym tle.</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TYPOGRAFIA ================= -->
+<section id="typografia">
+  <div class="wrap">
+    <p class="kicker" style="color:var(--p-gold);">02 — Typografia</p>
+    <h2>Dwa kroje, jasny podział ról</h2>
+    <p class="intro">
+      Cormorant Garamond mówi w imieniu marki — logotyp, nagłówki, cytaty, cena.
+      Jost podaje informacje — daty, etykiety, akapity. Nic poza tymi dwoma krojami.
+    </p>
+
+    <div class="siatka k2">
+      <div class="typ">
+        <p class="kicker" style="color:var(--p-gold);">Logotyp i nagłówki</p>
+        <p class="nazwa">Cormorant Garamond</p>
+        <p class="rola">Napis „PALMIERI”: SemiBold, wersaliki, tracking ≈ 0,30 em.</p>
+        <p class="okaz-serif">Palmieri</p>
+        <div class="wagi">
+          <span class="waga">Regular 400</span><span class="waga">Medium 500</span>
+          <span class="waga">SemiBold 600</span><span class="waga" style="font-style:italic">Italic</span>
+        </div>
+      </div>
+
+      <div class="typ">
+        <p class="kicker" style="color:var(--p-gold);">Tekst i interfejs</p>
+        <p class="nazwa">Jost</p>
+        <p class="rola">Akapity, nawigacja, etykiety, dane. Waga Light (300) jako podstawowa.</p>
+        <p class="okaz-sans">Pielgrzymki dla wymagających</p>
+        <div class="wagi">
+          <span class="waga">Light 300</span><span class="waga">Regular 400</span>
+          <span class="waga">Medium 500</span>
+        </div>
+      </div>
+    </div>
+
+    <h3>Skala pisma na kanwie</h3>
+    <table>
+      <tr><th>Stopień</th><th>Wartość</th><th>1080 px szerokości</th><th>Zastosowanie</th></tr>
+      <tr><td><code>--p-step-6</code></td><td>15,0 cqw</td><td>162 px</td><td>Hook w planszy otwierającej</td></tr>
+      <tr><td><code>--p-step-5</code></td><td>11,5 cqw</td><td>124 px</td><td>Nazwa kierunku w relacji</td></tr>
+      <tr><td><code>--p-step-4</code></td><td>8,6 cqw</td><td>93 px</td><td>Nagłówek, cena</td></tr>
+      <tr><td><code>--p-step-2</code></td><td>4,6 cqw</td><td>50 px</td><td>Pozycje list</td></tr>
+      <tr><td><code>--p-step-0</code></td><td>2,6 cqw</td><td>28 px</td><td>Tekst bazowy</td></tr>
+      <tr><td><code>--p-step--1</code></td><td>2,0 cqw</td><td>22 px</td><td>Etykiety, metryka wyjazdu</td></tr>
+    </table>
+    <p class="intro" style="margin-top:18px;">
+      Stopnie liczymy w <code>cqw</code> — procencie szerokości kanwy. Dlatego ten sam
+      komponent zachowuje proporcje w 1080×1920, 1080×1080 i 1200×628.
+    </p>
+  </div>
+</section>
+
+<!-- ================= ZNAK ================= -->
+<section id="znak">
+  <div class="wrap">
+    <p class="kicker" style="color:var(--p-gold);">03 — Znak</p>
+    <h2>Jedna barwa, spokojne tło, pole ochronne</h2>
+    <p class="intro">
+      Gałązka palmy wpisana w okrąg symbolizuje pełną, zamkniętą drogę. Znak występuje zawsze
+      w jednym, jednolitym kolorze — bez cieni i przejść tonalnych.
+    </p>
+
+    <div class="siatka k3" style="margin-bottom:34px;">
+      <div style="background:#16243F; padding:46px; display:grid; place-items:center;">
+        <span class="p-sygnet" style="width:120px; color:#B8965A; display:block;"></span>
+      </div>
+      <div style="background:#EFE7D2; padding:46px; display:grid; place-items:center;">
+        <span class="p-sygnet" style="width:120px; color:#16243F; display:block;"></span>
+      </div>
+      <div style="background:#B8965A; padding:46px; display:grid; place-items:center;">
+        <span class="p-sygnet" style="width:120px; color:#16243F; display:block;"></span>
+      </div>
+    </div>
+
+    <div class="zasady">
+      <div class="zasada tak"><span class="znak">✓</span>
+        <p>Pole ochronne wokół znaku równe wysokości litery „P” z logotypu — nic w nie nie wchodzi.</p></div>
+      <div class="zasada tak"><span class="znak">✓</span>
+        <p>Minimalny rozmiar: sygnet 40 px, lockup poziomy 150 px szerokości.</p></div>
+      <div class="zasada tak"><span class="znak">✓</span>
+        <p>Na zdjęciu — tylko po wystarczającym przyciemnieniu kadru.</p></div>
+      <div class="zasada nie"><span class="znak">✕</span>
+        <p>Bez cieni, poświat i gradientów na znaku.</p></div>
+      <div class="zasada nie"><span class="znak">✕</span>
+        <p>Bez obcych barw tła, złota na złocie i niespokojnych wzorów pod znakiem.</p></div>
+      <div class="zasada nie"><span class="znak">✕</span>
+        <p>Bez obracania i zniekształcania proporcji.</p></div>
+    </div>
+
+    <h3>Pliki znaku</h3>
+    <table>
+      <tr><th>Plik</th><th>Do czego</th></tr>
+      <tr><td><code>brand/logo-sygnet.svg</code></td><td>Wektor wzorcowy, dziedziczy <code>currentColor</code>.</td></tr>
+      <tr><td><code>brand/logo-sygnet-gold.svg</code> i pozostałe</td><td>Warianty jednobarwne do Canvy, Figmy i druku.</td></tr>
+      <tr><td><code>brand/sygnet.js</code></td><td>Wstawia wektor w każdy element <code>.p-sygnet</code> w szablonie.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= KOMPONENTY ================= -->
+<section id="komponenty">
+  <div class="wrap">
+    <p class="kicker" style="color:var(--p-gold);">04 — Komponenty</p>
+    <h2>Klocki, z których złożone są wszystkie szablony</h2>
+    <p class="intro">
+      Pełna definicja w <code>brand/palmieri.css</code>. Nazwy klas zaczynają się od <code>p-</code>,
+      więc nie kolidują z niczym, co dołożysz później.
+    </p>
+
+    <table>
+      <tr><th>Klasa</th><th>Rola</th></tr>
+      <tr><td><code>.p-canvas--9x16</code> · <code>--4x5</code> · <code>--1x1</code> · <code>--191x1</code></td>
+          <td>Kanwa w gotowym formacie eksportu.</td></tr>
+      <tr><td><code>.p-lockup</code> · <code>.p-lockup--v</code></td><td>Znak poziomy i pionowy z logotypem.</td></tr>
+      <tr><td><code>.p-eyebrow</code></td><td>Złota etykieta wersalikowa nad nagłówkiem.</td></tr>
+      <tr><td><code>.p-title</code> · <code>--xl</code> · <code>--hook</code></td><td>Nagłówki w Cormorant Garamond.</td></tr>
+      <tr><td><code>.p-rule</code> + <code>.p-diamond</code></td><td>Kreska z rombem — ornament ze spisu treści księgi.</td></tr>
+      <tr><td><code>.p-photo</code> · <code>.p-scrim</code></td><td>Kadr ze zdjęciem i wymagane przyciemnienie.</td></tr>
+      <tr><td><code>.p-badge</code> · <code>.p-meta</code></td><td>Plakietka terminu i wiersz danych wyjazdu.</td></tr>
+      <tr><td><code>.p-price</code></td><td>Cena: „od”, kwota, waluta.</td></tr>
+      <tr><td><code>.p-cta</code> · <code>--ghost</code> · <code>--block</code></td><td>Wezwanie do działania.</td></tr>
+      <tr><td><code>.p-list</code></td><td>Lista punktów albo dni programu.</td></tr>
+      <tr><td><code>.p-arc</code> · <code>.p-grain</code></td><td>Łuk i ziarno — dekoracja tła.</td></tr>
+      <tr><td><code>.p-inset-shorts</code> · <code>.p-inset-story</code></td><td>Wcięcia omijające interfejs platformy.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= SZABLONY ================= -->
+<section id="szablony">
+  <div class="wrap">
+    <p class="kicker" style="color:var(--p-gold);">05 — Szablony</p>
+    <h2>Piętnaście gotowych kadrów</h2>
+    <p class="intro">
+      Wybierz wyjazd, a wszystkie podglądy przeładują się z jego danymi. Przełącznik stref
+      pokazuje obszary zasłaniane przez interfejs YouTube’a i Instagrama — nic ważnego nie może tam leżeć.
+    </p>
+
+    <div class="sterowanie">
+      <label for="wybor">Wyjazd</label>
+      <select id="wybor">
+        <option value="ziemia-swieta">Ziemia Święta</option>
+        <option value="fatima">Fatima i Santiago</option>
+        <option value="rzym">Rzym i Asyż</option>
+        <option value="medziugorje">Medziugorje</option>
+        <option value="grecja">Grecja św. Pawła</option>
+      </select>
+      <button id="strefy" aria-pressed="false">Pokaż strefy interfejsu</button>
+    </div>
+
+    <div class="galeria" id="galeria"></div>
+  </div>
+</section>
+
+<!-- ================= UŻYCIE ================= -->
+<section id="uzycie">
+  <div class="wrap">
+    <p class="kicker" style="color:var(--p-gold);">06 — Jak używać</p>
+    <h2>Od tekstu do pliku PNG</h2>
+
+    <h3>1 · Zmień treść</h3>
+    <p class="intro">
+      Wszystkie teksty siedzą w <code>content/wyjazdy.js</code>. Dopisanie nowego wyjazdu
+      to skopiowanie jednego bloku i podmiana wartości — szablony podłączą się same.
+    </p>
+
+    <h3>2 · Podłóż własne zdjęcia</h3>
+    <p class="intro">
+      Wrzuć zdjęcia do <code>assets/photos/</code> i wskaż je w polu <code>zdjecie</code>.
+      Adnotacja „Zdjęcie zastępcze” zniknie sama. Kadry z ludźmi i architekturą działają
+      najlepiej, bo przyciemnienie i tak sprowadza je do granatu.
+    </p>
+
+    <h3>3 · Wyeksportuj</h3>
+<pre><b># wszystkie szablony, domyślny wyjazd</b>
+python3 tools/export.py
+
+<b># komplet materiałów dla jednego wyjazdu → export/fatima/</b>
+python3 tools/export.py --wyjazd fatima
+
+<b># tylko reklamy, w podwójnej rozdzielczości</b>
+python3 tools/export.py ad- --skala 2
+
+<b># z podglądem stref interfejsu (do sprawdzenia, nie do publikacji)</b>
+python3 tools/export.py --safe</pre>
+
+    <h3>Jednorazowa zmiana bez ruszania plików</h3>
+    <p class="intro">
+      Każde pole można nadpisać w adresie szablonu — przydaje się przy testach A/B:
+      <code>templates/ad-01-4x5.html?wyjazd=rzym&amp;cena=3%20990&amp;cta=Ostatnie%20miejsca</code>
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Palmieri sp. z o.o. · ul. Zbożowa 17/37, 87-100 Toruń</span>
+    <span>601 976 612 · biuro@palmieri.pl</span>
+    <span>System oparty na „Księdze identyfikacji wizualnej”, wersja skrócona 2026</span>
+  </div>
+</footer>
+
+<script>
+  var SZABLONY = [
+    { plik: "shorts-01-hook.html",            nazwa: "Plansza otwierająca", grupa: "Shorts",   format: "1080 × 1920" },
+    { plik: "shorts-02-belka.html",           nazwa: "Belka opisowa",       grupa: "Shorts",   format: "1080 × 1920 · PNG z alfą" },
+    { plik: "shorts-03-cytat.html",           nazwa: "Cytat",               grupa: "Shorts",   format: "1080 × 1920" },
+    { plik: "shorts-04-lista.html",           nazwa: "Trzy punkty",         grupa: "Shorts",   format: "1080 × 1920" },
+    { plik: "shorts-05-endcard.html",         nazwa: "Plansza końcowa",     grupa: "Shorts",   format: "1080 × 1920" },
+    { plik: "story-01-zdjecie.html",          nazwa: "Kadr ze zdjęciem",    grupa: "Relacje",  format: "1080 × 1920" },
+    { plik: "story-02-oferta.html",           nazwa: "Oferta wyjazdu",      grupa: "Relacje",  format: "1080 × 1920" },
+    { plik: "story-03-ostatnie-miejsca.html", nazwa: "Ostatnie miejsca",    grupa: "Relacje",  format: "1080 × 1920" },
+    { plik: "story-04-opinia.html",           nazwa: "Opinia pielgrzyma",   grupa: "Relacje",  format: "1080 × 1920" },
+    { plik: "story-05-program.html",          nazwa: "Program dzień po dniu", grupa: "Relacje", format: "1080 × 1920" },
+    { plik: "ad-01-4x5.html",                 nazwa: "Reklama wyjazdu",     grupa: "Reklamy",  format: "1080 × 1350" },
+    { plik: "ad-02-1x1.html",                 nazwa: "Reklama kwadratowa",  grupa: "Reklamy",  format: "1080 × 1080" },
+    { plik: "ad-03-9x16.html",                nazwa: "Reklama pionowa",     grupa: "Reklamy",  format: "1080 × 1920" },
+    { plik: "ad-04-link-1200x628.html",       nazwa: "Reklama linkowa",     grupa: "Reklamy",  format: "1200 × 628" },
+    { plik: "ad-05-karuzela.html",            nazwa: "Karuzela, 3 slajdy",  grupa: "Reklamy",  format: "3 × 1080 × 1080" }
+  ];
+
+  var WYMIARY = {
+    "1080 × 1920": [1080, 1920], "1080 × 1920 · PNG z alfą": [1080, 1920],
+    "1080 × 1350": [1080, 1350], "1080 × 1080": [1080, 1080],
+    "1200 × 628": [1200, 628],   "3 × 1080 × 1080": [1080, 1080]
+  };
+
+  var galeria = document.getElementById("galeria");
+  var wybor = document.getElementById("wybor");
+  var przyciskStref = document.getElementById("strefy");
+  var strefyWlaczone = false;
+
+  function adres(plik) {
+    var q = "?wyjazd=" + encodeURIComponent(wybor.value);
+    return "templates/" + plik + q + (strefyWlaczone ? "&safe=1" : "");
+  }
+
+  function rysuj() {
+    galeria.innerHTML = "";
+    var ostatniaGrupa = null;
+
+    SZABLONY.forEach(function (s) {
+      if (s.grupa !== ostatniaGrupa) {
+        ostatniaGrupa = s.grupa;
+        var naglowek = document.createElement("h3");
+        naglowek.textContent = s.grupa;
+        naglowek.style.gridColumn = "1 / -1";
+        naglowek.style.margin = "26px 0 0";
+        galeria.appendChild(naglowek);
+      }
+
+      // karuzela pokazuje trzy slajdy obok siebie — dostaje cały wiersz
+      var karuzela = s.format.indexOf("3 ×") === 0;
+      var wym = karuzela ? [3336, 1128] : WYMIARY[s.format];
+
+      var karta = document.createElement("article");
+      karta.className = "karta";
+      if (karuzela) karta.style.gridColumn = "1 / -1";
+      karta.innerHTML =
+        '<div class="podglad" data-w="' + wym[0] + '" data-h="' + wym[1] + '">' +
+          '<iframe loading="lazy" src="' + adres(s.plik) + '" ' +
+            'style="width:' + wym[0] + 'px;height:' + wym[1] + 'px" ' +
+            'title="' + s.nazwa + '"></iframe>' +
+        "</div>" +
+        '<div class="stopka"><b>' + s.nazwa + "</b><span>" + s.format + "</span>" +
+          '<a href="' + adres(s.plik) + '" target="_blank" rel="noopener">Otwórz</a></div>';
+      galeria.appendChild(karta);
+    });
+
+    dopasuj();
+  }
+
+  // Skala podglądu wynika z rzeczywistej szerokości kolumny siatki,
+  // więc kadr nigdy nie zostawia pustych pasów po bokach.
+  function dopasuj() {
+    galeria.querySelectorAll(".podglad").forEach(function (box) {
+      var w = +box.dataset.w;
+      var h = +box.dataset.h;
+      var skala = box.clientWidth / w;
+      box.style.height = Math.round(h * skala) + "px";
+      box.querySelector("iframe").style.transform = "scale(" + skala + ")";
+    });
+  }
+
+  window.addEventListener("resize", dopasuj);
+
+  wybor.addEventListener("change", rysuj);
+  przyciskStref.addEventListener("click", function () {
+    strefyWlaczone = !strefyWlaczone;
+    przyciskStref.setAttribute("aria-pressed", String(strefyWlaczone));
+    przyciskStref.textContent = strefyWlaczone ? "Ukryj strefy interfejsu" : "Pokaż strefy interfejsu";
+    rysuj();
+  });
+
+  rysuj();
+</script>
+
+</body>
+</html>

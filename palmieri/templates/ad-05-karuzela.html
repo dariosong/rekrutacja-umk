@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Palmieri — Reklama 05 · Karuzela</title>
+<link rel="stylesheet" href="../brand/fonts.css">
+<link rel="stylesheet" href="../brand/tokens.css">
+<link rel="stylesheet" href="../brand/palmieri.css">
+<script defer src="../brand/sygnet.js"></script>
+<script defer src="../content/wyjazdy.js"></script>
+<script defer src="../content/apply.js"></script>
+<style>
+  body { display: flex; flex-wrap: wrap; gap: 24px; padding: 24px; }
+</style>
+</head>
+
+<!--
+  REKLAMA 05 — KARUZELA, TRZY SLAJDY (3 × 1080 × 1080)
+  Slajd 1 przyciąga, slajd 2 tłumaczy, slajd 3 prosi o decyzję.
+  Każdy slajd eksportuje się do osobnego pliku PNG.
+-->
+
+<body data-wyjazd="ziemia-swieta">
+
+<!-- ---------- SLAJD 1 · OBIETNICA ---------- -->
+<div class="p-canvas p-canvas--1x1" data-export="ad-05-karuzela-1">
+  <div class="p-photo p-photo--duotone" data-photo></div>
+  <div class="p-scrim p-scrim--soft"></div>
+  <div class="p-scrim p-scrim--bottom"></div>
+  <div class="p-grain"></div>
+  <p class="p-photo-note">Zdjęcie zastępcze</p>
+
+  <div class="p-stack p-stack--between p-layer">
+    <div class="p-lockup p-lockup--cream" style="--sygnet:9cqw;">
+      <span class="p-sygnet"></span>
+      <span class="p-lockup__word">Palmieri</span>
+    </div>
+    <div>
+      <p class="p-eyebrow" data-p="eyebrow">Pielgrzymka · 8 dni</p>
+      <h1 class="p-title" style="margin-top:var(--p-space-2); font-size:var(--p-step-4);" data-p="hook">
+        Wróć z tej drogi kimś innym
+      </h1>
+      <div class="p-rule" style="--rule-w:24cqw; margin-top:var(--p-space-3);">
+        <i class="p-diamond"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ---------- SLAJD 2 · CO ZOBACZYSZ ---------- -->
+<div class="p-canvas p-canvas--1x1" data-export="ad-05-karuzela-2">
+  <div class="p-arc" style="width:120cqw; height:120cqw; right:-56cqw; top:-30cqw; --arc-opacity:.12;"></div>
+  <div class="p-grain"></div>
+
+  <div class="p-stack p-stack--between p-layer">
+    <div>
+      <p class="p-eyebrow" data-p="kierunek">Ziemia Święta</p>
+      <h2 class="p-title p-title--sm" style="margin-top:var(--p-space-2);">Co zapamiętasz</h2>
+    </div>
+
+    <ol class="p-list" data-p-list="punkty" style="gap:var(--p-space-3);">
+      <li class="p-list__item" style="align-items:flex-start;">
+        <span class="p-list__no" data-slot="numer" style="font-size:var(--p-step-2); min-width:9cqw;">01</span>
+        <span class="p-list__text" data-slot="opis" style="font-size:var(--p-step-2); line-height:1.24;">
+          Msza w Bazylice Grobu Pańskiego
+        </span>
+      </li>
+    </ol>
+
+    <div>
+      <div class="p-hr"></div>
+      <div class="p-meta" style="margin-top:var(--p-space-3);">
+        <span data-p="terminKrotki">14–21 X 2026</span>
+        <span data-p="opiekun">ks. Marek Wiśniewski</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ---------- SLAJD 3 · DECYZJA ---------- -->
+<div class="p-canvas p-canvas--1x1" data-export="ad-05-karuzela-3">
+  <div class="p-frame" style="--frame-inset:4.6cqw;"></div>
+  <div class="p-grain"></div>
+
+  <div class="p-stack p-stack--between p-center p-layer">
+    <span></span>
+
+    <div>
+      <div class="p-lockup p-lockup--v p-lockup--gold" style="--sygnet:24cqw;">
+        <span class="p-sygnet"></span>
+        <span class="p-lockup__word">Palmieri</span>
+        <span class="p-lockup__sub" data-p="marka.rola">Biuro pielgrzymkowe · Toruń</span>
+      </div>
+
+      <div class="p-price" style="justify-content:center; margin-top:var(--p-space-5);">
+        <span class="p-price__from">od</span>
+        <span class="p-price__value" data-p="cena">6 890</span>
+        <span class="p-price__unit" data-p="waluta">zł</span>
+      </div>
+      <p class="p-lead" style="margin-top:var(--p-space-2); font-size:var(--p-step--1);" data-p="cenaNota">
+        Przelot, hotele, wyżywienie i opieka kapłana w cenie.
+      </p>
+    </div>
+
+    <div style="width:100%;">
+      <span class="p-cta p-cta--block" data-p="cta">Zapisz się</span>
+      <p class="p-signature" style="justify-content:center; margin-top:var(--p-space-3);">
+        <span data-p="marka.www">palmieri.pl</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

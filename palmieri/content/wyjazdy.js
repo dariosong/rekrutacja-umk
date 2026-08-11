@@ -1,0 +1,191 @@
+/* =========================================================================
+   PALMIERI — TREŚĆ
+   Jedno miejsce, w którym zmieniasz teksty wszystkich szablonów.
+   Szablon czyta domyślny wyjazd z atrybutu `data-wyjazd` w <body>,
+   a pojedynczy materiał można nadpisać w adresie, np.:
+       ad-01-4x5.html?wyjazd=fatima
+       ad-01-4x5.html?cena=5%20490&termin=3%E2%80%9310%20V%202026
+   ========================================================================= */
+
+window.PALMIERI = {
+  marka: {
+    nazwa: "Palmieri",
+    rola: "Biuro pielgrzymkowe · Toruń",
+    haslo: "Pielgrzymki dla wymagających",
+    www: "palmieri.pl",
+    tel: "601 976 612",
+    mail: "biuro@palmieri.pl",
+  },
+
+  wyjazdy: {
+    "ziemia-swieta": {
+      kierunek: "Ziemia Święta",
+      podtytul: "Jerozolima · Betlejem · Galilea",
+      eyebrow: "Pielgrzymka · 8 dni",
+      hook: "Wróć z tej drogi kimś innym",
+      lead: "Osiem dni w miejscach, w których Ewangelia przestaje być tekstem, a staje się krajobrazem.",
+      termin: "14–21 października 2026",
+      terminKrotki: "14–21 X 2026",
+      dni: "8 dni",
+      wylot: "Wylot z Warszawy",
+      opiekun: "ks. Marek Wiśniewski",
+      cena: "6 890",
+      waluta: "zł",
+      cenaNota: "Przelot, hotele ***, dwa posiłki dziennie, przewodnik i opieka kapłana w cenie.",
+      miejsca: "6",
+      cta: "Zapisz się",
+      punkty: [
+        "Msza w Bazylice Grobu Pańskiego",
+        "Odnowienie przyrzeczeń chrzcielnych nad Jordanem",
+        "Wschód słońca nad Jeziorem Galilejskim",
+      ],
+      program: [
+        ["01", "Warszawa — Tel Awiw. Wieczorna modlitwa nad morzem."],
+        ["02", "Nazaret, Kana Galilejska, Góra Błogosławieństw."],
+        ["03", "Jezioro Galilejskie, Kafarnaum, rejs o świcie."],
+        ["04", "Jordan — odnowienie przyrzeczeń chrzcielnych."],
+        ["05", "Betlejem — Bazylika Narodzenia, Pole Pasterzy."],
+      ],
+      opinia:
+        "Byłam już na kilku pielgrzymkach. Ta pierwszy raz nie była wycieczką z modlitwą, tylko drogą.",
+      opiniaAutor: "Anna, Toruń",
+      zdjecie: "../assets/photos-zastepcze/ziemia-swieta.jpg",
+    },
+
+    fatima: {
+      kierunek: "Fatima i Santiago",
+      podtytul: "Fatima · Santiago de Compostela · Porto",
+      eyebrow: "Pielgrzymka · 7 dni",
+      hook: "Ostatnie kilometry idzie się inaczej",
+      lead: "Portugalia i Galicja: sanktuarium, ocean i ostatni odcinek Drogi św. Jakuba przejdziemy pieszo.",
+      termin: "9–15 maja 2026",
+      terminKrotki: "9–15 V 2026",
+      dni: "7 dni",
+      wylot: "Wylot z Gdańska",
+      opiekun: "ks. Paweł Zieliński",
+      cena: "5 490",
+      waluta: "zł",
+      cenaNota: "Przelot, hotele ***, śniadania i obiadokolacje, przewodnik i opieka kapłana.",
+      miejsca: "9",
+      cta: "Rezerwuję miejsce",
+      punkty: [
+        "Procesja świec w Fatimie",
+        "Ostatnie 20 km Camino Portugués pieszo",
+        "Msza pielgrzymia w katedrze w Santiago",
+      ],
+      program: [
+        ["01", "Gdańsk — Lizbona. Wieczór w Belém."],
+        ["02", "Fatima — Kaplica Objawień, procesja świec."],
+        ["03", "Coimbra i Porto — Douro o zachodzie słońca."],
+        ["04", "Camino Portugués — ostatni odcinek pieszo."],
+        ["05", "Santiago de Compostela — Msza pielgrzymia."],
+      ],
+      opinia:
+        "Myślałem, że jadę zobaczyć sanktuaria. Wróciłem z decyzją, którą odkładałem od trzech lat.",
+      opiniaAutor: "Krzysztof, Bydgoszcz",
+      zdjecie: "../assets/photos-zastepcze/fatima.jpg",
+    },
+
+    rzym: {
+      kierunek: "Rzym i Asyż",
+      podtytul: "Watykan · Asyż · Loreto",
+      eyebrow: "Pielgrzymka · 6 dni",
+      hook: "Miasto, które uczy patrzeć w górę",
+      lead: "Bazyliki większe, groby Apostołów i cisza Asyżu — w tempie, które pozwala się modlić, a nie tylko zwiedzać.",
+      termin: "18–23 kwietnia 2026",
+      terminKrotki: "18–23 IV 2026",
+      dni: "6 dni",
+      wylot: "Wylot z Warszawy",
+      opiekun: "ks. Tomasz Nowak",
+      cena: "4 290",
+      waluta: "zł",
+      cenaNota: "Przelot, hotele ***, śniadania i obiadokolacje, bilety wstępu, opieka kapłana.",
+      miejsca: "11",
+      cta: "Zapisz się",
+      punkty: [
+        "Msza przy grobie św. Piotra",
+        "Audiencja generalna na placu św. Piotra",
+        "Wieczór w Asyżu bez tłumów",
+      ],
+      program: [
+        ["01", "Warszawa — Rzym. Bazylika Matki Bożej Większej."],
+        ["02", "Watykan — Msza przy grobie św. Piotra."],
+        ["03", "Rzym chrześcijański — katakumby, Bazylika św. Pawła."],
+        ["04", "Asyż — Porcjunkula, bazylika św. Franciszka."],
+        ["05", "Loreto — Domek Nazaretański, powrót."],
+      ],
+      opinia:
+        "Pierwszy raz w Rzymie nie biegłam z listą zabytków. I pierwszy raz coś z tego miasta ze mną zostało.",
+      opiniaAutor: "Marta, Włocławek",
+      zdjecie: "../assets/photos-zastepcze/rzym.jpg",
+    },
+
+    medziugorje: {
+      kierunek: "Medziugorje",
+      podtytul: "Medziugorje · Wodospady Kravica · Mostar",
+      eyebrow: "Pielgrzymka · 8 dni",
+      hook: "Wejdź na Podbrdo o wschodzie słońca",
+      lead: "Osiem dni na modlitwie, adoracji i drodze krzyżowej na Križevac — z czasem, którego nikt ci nie zabierze.",
+      termin: "22–29 sierpnia 2026",
+      terminKrotki: "22–29 VIII 2026",
+      dni: "8 dni",
+      wylot: "Wyjazd autokarem z Torunia",
+      opiekun: "ks. Marek Wiśniewski",
+      cena: "3 190",
+      waluta: "zł",
+      cenaNota: "Przejazd autokarem klasy lux, pensjonaty, dwa posiłki dziennie, opieka kapłana.",
+      miejsca: "14",
+      cta: "Zapisz się",
+      punkty: [
+        "Wejście na Podbrdo o wschodzie słońca",
+        "Droga krzyżowa na Križevac",
+        "Wieczorna adoracja przy kościele św. Jakuba",
+      ],
+      program: [
+        ["01", "Toruń — przejazd przez Słowację i Chorwację."],
+        ["02", "Medziugorje — program modlitewny w parafii."],
+        ["03", "Podbrdo o wschodzie słońca, adoracja wieczorem."],
+        ["04", "Križevac — droga krzyżowa."],
+        ["05", "Kravica i Mostar — dzień odpoczynku."],
+      ],
+      opinia:
+        "Cisza na Podbrdo o piątej rano. Tego się nie da opowiedzieć, trzeba tam po prostu stanąć.",
+      opiniaAutor: "Grzegorz, Toruń",
+      zdjecie: "../assets/photos-zastepcze/medziugorje.jpg",
+    },
+
+    grecja: {
+      kierunek: "Grecja św. Pawła",
+      podtytul: "Ateny · Korynt · Filippi · Saloniki",
+      eyebrow: "Pielgrzymka · 8 dni",
+      hook: "Tam, gdzie Ewangelia weszła do Europy",
+      lead: "Trasa misyjnych podróży św. Pawła — od Areopagu w Atenach po miejsce chrztu Lidii w Filippi.",
+      termin: "5–12 września 2026",
+      terminKrotki: "5–12 IX 2026",
+      dni: "8 dni",
+      wylot: "Wylot z Warszawy",
+      opiekun: "ks. Tomasz Nowak",
+      cena: "5 990",
+      waluta: "zł",
+      cenaNota: "Przelot, hotele ****, śniadania i obiadokolacje, przewodnik i opieka kapłana.",
+      miejsca: "8",
+      cta: "Rezerwuję miejsce",
+      punkty: [
+        "Areopag — miejsce mowy św. Pawła",
+        "Filippi i rzeka, w której ochrzczono Lidię",
+        "Meteory — klasztory na skałach",
+      ],
+      program: [
+        ["01", "Warszawa — Ateny. Wieczorny spacer pod Akropolem."],
+        ["02", "Areopag, Akropol, port w Pireusie."],
+        ["03", "Korynt — Msza przy ruinach bazyliki."],
+        ["04", "Meteory — klasztory na skałach."],
+        ["05", "Filippi i Saloniki — śladami pierwszej gminy."],
+      ],
+      opinia:
+        "Dzieje Apostolskie czytam teraz z mapą w głowie. To już nie jest odległa historia.",
+      opiniaAutor: "Elżbieta, Chełmno",
+      zdjecie: "../assets/photos-zastepcze/grecja.jpg",
+    },
+  },
+};
