@@ -28,6 +28,7 @@ OPISY = {
     "shorts-03-cytat": ("Shorts", "Cytat"),
     "shorts-04-lista": ("Shorts", "Trzy punkty"),
     "shorts-05-endcard": ("Shorts", "Plansza końcowa"),
+    "shorts-06-talking-head": ("Shorts", "Talking head — pytanie i napis"),
     "story-01-zdjecie": ("Relacje", "Kadr ze zdjęciem"),
     "story-02-oferta": ("Relacje", "Oferta wyjazdu"),
     "story-03-ostatnie-miejsca": ("Relacje", "Ostatnie miejsca"),
@@ -46,12 +47,15 @@ ETYKIETY = [
     ("kierunek", "Kierunek", "input"),
     ("podtytul", "Podtytuł", "input"),
     ("hook", "Zdanie otwierające", "textarea"),
+    ("pytanie", "Pytanie", "textarea"),
+    ("napis", "Napis w filmie", "textarea"),
     ("lead", "Zajawka", "textarea"),
     ("termin", "Termin", "input"),
     ("terminKrotki", "Termin skrócony", "input"),
     ("dni", "Czas trwania", "input"),
     ("wylot", "Wylot", "input"),
     ("opiekun", "Opiekun duchowy", "input"),
+    ("opiekunRola", "Rola opiekuna", "input"),
     ("cena", "Cena", "input"),
     ("waluta", "Waluta", "input"),
     ("cenaNota", "Co w cenie", "textarea"),
@@ -99,6 +103,27 @@ def zdjecia_zastepcze() -> dict[str, str]:
     return out
 
 
+def wytnij_kanwy(cialo: str) -> list[str]:
+    """Wycina każdą kanwę licząc znaczniki <div>, a nie zgadując po komentarzach.
+
+    Wcześniejsza wersja dzieliła plik po konwencji komentarza i cicho gubiła
+    drugą kanwę w szablonach wielokadrowych.
+    """
+    cialo = re.sub(r"<!--.*?-->", "", cialo, flags=re.S)
+    kanwy = []
+    for start in re.finditer(r'<div class="p-canvas', cialo):
+        i = start.start()
+        glebokosc = 0
+        for znacznik in re.finditer(r"<div\b|</div\s*>", cialo[i:]):
+            glebokosc += 1 if znacznik.group(0).startswith("<div") else -1
+            if glebokosc == 0:
+                kanwy.append(cialo[i : i + znacznik.end()])
+                break
+        else:
+            raise ValueError("kanwa bez domykającego </div>")
+    return kanwy
+
+
 def szablony() -> tuple[list[dict], str]:
     """Wyciąga kanwy z plików szablonów razem z ich lokalnymi stylami."""
     lista, dodatkowe_style = [], []
@@ -116,10 +141,7 @@ def szablony() -> tuple[list[dict], str]:
         domyslny = re.search(r'<body[^>]*data-wyjazd="([^"]+)"', tresc)
 
         kanwy = []
-        for kanwa in re.findall(r'(<div class="p-canvas.*?)(?=\n<!-- -|\Z)', ciało, re.S):
-            kanwa = kanwa.strip()
-            if not kanwa.endswith("</div>"):
-                continue
+        for kanwa in wytnij_kanwy(ciało):
             klasy = re.search(r'class="([^"]+)"', kanwa).group(1)
             format_ = next((k for k in FORMATY if k in klasy), "p-canvas--9x16")
             kanwy.append({
@@ -170,6 +192,9 @@ def main() -> None:
     cel = ROOT / "studio.html"
     cel.write_text(strona)
     print(f"zapisano {cel.relative_to(ROOT)} — {cel.stat().st_size // 1024} KB")
+    for s in lista:
+        print(f"  {s['stem']}: {len(s['kanwy'])} kanwa/kanwy — " +
+              ", ".join(k["id"] for k in s["kanwy"]))
 
 
 if __name__ == "__main__":

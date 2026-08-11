@@ -2,7 +2,7 @@
 
 System wizualny biura pielgrzymkowego Palmieri, zbudowany wprost z „Księgi
 identyfikacji wizualnej” (wersja skrócona, 2026): barwy, kroje pisma i zasady
-użycia znaku przełożone na bibliotekę komponentów i **piętnaście szablonów**
+użycia znaku przełożone na bibliotekę komponentów i **szesnaście szablonów**
 do Shorts, relacji i reklam wyjazdów.
 
 **Chcesz po prostu zrobić grafikę?** Otwórz `studio.html` dwuklikiem: wybierasz
@@ -33,7 +33,7 @@ palmieri/
 ├── content/
 │   ├── wyjazdy.js          ← TU ZMIENIASZ TEKSTY
 │   └── apply.js            podstawia treść w szablony
-├── templates/              15 szablonów (5 Shorts, 5 relacji, 5 reklam)
+├── templates/              16 szablonów (6 Shorts, 5 relacji, 5 reklam)
 ├── assets/
 │   ├── photos/             tu wrzucasz własne zdjęcia
 │   └── photos-zastepcze/   makiety w barwach marki
@@ -54,6 +54,7 @@ palmieri/
 | `shorts-03-cytat` | cytat na kremowym tle | 1080 × 1920 |
 | `shorts-04-lista` | trzy punkty | 1080 × 1920 |
 | `shorts-05-endcard` | plansza końcowa z wezwaniem | 1080 × 1920 |
+| `shorts-06-talking-head` | oprawa filmu do kamery: pytanie + napis, **PNG z przezroczystością** | 2 × 1080 × 1920 |
 | `story-01-zdjecie` | pełnoekranowy kadr ze zdjęciem | 1080 × 1920 |
 | `story-02-oferta` | oferta wyjazdu z ceną | 1080 × 1920 |
 | `story-03-ostatnie-miejsca` | komunikat o dostępności | 1080 × 1920 |
@@ -109,6 +110,19 @@ Każde pole można nadpisać wprost w adresie szablonu — wygodne przy testach 
 ```
 templates/ad-01-4x5.html?wyjazd=rzym&cena=3%20990&cta=Ostatnie%20miejsca
 ```
+
+## Talking head — jak używać
+
+`shorts-06-talking-head` daje dwa pliki PNG z przezroczystym tłem, do położenia
+na ujęciu w programie montażowym:
+
+- **pytanie** — na pierwsze sekundy. Pytanie stoi nad głową mówiącego, podpis pod nim.
+- **napis** — na resztę klipu: znak u góry, pas na napisy u dołu.
+
+Oba mają czysty środek, więc twarz nigdy nie ląduje pod przyciemnieniem.
+Jeżeli napisy wypalasz w programie montażowym, ustaw w nim **Jost Medium ≈ 67 px**
+(6,2% szerokości kadru), interlinia 1,22, kolor `#EFE7D2` — wtedy zgrają się
+z oprawą.
 
 ## Zasady, które system pilnuje za ciebie
 

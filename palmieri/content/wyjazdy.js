@@ -49,6 +49,9 @@ window.PALMIERI = {
       opinia:
         "Byłam już na kilku pielgrzymkach. Ta pierwszy raz nie była wycieczką z modlitwą, tylko drogą.",
       opiniaAutor: "Anna, Toruń",
+      pytanie: "Czym pielgrzymka różni się od wycieczki?",
+      opiekunRola: "Opiekun duchowy grupy",
+      napis: "Program układa się wokół Mszy, nie wokół listy zabytków",
       zdjecie: "../assets/photos-zastepcze/ziemia-swieta.jpg",
     },
 
@@ -83,6 +86,9 @@ window.PALMIERI = {
       opinia:
         "Myślałem, że jadę zobaczyć sanktuaria. Wróciłem z decyzją, którą odkładałem od trzech lat.",
       opiniaAutor: "Krzysztof, Bydgoszcz",
+      pytanie: "Czy trzeba być w formie, żeby przejść Camino?",
+      opiekunRola: "Opiekun duchowy grupy",
+      napis: "Ostatnie dwadzieścia kilometrów idziemy w tempie najwolniejszego",
       zdjecie: "../assets/photos-zastepcze/fatima.jpg",
     },
 
@@ -117,6 +123,9 @@ window.PALMIERI = {
       opinia:
         "Pierwszy raz w Rzymie nie biegłam z listą zabytków. I pierwszy raz coś z tego miasta ze mną zostało.",
       opiniaAutor: "Marta, Włocławek",
+      pytanie: "Zdążymy się pomodlić, czy tylko zwiedzimy?",
+      opiekunRola: "Opiekun duchowy grupy",
+      napis: "Msza przy grobie świętego Piotra jest o siódmej rano",
       zdjecie: "../assets/photos-zastepcze/rzym.jpg",
     },
 
@@ -151,6 +160,9 @@ window.PALMIERI = {
       opinia:
         "Cisza na Podbrdo o piątej rano. Tego się nie da opowiedzieć, trzeba tam po prostu stanąć.",
       opiniaAutor: "Grzegorz, Toruń",
+      pytanie: "Po co wchodzić na Podbrdo o piątej rano?",
+      opiekunRola: "Opiekun duchowy grupy",
+      napis: "Bo o piątej rano jesteś tam prawie sam",
       zdjecie: "../assets/photos-zastepcze/medziugorje.jpg",
     },
 
@@ -185,6 +197,9 @@ window.PALMIERI = {
       opinia:
         "Dzieje Apostolskie czytam teraz z mapą w głowie. To już nie jest odległa historia.",
       opiniaAutor: "Elżbieta, Chełmno",
+      pytanie: "Co Grecja ma wspólnego z Ewangelią?",
+      opiekunRola: "Opiekun duchowy grupy",
+      napis: "Święty Paweł mówił na Areopagu — stoimy dokładnie w tym miejscu",
       zdjecie: "../assets/photos-zastepcze/grecja.jpg",
     },
   },

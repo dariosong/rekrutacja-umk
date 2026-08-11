@@ -67,6 +67,11 @@ button:focus-visible, .zrzutnia:focus-visible {
 .zrzutnia b { display: block; font-family: var(--p-font-display); font-weight: 600; font-size: 16px; }
 .zrzutnia span { font-size: 12px; color: rgb(239 231 210 / .5); }
 .zrzutnia.ma-zdjecie { border-style: solid; border-color: rgb(184 150 90 / .6); }
+.zrzutnia.wylaczona {
+  border-color: rgb(239 231 210 / .18); cursor: default; background: none;
+}
+.zrzutnia.wylaczona:hover { background: none; border-color: rgb(239 231 210 / .18); }
+.zrzutnia.wylaczona b { color: rgb(239 231 210 / .55); font-family: var(--p-font-text); font-size: 13px; font-weight: 400; }
 
 .suwaki { margin-top: 14px; display: none; }
 .suwaki.widoczne { display: block; }
@@ -98,14 +103,18 @@ input[type="range"] { width: 100%; accent-color: var(--p-gold); }
 
 /* ── scena ── */
 .scena {
-  overflow: auto; padding: 32px; display: flex; flex-direction: column;
-  align-items: center; justify-content: flex-start; gap: 26px;
+  overflow: auto; padding: 32px; display: flex; flex-wrap: wrap;
+  align-items: flex-start; justify-content: center; gap: 26px; align-content: flex-start;
   background:
     linear-gradient(45deg, rgb(28 39 68 / .035) 25%, transparent 25%, transparent 75%, rgb(28 39 68 / .035) 75%) 0 0 / 22px 22px,
     linear-gradient(45deg, rgb(28 39 68 / .035) 25%, transparent 25%, transparent 75%, rgb(28 39 68 / .035) 75%) 11px 11px / 22px 22px,
     var(--p-porcelain);
 }
 .ramka { box-shadow: 0 10px 40px rgb(22 36 63 / .16); }
+
+/* Nakładki są przezroczyste, więc na jasnej scenie byłyby niewidoczne.
+   Podkład udaje kadr wideo — do pliku PNG oczywiście nie trafia. */
+.p-stage.na-wideo { background: #4A5348; }
 .podpis { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: rgb(28 39 68 / .42); text-align: center; }
 
 @media (max-width: 900px) {
@@ -188,6 +197,7 @@ const stan = {
   szablon: SZABLONY[0],
   wyjazd: SZABLONY[0].wyjazd,
   zdjecie: null,
+  nazwaPliku: "",
   pozX: 50,
   pozY: 50,
   moc: 1,
@@ -282,8 +292,9 @@ function rysuj() {
   scena.innerHTML = "";
   document.body.classList.toggle("show-safe", stan.strefy);
 
-  const dostepna = scena.clientWidth - 64;
-  const wysokoscSceny = scena.clientHeight - 64 - (stan.szablon.kanwy.length > 1 ? 120 : 30);
+  const ile = stan.szablon.kanwy.length;
+  const dostepna = (scena.clientWidth - 64 - (ile - 1) * 26) / ile;
+  const wysokoscSceny = scena.clientHeight - 64 - 40;
 
   stan.szablon.kanwy.forEach((kanwaOpis) => {
     const kadr = document.createElement("div");
@@ -293,13 +304,9 @@ function rysuj() {
     wypelnij(kanwa);
     dodajStrefy(kanwa, stan.strefy ? kanwaOpis.safe : "");
 
-    const skala = Math.min(
-      dostepna / kanwaOpis.w,
-      wysokoscSceny / (kanwaOpis.h * (stan.szablon.kanwy.length > 1 ? 1 : 1)),
-      1
-    );
+    const skala = Math.min(dostepna / kanwaOpis.w, wysokoscSceny / kanwaOpis.h, 1);
     const scenka = document.createElement("div");
-    scenka.className = "p-stage";
+    scenka.className = "p-stage" + (kanwaOpis.alpha ? " na-wideo" : "");
     scenka.style.setProperty("--p-scale", skala);
     scenka.style.setProperty("--p-w", kanwaOpis.w + "px");
     scenka.style.setProperty("--p-h", kanwaOpis.h + "px");
@@ -309,7 +316,8 @@ function rysuj() {
     blok.appendChild(scenka);
     const podpis = document.createElement("p");
     podpis.className = "podpis";
-    podpis.textContent = `${kanwaOpis.id} · ${kanwaOpis.w} × ${kanwaOpis.h}`;
+    podpis.textContent = `${kanwaOpis.id} · ${kanwaOpis.w} × ${kanwaOpis.h}` +
+      (kanwaOpis.alpha ? " · PNG z przezroczystym tłem" : "");
     podpis.style.marginTop = "10px";
     blok.appendChild(podpis);
     scena.appendChild(blok);
@@ -456,6 +464,7 @@ function rysujPola() {
 wyborSzablonu.addEventListener("change", () => {
   stan.szablon = SZABLONY[+wyborSzablonu.value];
   rysujPola();
+  odswiezZrzutnie();
   rysuj();
 });
 
@@ -477,23 +486,57 @@ const zrzutnia = document.getElementById("zrzutnia");
 const wejsciePliku = document.getElementById("plik");
 const suwaki = document.getElementById("suwaki");
 
+/* Nie każdy szablon ma warstwę zdjęcia: nakładki na wideo mają za tło sam film,
+   a kadry na kremie obywają się bez zdjęcia z założenia. Zamiast przyjmować plik
+   i nie robić nic, studio mówi wprost, że tutaj zdjęcie nie ma gdzie wejść. */
+function uzywaZdjecia() {
+  return stan.szablon.kanwy.some((k) => k.html.indexOf("data-photo") !== -1);
+}
+
+function powodBrakuZdjecia() {
+  const html = stan.szablon.kanwy.map((k) => k.html).join("");
+  if (html.indexOf("is-overlay") !== -1)
+    return "To nakładka na Twoje wideo — tłem jest sam film.";
+  if (html.indexOf("p-canvas--cream") !== -1)
+    return "Kadr na kremowym tle, celowo bez zdjęcia.";
+  return "Ten szablon nie korzysta ze zdjęcia.";
+}
+
+function odswiezZrzutnie() {
+  const mozna = uzywaZdjecia();
+  zrzutnia.classList.toggle("wylaczona", !mozna);
+  zrzutnia.toggleAttribute("tabindex", mozna);
+
+  if (!mozna) {
+    zrzutnia.querySelector("b").textContent = powodBrakuZdjecia();
+    zrzutnia.querySelector("span").textContent = "Zdjęcia używają: plansza otwierająca, kadr ze zdjęciem, oferta, program i wszystkie reklamy.";
+    suwaki.classList.remove("widoczne");
+    return;
+  }
+
+  const ma = Boolean(stan.zdjecie);
+  zrzutnia.classList.toggle("ma-zdjecie", ma);
+  zrzutnia.querySelector("b").textContent = ma ? stan.nazwaPliku : "Przeciągnij zdjęcie";
+  zrzutnia.querySelector("span").textContent = ma ? "kliknij, żeby podmienić" : "albo kliknij i wybierz plik";
+  suwaki.classList.toggle("widoczne", ma);
+}
+
 function wczytaj(plik) {
+  if (!uzywaZdjecia()) return;
   if (!plik || !plik.type.startsWith("image/")) return;
   const czytnik = new FileReader();
   czytnik.onload = () => {
     stan.zdjecie = czytnik.result;
-    zrzutnia.classList.add("ma-zdjecie");
-    zrzutnia.querySelector("b").textContent = plik.name;
-    zrzutnia.querySelector("span").textContent = "kliknij, żeby podmienić";
-    suwaki.classList.add("widoczne");
+    stan.nazwaPliku = plik.name;
+    odswiezZrzutnie();
     rysuj();
   };
   czytnik.readAsDataURL(plik);
 }
 
-zrzutnia.addEventListener("click", () => wejsciePliku.click());
+zrzutnia.addEventListener("click", () => { if (uzywaZdjecia()) wejsciePliku.click(); });
 zrzutnia.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" || e.key === " ") { e.preventDefault(); wejsciePliku.click(); }
+  if ((e.key === "Enter" || e.key === " ") && uzywaZdjecia()) { e.preventDefault(); wejsciePliku.click(); }
 });
 wejsciePliku.addEventListener("change", () => wczytaj(wejsciePliku.files[0]));
 
@@ -527,17 +570,15 @@ document.getElementById("duoton").addEventListener("change", (e) => {
 
 document.getElementById("usun-zdjecie").addEventListener("click", () => {
   stan.zdjecie = null;
-  zrzutnia.classList.remove("ma-zdjecie");
-  zrzutnia.querySelector("b").textContent = "Przeciągnij zdjęcie";
-  zrzutnia.querySelector("span").textContent = "albo kliknij i wybierz plik";
-  suwaki.classList.remove("widoczne");
   wejsciePliku.value = "";
+  odswiezZrzutnie();
   rysuj();
 });
 
 window.addEventListener("resize", rysuj);
 
 rysujPola();
+odswiezZrzutnie();
 rysuj();
 </script>
 </body>

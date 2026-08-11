@@ -337,7 +337,7 @@ html, body {
   position: absolute; inset: 0;
   background: var(--p-navy);
   mix-blend-mode: color;
-  opacity: .70;
+  opacity: .42;
 }
 .p-photo--duotone::after {
   content: "";
@@ -370,8 +370,8 @@ html, body {
     linear-gradient(to top,    rgb(22 36 63 / .94) 0%, rgb(22 36 63 / 0) 46%);
 }
 /* Równomierne przyciemnienie — gdy tekst leży na środku kadru */
-.p-scrim--full  { background: rgb(22 36 63 / .74); }
-.p-scrim--soft  { background: rgb(22 36 63 / .45); }
+.p-scrim--full  { background: rgb(22 36 63 / .60); }
+.p-scrim--soft  { background: rgb(22 36 63 / .28); }
 
 /* Znacznik pliku zastępczego — znika po podstawieniu własnego zdjęcia */
 .p-photo-note {
@@ -522,6 +522,21 @@ html, body {
 }
 .p-card--cream { background: var(--p-cream); border-color: var(--p-gold-24); }
 .p-card--outline { background: transparent; border-color: var(--p-gold-40); color: inherit; }
+
+/* Napis wypalany w filmie. Shorts ogląda się bez dźwięku, więc napis jest
+   treścią, nie ozdobą: gruba waga Jost, wysoki kontrast, żadnych efektów —
+   czytelność bierze się z przyciemnienia kadru pod spodem. */
+.p-napis {
+  font-family: var(--p-font-text);
+  font-weight: var(--p-w-medium);
+  font-size: var(--p-step-3);
+  line-height: 1.22;
+  color: var(--p-cream);
+  margin: 0;
+  text-wrap: balance;
+}
+/* wyróżnienie słowa klucza — jedyna dozwolona ozdoba napisu */
+.p-napis em { font-style: normal; color: var(--p-gold-light); }
 
 /* Stopka nadawcy — obecna na każdym materiale */
 .p-signature {

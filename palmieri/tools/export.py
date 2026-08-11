@@ -97,6 +97,11 @@ def main() -> int:
                 print(f"  pomijam {plik.name} — brak kanwy z atrybutem data-export")
                 continue
 
+            # `omit_background` zdejmuje tło strony, a nie tło elementu. Bez tego
+            # nakładki na wideo wychodziły z pełnym granatem zamiast przezroczystości.
+            if any(k.get_attribute("data-export-alpha") == "1" for k in kanwy):
+                strona.add_style_tag(content="html, body { background: transparent !important; }")
+
             for kanwa in kanwy:
                 nazwa = kanwa.get_attribute("data-export")
                 alfa = kanwa.get_attribute("data-export-alpha") == "1"
