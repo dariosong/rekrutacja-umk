@@ -15,19 +15,18 @@
   .is-overlay { background: transparent; }
   body { display: flex; flex-wrap: wrap; gap: 24px; padding: 24px; }
 
-  /* Środek kadru zostaje czysty: przyciemniamy tylko górę i dół, żeby nie
-     kłaść szarej płachty na twarz mówiącego. */
-  .scrim-gora {
-    top: 0; bottom: auto; height: 40%;
+  /* Cokół w barwie firmowej. Dochodzi do pełnego granatu, więc niesie tekst
+     niezależnie od tego, co dzieje się w kadrze pod spodem. */
+  .cokol      { top: auto; bottom: 0; height: 64%; }
+  .cokol--niski { height: 48%; }
+
+  /* Delikatne przyciemnienie górnej krawędzi — tylko pod znak. Twarz mówiącego
+     zostaje w czystym kadrze, między cokołem a tym pasem. */
+  .naglowie {
+    top: 0; bottom: auto; height: 20%;
     background: linear-gradient(to bottom,
-      rgb(22 36 63 / .92) 0%, rgb(22 36 63 / .74) 46%, rgb(22 36 63 / 0) 100%);
+      rgb(22 36 63 / .80) 0%, rgb(22 36 63 / .44) 52%, rgb(22 36 63 / 0) 100%);
   }
-  .scrim-dol {
-    top: auto; bottom: 0; height: 38%;
-    background: linear-gradient(to top,
-      rgb(22 36 63 / .94) 0%, rgb(22 36 63 / .70) 42%, rgb(22 36 63 / 0) 100%);
-  }
-  .scrim-gora--niski { height: 24%; }
 </style>
 </head>
 
@@ -36,11 +35,13 @@
 
   Oprawa filmu, w którym ktoś mówi wprost do kamery. Dwa pliki na jeden klip:
 
-    A. PYTANIE — na pierwsze sekundy. Pytanie stoi nad głową mówiącego,
-       podpis pod nim. To ono zatrzymuje przewijanie.
-    B. NAPIS  — na resztę klipu. Sam znak u góry i pas na napisy u dołu.
+    A. PYTANIE — na pierwsze sekundy. Duże pytanie na firmowym cokole,
+       podpis mówiącego pod nim. To ono zatrzymuje przewijanie.
+    B. NAPIS  — na resztę klipu. Znak u góry i pas na napisy u dołu.
 
-  Oba pliki mają czysty środek, więc twarz nigdy nie ląduje pod przyciemnieniem.
+  Cała treść siedzi na cokole, a środek i góra kadru zostają czyste, więc
+  twarz nigdy nie ląduje pod przyciemnieniem.
+
   Napis w wariancie B pokazuje docelowy krój i stopień pisma: jeżeli napisy
   wypalasz w programie montażowym, ustaw w nim Jost Medium ≈ 67 px
   (6,2% szerokości kadru), interlinia 1,22, kolor #EFE7D2.
@@ -52,36 +53,35 @@
 <div class="p-canvas p-canvas--9x16 is-overlay" data-export="shorts-06-th-pytanie" data-kadr="Kadr 1 · pytanie"
      data-export-alpha="1" data-safe="shorts">
 
-  <div class="p-scrim scrim-gora"></div>
-  <div class="p-scrim scrim-dol"></div>
+  <div class="p-scrim naglowie"></div>
+  <div class="p-scrim p-scrim--brand cokol"></div>
 
   <div class="p-stack p-stack--between p-inset-shorts p-inset-icons p-layer">
 
+    <div class="p-lockup p-lockup--cream" style="--sygnet:8cqw;">
+      <span class="p-sygnet"></span>
+      <span class="p-lockup__word">Palmieri</span>
+    </div>
+
     <div>
-      <div class="p-lockup p-lockup--cream" style="--sygnet:8cqw;">
-        <span class="p-sygnet"></span>
-        <span class="p-lockup__word">Palmieri</span>
-      </div>
+      <p class="p-eyebrow">Pytacie nas o to najczęściej</p>
 
-      <p class="p-eyebrow" style="margin-top:var(--p-space-4);">Pytacie nas o to najczęściej</p>
-
-      <h1 class="p-title" style="margin-top:var(--p-space-2); font-size:var(--p-step-3); max-width:74cqw;"
+      <h1 class="p-title" style="margin-top:var(--p-space-3); font-size:var(--p-step-4); line-height:1.04;"
           data-p="pytanie">
         Czym pielgrzymka różni się od wycieczki?
       </h1>
-    </div>
 
-    <div class="p-row" style="gap:var(--p-space-3); align-items:center;">
-      <i class="p-diamond"></i>
-      <div>
-        <p class="p-title p-title--sm" style="font-size:var(--p-step-2);" data-p="opiekun">
-          ks. Marek Wiśniewski
-        </p>
-        <p class="p-label" style="margin-top:var(--p-space-1); color:var(--p-cream-60);"
-           data-p="opiekunRola">
-          Opiekun duchowy grupy
-        </p>
+      <div class="p-rule p-rule--solid" style="--rule-w:18cqw; margin-block:var(--p-space-4);">
+        <i class="p-diamond"></i>
       </div>
+
+      <p class="p-title p-title--sm" style="font-size:var(--p-step-2);" data-p="opiekun">
+        ks. Marek Wiśniewski
+      </p>
+      <p class="p-label" style="margin-top:var(--p-space-1); color:var(--p-cream-60);"
+         data-p="opiekunRola">
+        Opiekun duchowy grupy
+      </p>
     </div>
 
   </div>
@@ -91,8 +91,8 @@
 <div class="p-canvas p-canvas--9x16 is-overlay" data-export="shorts-06-th-napis" data-kadr="Kadr 2 · napis"
      data-export-alpha="1" data-safe="shorts">
 
-  <div class="p-scrim scrim-gora scrim-gora--niski"></div>
-  <div class="p-scrim scrim-dol"></div>
+  <div class="p-scrim naglowie"></div>
+  <div class="p-scrim p-scrim--brand cokol cokol--niski"></div>
 
   <div class="p-stack p-stack--between p-inset-shorts p-inset-icons p-layer">
 
@@ -105,7 +105,7 @@
     </div>
 
     <div>
-      <div class="p-rule p-rule--solid" style="--rule-w:20cqw; margin-bottom:var(--p-space-3);">
+      <div class="p-rule p-rule--solid" style="--rule-w:18cqw; margin-bottom:var(--p-space-3);">
         <i class="p-diamond"></i>
       </div>
       <p class="p-napis" data-p="napis">

@@ -13,7 +13,8 @@
   /* Nakładka na materiał wideo — tło kanwy zostaje przezroczyste,
      żeby plik PNG dało się położyć na ujęciu w programie montażowym. */
   .is-overlay { background: transparent; }
-  .is-overlay .p-scrim--bottom { height: 46%; top: auto; bottom: 0; }
+  /* Ten sam cokół w barwie firmowej, co w szablonie talking head */
+  .is-overlay .p-scrim--brand { height: 46%; top: auto; bottom: 0; }
 </style>
 </head>
 
@@ -28,7 +29,7 @@
 
 <div class="p-canvas p-canvas--9x16 is-overlay" data-export="shorts-02-belka" data-export-alpha="1" data-safe="shorts">
 
-  <div class="p-scrim p-scrim--bottom"></div>
+  <div class="p-scrim p-scrim--brand"></div>
 
   <div class="p-stack p-stack--end p-inset-shorts p-inset-icons p-layer">
 
