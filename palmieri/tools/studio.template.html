@@ -81,6 +81,12 @@ input[type="range"] { width: 100%; accent-color: var(--p-gold); }
   letter-spacing: .12em; text-transform: uppercase; cursor: pointer; padding: 6px 0; margin-top: 6px;
 }
 .usun:hover { color: var(--p-gold-light); }
+.podgrupa {
+  font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--p-gold-light); margin: 20px 0 10px;
+  padding-bottom: 7px; border-bottom: 1px solid rgb(184 150 90 / .22);
+}
+.podgrupa:first-child { margin-top: 0; }
 .nota { font-size: 11.5px; line-height: 1.45; color: rgb(239 231 210 / .45); margin: 2px 0 0; }
 #moc-opis { color: var(--p-gold-light); font-weight: 400; }
 
@@ -224,7 +230,9 @@ function wypelnij(korzen) {
 
   korzen.querySelectorAll("[data-p]").forEach((el) => {
     const wartosc = pole(zrodlo, el.dataset.p);
-    if (wartosc != null && wartosc !== "") el.textContent = wartosc;
+    // także pusty ciąg trafia na kadr: panel i podgląd muszą mówić to samo,
+    // inaczej wyczyszczone pole zostawia na grafice tekst z szablonu
+    if (wartosc != null) el.textContent = wartosc;
   });
 
   korzen.querySelectorAll("[data-photo]").forEach((el) => {
@@ -316,7 +324,8 @@ function rysuj() {
     blok.appendChild(scenka);
     const podpis = document.createElement("p");
     podpis.className = "podpis";
-    podpis.textContent = `${kanwaOpis.id} · ${kanwaOpis.w} × ${kanwaOpis.h}` +
+    podpis.textContent = (kanwaOpis.kadr ? kanwaOpis.kadr + " · " : "") +
+      `${kanwaOpis.w} × ${kanwaOpis.h}` +
       (kanwaOpis.alpha ? " · PNG z przezroczystym tłem" : "");
     podpis.style.marginTop = "10px";
     blok.appendChild(podpis);
@@ -420,41 +429,101 @@ Object.entries(PALMIERI.wyjazdy).forEach(([slug, w]) => {
 });
 wyborWyjazdu.value = stan.wyjazd;
 
-/* Formularz pokazuje tylko te pola, których używa wybrany szablon —
-   panel nie puchnie od wartości, które i tak nigdzie się nie pojawią. */
-function rysujPola() {
-  const uzywane = new Set();
-  stan.szablon.kanwy.forEach((k) => {
-    const tymczasowy = document.createElement("div");
-    tymczasowy.innerHTML = k.html;
-    tymczasowy.querySelectorAll("[data-p]").forEach((el) => uzywane.add(el.dataset.p));
-    tymczasowy.querySelectorAll("[data-p-list]").forEach((el) => uzywane.add(el.dataset.pList));
-    tymczasowy.querySelectorAll("[data-p-program]").forEach((el) => uzywane.add(el.dataset.pProgram));
-  });
+/* Formularz pokazuje tylko te pola, których używa wybrany szablon — panel nie
+   puchnie od wartości, które i tak nigdzie się nie pojawią. Przy szablonie
+   wielokadrowym pola są dodatkowo pogrupowane według kadru, na który działają:
+   bez tego wpisujesz tekst i nie wiadomo, dlaczego zmienił się tylko jeden. */
 
-  const zrodlo = dane();
+function poleUzywane(html) {
+  const tymczasowy = document.createElement("div");
+  tymczasowy.innerHTML = html;
+  const klucze = new Set();
+  tymczasowy.querySelectorAll("[data-p]").forEach((el) => klucze.add(el.dataset.p));
+  tymczasowy.querySelectorAll("[data-p-list]").forEach((el) => klucze.add(el.dataset.pList));
+  tymczasowy.querySelectorAll("[data-p-program]").forEach((el) => klucze.add(el.dataset.pProgram));
+  return klucze;
+}
+
+/* Część pól nie ma odpowiednika w pliku danych — wtedy na kadrze zostaje treść
+   wpisana wprost w szablon. Panel musi pokazać dokładnie to samo, inaczej pole
+   świeci pustką, a na grafice stoi tekst, którego nie da się stąd ruszyć. */
+function domyslneZSzablonu() {
+  const mapa = {};
+  stan.szablon.kanwy.forEach((kanwa) => {
+    const tymczasowy = document.createElement("div");
+    tymczasowy.innerHTML = kanwa.html;
+    tymczasowy.querySelectorAll("[data-p]").forEach((el) => {
+      const klucz = el.dataset.p;
+      if (!(klucz in mapa)) mapa[klucz] = el.textContent.trim().replace(/\s+/g, " ");
+    });
+  });
+  return mapa;
+}
+
+function dodajPole(gniazdo, klucz, etykieta, rodzaj, zrodlo, domyslne) {
+  const label = document.createElement("label");
+  const opis = document.createElement("span");
+  opis.textContent = etykieta;
+  const kontrolka = document.createElement(rodzaj === "textarea" ? "textarea" : "input");
+  if (rodzaj !== "textarea") kontrolka.type = "text";
+  kontrolka.value = zrodlo[klucz] != null ? zrodlo[klucz] : (domyslne[klucz] || "");
+  kontrolka.addEventListener("input", () => {
+    stan.nadpisania[klucz] = kontrolka.value;
+    rysuj();
+  });
+  label.append(opis, kontrolka);
+  gniazdo.appendChild(label);
+}
+
+function dodajPodgrupe(gniazdo, tytul) {
+  const naglowek = document.createElement("p");
+  naglowek.className = "podgrupa";
+  naglowek.textContent = tytul;
+  gniazdo.appendChild(naglowek);
+}
+
+function rysujPola() {
   const gniazdo = document.getElementById("pola");
   gniazdo.innerHTML = "";
 
-  ETYKIETY.filter(([klucz]) => uzywane.has(klucz)).forEach(([klucz, etykieta, rodzaj]) => {
-    const label = document.createElement("label");
-    const opis = document.createElement("span");
-    opis.textContent = etykieta;
-    const kontrolka = document.createElement(rodzaj === "textarea" ? "textarea" : "input");
-    if (rodzaj !== "textarea") kontrolka.type = "text";
-    kontrolka.value = zrodlo[klucz] != null ? zrodlo[klucz] : "";
-    kontrolka.addEventListener("input", () => {
-      stan.nadpisania[klucz] = kontrolka.value;
-      rysuj();
+  const zrodlo = dane();
+  const domyslne = domyslneZSzablonu();
+  const kanwy = stan.szablon.kanwy;
+
+  // klucz pola → indeksy kadrów, na których się pojawia
+  const uzycie = new Map();
+  kanwy.forEach((k, i) => {
+    poleUzywane(k.html).forEach((klucz) => {
+      if (!uzycie.has(klucz)) uzycie.set(klucz, []);
+      uzycie.get(klucz).push(i);
     });
-    label.append(opis, kontrolka);
-    gniazdo.appendChild(label);
   });
 
-  if (uzywane.has("punkty") || uzywane.has("program")) {
+  const doPokazania = ETYKIETY.filter(([klucz]) => uzycie.has(klucz));
+
+  if (kanwy.length === 1) {
+    doPokazania.forEach(([klucz, etykieta, rodzaj]) =>
+      dodajPole(gniazdo, klucz, etykieta, rodzaj, zrodlo, domyslne));
+  } else {
+    const wspolne = doPokazania.filter(([k]) => uzycie.get(k).length > 1);
+    if (wspolne.length) {
+      dodajPodgrupe(gniazdo, "Wspólne dla wszystkich kadrów");
+      wspolne.forEach(([klucz, etykieta, rodzaj]) =>
+        dodajPole(gniazdo, klucz, etykieta, rodzaj, zrodlo, domyslne));
+    }
+    kanwy.forEach((kanwa, i) => {
+      const swoje = doPokazania.filter(([k]) => uzycie.get(k).length === 1 && uzycie.get(k)[0] === i);
+      if (!swoje.length) return;
+      dodajPodgrupe(gniazdo, kanwa.kadr || "Kadr " + (i + 1));
+      swoje.forEach(([klucz, etykieta, rodzaj]) =>
+        dodajPole(gniazdo, klucz, etykieta, rodzaj, zrodlo, domyslne));
+    });
+  }
+
+  if (uzycie.has("punkty") || uzycie.has("program")) {
     const nota = document.createElement("p");
-    nota.style.cssText = "font-size:12px;color:rgb(239 231 210 / .45);margin:4px 0 0";
-    nota.textContent = uzywane.has("program")
+    nota.className = "nota";
+    nota.textContent = uzycie.has("program")
       ? "Kolejne dni programu zmieniasz w pliku content/wyjazdy.js."
       : "Punkty listy zmieniasz w pliku content/wyjazdy.js.";
     gniazdo.appendChild(nota);

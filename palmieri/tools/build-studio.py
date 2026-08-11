@@ -146,6 +146,7 @@ def szablony() -> tuple[list[dict], str]:
             format_ = next((k for k in FORMATY if k in klasy), "p-canvas--9x16")
             kanwy.append({
                 "id": re.search(r'data-export="([^"]+)"', kanwa).group(1),
+                "kadr": (re.search(r'data-kadr="([^"]+)"', kanwa) or [None, ""])[1],
                 "w": FORMATY[format_][0],
                 "h": FORMATY[format_][1],
                 "alpha": 'data-export-alpha="1"' in kanwa,
