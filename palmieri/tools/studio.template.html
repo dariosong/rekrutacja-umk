@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palmieri — studio</title>
+<style>
+/*FONTY*/
+/*TOKENY*/
+/*KOMPONENTY*/
+/*STYLE-SZABLONOW*/
+
+/* ═══════════════════════════════════════════════════════════════════
+   INTERFEJS STUDIA — nie trafia do eksportowanego pliku
+   ═══════════════════════════════════════════════════════════════════ */
+
+html, body { height: 100%; }
+body {
+  margin: 0; background: var(--p-porcelain); color: var(--p-ink);
+  font-family: var(--p-font-text); font-weight: 300; font-size: 15px; line-height: 1.55;
+}
+.app { display: grid; grid-template-columns: 360px 1fr; height: 100vh; }
+
+/* ── panel ── */
+.panel { background: var(--p-navy); color: var(--p-cream); overflow-y: auto; padding: 26px 24px 40px; }
+.panel-znak { display: flex; align-items: center; gap: 12px; color: var(--p-gold); margin-bottom: 30px; }
+.panel-znak svg { width: 34px; height: auto; display: block; }
+.panel-znak b {
+  font-family: var(--p-font-display); font-weight: 600; font-size: 17px;
+  letter-spacing: .3em; margin-right: -.3em; text-transform: uppercase;
+}
+.panel-znak i { font-style: normal; font-size: 11px; letter-spacing: .18em; color: rgb(239 231 210 / .45); text-transform: uppercase; }
+
+.grupa-pol { border-top: 1px solid rgb(184 150 90 / .28); padding-top: 18px; margin-top: 26px; }
+.grupa-pol:first-of-type { border-top: 0; margin-top: 0; padding-top: 0; }
+.grupa-pol > h2 {
+  font-family: var(--p-font-text); font-weight: 500; font-size: 10.5px;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--p-gold-light);
+  margin: 0 0 14px;
+}
+
+label { display: block; margin-bottom: 12px; }
+label > span {
+  display: block; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+  color: rgb(239 231 210 / .5); margin-bottom: 5px;
+}
+input[type="text"], textarea, select {
+  width: 100%; font-family: var(--p-font-text); font-size: 14px; font-weight: 300;
+  background: rgb(255 255 255 / .06); color: var(--p-cream);
+  border: 1px solid rgb(184 150 90 / .3); border-radius: 2px; padding: 8px 10px;
+}
+textarea { resize: vertical; min-height: 58px; line-height: 1.45; }
+select { appearance: none; background-image: none; cursor: pointer; }
+select option { background: var(--p-navy); color: var(--p-cream); }
+input:focus-visible, textarea:focus-visible, select:focus-visible,
+button:focus-visible, .zrzutnia:focus-visible {
+  outline: 2px solid var(--p-gold-light); outline-offset: 2px;
+}
+
+/* ── zrzutnia na zdjęcie ── */
+.zrzutnia {
+  border: 1px dashed rgb(184 150 90 / .5); border-radius: 3px; padding: 20px 16px;
+  text-align: center; cursor: pointer; background: rgb(255 255 255 / .03);
+  transition: background .15s ease, border-color .15s ease;
+}
+.zrzutnia:hover, .zrzutnia.nad { background: rgb(184 150 90 / .16); border-color: var(--p-gold-light); }
+.zrzutnia b { display: block; font-family: var(--p-font-display); font-weight: 600; font-size: 16px; }
+.zrzutnia span { font-size: 12px; color: rgb(239 231 210 / .5); }
+.zrzutnia.ma-zdjecie { border-style: solid; border-color: rgb(184 150 90 / .6); }
+
+.suwaki { margin-top: 14px; display: none; }
+.suwaki.widoczne { display: block; }
+input[type="range"] { width: 100%; accent-color: var(--p-gold); }
+.usun {
+  background: none; border: 0; color: rgb(239 231 210 / .5); font-size: 11.5px;
+  letter-spacing: .12em; text-transform: uppercase; cursor: pointer; padding: 6px 0; margin-top: 6px;
+}
+.usun:hover { color: var(--p-gold-light); }
+.nota { font-size: 11.5px; line-height: 1.45; color: rgb(239 231 210 / .45); margin: 2px 0 0; }
+#moc-opis { color: var(--p-gold-light); font-weight: 400; }
+
+.przelacznik { display: flex; align-items: center; gap: 9px; font-size: 13px; cursor: pointer; margin-top: 4px; }
+.przelacznik input { accent-color: var(--p-gold); width: 15px; height: 15px; }
+
+/* ── pobieranie ── */
+.pobierz {
+  position: sticky; bottom: -40px; margin: 26px -24px -40px; padding: 20px 24px 24px;
+  background: linear-gradient(to top, var(--p-navy) 72%, rgb(22 36 63 / 0));
+}
+.pobierz button {
+  width: 100%; font-family: var(--p-font-text); font-weight: 500; font-size: 13px;
+  letter-spacing: .16em; text-transform: uppercase; padding: 15px;
+  background: var(--p-gold); color: var(--p-navy); border: 0; border-radius: 100px; cursor: pointer;
+}
+.pobierz button:hover { background: var(--p-gold-light); }
+.pobierz button[disabled] { opacity: .55; cursor: progress; }
+.pobierz p { margin: 10px 0 0; font-size: 11.5px; color: rgb(239 231 210 / .45); text-align: center; }
+
+/* ── scena ── */
+.scena {
+  overflow: auto; padding: 32px; display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-start; gap: 26px;
+  background:
+    linear-gradient(45deg, rgb(28 39 68 / .035) 25%, transparent 25%, transparent 75%, rgb(28 39 68 / .035) 75%) 0 0 / 22px 22px,
+    linear-gradient(45deg, rgb(28 39 68 / .035) 25%, transparent 25%, transparent 75%, rgb(28 39 68 / .035) 75%) 11px 11px / 22px 22px,
+    var(--p-porcelain);
+}
+.ramka { box-shadow: 0 10px 40px rgb(22 36 63 / .16); }
+.podpis { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: rgb(28 39 68 / .42); text-align: center; }
+
+@media (max-width: 900px) {
+  .app { grid-template-columns: 1fr; height: auto; }
+  .panel { height: auto; }
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+  <aside class="panel">
+    <div class="panel-znak">
+      <span id="znak-studia"></span>
+      <div><b>Palmieri</b><br><i>Studio</i></div>
+    </div>
+
+    <div class="grupa-pol">
+      <h2>Materiał</h2>
+      <label><span>Szablon</span><select id="wybor-szablonu"></select></label>
+      <label><span>Wyjazd</span><select id="wybor-wyjazdu"></select></label>
+      <label class="przelacznik">
+        <input type="checkbox" id="wybor-stref"> Pokaż strefy interfejsu
+      </label>
+    </div>
+
+    <div class="grupa-pol">
+      <h2>Zdjęcie</h2>
+      <div class="zrzutnia" id="zrzutnia" tabindex="0" role="button">
+        <b>Przeciągnij zdjęcie</b>
+        <span>albo kliknij i wybierz plik</span>
+      </div>
+      <input type="file" id="plik" accept="image/*" hidden>
+      <div class="suwaki" id="suwaki">
+        <label><span>Kadr — w poziomie</span><input type="range" id="poz-x" min="0" max="100" value="50"></label>
+        <label><span>Kadr — w pionie</span><input type="range" id="poz-y" min="0" max="100" value="50"></label>
+        <label><span>Przyciemnienie <b id="moc-opis">100%</b></span>
+          <input type="range" id="moc" min="45" max="100" value="100"></label>
+        <label class="przelacznik">
+          <input type="checkbox" id="duoton" checked> Duoton marki
+        </label>
+        <p class="nota">
+          Księga wymaga przyciemnienia zdjęcia pod znakiem — dlatego suwak
+          nie schodzi poniżej 45%. Wyłączenie duotonu zostawia naturalne barwy kadru.
+        </p>
+        <button class="usun" id="usun-zdjecie">Usuń zdjęcie</button>
+      </div>
+    </div>
+
+    <div class="grupa-pol">
+      <h2>Treść</h2>
+      <div id="pola"></div>
+    </div>
+
+    <div class="pobierz">
+      <button id="pobierz">Pobierz PNG</button>
+      <p id="status">Plik zapisze się w folderze Pobrane</p>
+    </div>
+  </aside>
+
+  <main class="scena" id="scena"></main>
+</div>
+
+<script>
+"use strict";
+
+const SYGNET   = /*SYGNET*/;
+const PALMIERI = /*DANE*/;
+const SZABLONY = /*SZABLONY*/;
+const ZDJECIA  = /*ZDJECIA*/;
+const ETYKIETY = /*ETYKIETY*/;
+
+/* Style, które muszą wyjechać razem z kanwą do pliku PNG.
+   Interfejs studia zostaje — eksportujemy tylko samą kanwę. */
+const STYLE_KANWY = document.querySelector("style").textContent
+  .split("/* ═══")[0];
+
+const stan = {
+  szablon: SZABLONY[0],
+  wyjazd: SZABLONY[0].wyjazd,
+  zdjecie: null,
+  pozX: 50,
+  pozY: 50,
+  moc: 1,
+  duoton: true,
+  nadpisania: {},
+  strefy: false,
+};
+
+/* ─── treść ──────────────────────────────────────────────────────── */
+
+function dane() {
+  const wyjazd = PALMIERI.wyjazdy[stan.wyjazd];
+  return Object.assign({}, wyjazd, stan.nadpisania, { marka: PALMIERI.marka });
+}
+
+function pole(zrodlo, sciezka) {
+  return sciezka.split(".").reduce((a, k) => (a == null ? undefined : a[k]), zrodlo);
+}
+
+function wypelnij(korzen) {
+  const zrodlo = dane();
+
+  korzen.querySelectorAll(".p-sygnet").forEach((el) => { el.innerHTML = SYGNET; });
+
+  korzen.querySelectorAll("[data-p]").forEach((el) => {
+    const wartosc = pole(zrodlo, el.dataset.p);
+    if (wartosc != null && wartosc !== "") el.textContent = wartosc;
+  });
+
+  korzen.querySelectorAll("[data-photo]").forEach((el) => {
+    const zrodloZdjecia = stan.zdjecie || ZDJECIA[(zrodlo.zdjecie || "").split("/").pop()];
+    if (zrodloZdjecia) el.style.setProperty("--photo", `url("${zrodloZdjecia}")`);
+    el.style.setProperty("--photo-pos", `${stan.pozX}% ${stan.pozY}%`);
+    el.classList.toggle("p-photo--duotone", stan.duoton);
+  });
+
+  // Przyciemnienie regulujemy przezroczystością warstw, nie zmianą gradientów,
+  // dzięki czemu każdy szablon reaguje tak samo niezależnie od tego,
+  // ilu warstw przyciemnienia używa.
+  korzen.querySelectorAll(".p-scrim").forEach((el) => { el.style.opacity = stan.moc; });
+
+  // adnotacja znika, gdy w kadrze leży własne zdjęcie
+  if (stan.zdjecie) korzen.querySelectorAll(".p-photo-note").forEach((el) => el.remove());
+
+  korzen.querySelectorAll("[data-p-list]").forEach((lista) => {
+    const pozycje = pole(zrodlo, lista.dataset.pList);
+    if (!Array.isArray(pozycje)) return;
+    const wzor = lista.firstElementChild;
+    if (!wzor) return;
+    lista.innerHTML = "";
+    pozycje.forEach((tekst, i) => {
+      const el = wzor.cloneNode(true);
+      const numer = el.querySelector("[data-slot='numer']");
+      const opis = el.querySelector("[data-slot='opis']") || el;
+      if (numer) numer.textContent = String(i + 1).padStart(2, "0");
+      opis.textContent = tekst;
+      lista.appendChild(el);
+    });
+  });
+
+  korzen.querySelectorAll("[data-p-program]").forEach((lista) => {
+    const pozycje = pole(zrodlo, lista.dataset.pProgram);
+    if (!Array.isArray(pozycje)) return;
+    const wzor = lista.firstElementChild;
+    if (!wzor) return;
+    lista.innerHTML = "";
+    pozycje.forEach((para) => {
+      const el = wzor.cloneNode(true);
+      const numer = el.querySelector("[data-slot='numer']");
+      const opis = el.querySelector("[data-slot='opis']");
+      if (numer) numer.textContent = para[0];
+      if (opis) opis.textContent = para[1];
+      lista.appendChild(el);
+    });
+  });
+}
+
+function dodajStrefy(kanwa, rodzaj) {
+  if (!rodzaj) return;
+  const strefy = rodzaj === "shorts" ? ["top", "bottom", "right"] : ["top", "bottom"];
+  const nakladka = document.createElement("div");
+  nakladka.className = "p-safe p-safe--" + rodzaj;
+  nakladka.innerHTML = strefy.map((s) => `<div class="p-safe__zone is-${s}"></div>`).join("");
+  kanwa.appendChild(nakladka);
+}
+
+/* ─── podgląd ────────────────────────────────────────────────────── */
+
+const scena = document.getElementById("scena");
+
+function rysuj() {
+  scena.innerHTML = "";
+  document.body.classList.toggle("show-safe", stan.strefy);
+
+  const dostepna = scena.clientWidth - 64;
+  const wysokoscSceny = scena.clientHeight - 64 - (stan.szablon.kanwy.length > 1 ? 120 : 30);
+
+  stan.szablon.kanwy.forEach((kanwaOpis) => {
+    const kadr = document.createElement("div");
+    kadr.innerHTML = kanwaOpis.html;
+    const kanwa = kadr.firstElementChild;
+    kanwa.classList.add("ramka");
+    wypelnij(kanwa);
+    dodajStrefy(kanwa, stan.strefy ? kanwaOpis.safe : "");
+
+    const skala = Math.min(
+      dostepna / kanwaOpis.w,
+      wysokoscSceny / (kanwaOpis.h * (stan.szablon.kanwy.length > 1 ? 1 : 1)),
+      1
+    );
+    const scenka = document.createElement("div");
+    scenka.className = "p-stage";
+    scenka.style.setProperty("--p-scale", skala);
+    scenka.style.setProperty("--p-w", kanwaOpis.w + "px");
+    scenka.style.setProperty("--p-h", kanwaOpis.h + "px");
+    scenka.appendChild(kanwa);
+
+    const blok = document.createElement("div");
+    blok.appendChild(scenka);
+    const podpis = document.createElement("p");
+    podpis.className = "podpis";
+    podpis.textContent = `${kanwaOpis.id} · ${kanwaOpis.w} × ${kanwaOpis.h}`;
+    podpis.style.marginTop = "10px";
+    blok.appendChild(podpis);
+    scena.appendChild(blok);
+  });
+}
+
+/* ─── zapis do PNG ───────────────────────────────────────────────── */
+
+async function doPliku(kanwaOpis) {
+  const kadr = document.createElement("div");
+  kadr.innerHTML = kanwaOpis.html;
+  const kanwa = kadr.firstElementChild;
+  wypelnij(kanwa);
+
+  const svg =
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${kanwaOpis.w}" height="${kanwaOpis.h}">` +
+    `<foreignObject width="100%" height="100%">` +
+    // CDATA, bo wnętrze <foreignObject> czyta parser XML: bez tego dowolny
+    // znak „<" albo „&" w arkuszu (choćby w komentarzu) wywraca cały eksport
+    `<div xmlns="http://www.w3.org/1999/xhtml"><style><![CDATA[${STYLE_KANWY}]]></style>` +
+    new XMLSerializer().serializeToString(kanwa) +
+    `</div></foreignObject></svg>`;
+
+  const obraz = new Image();
+  await new Promise((gotowe, blad) => {
+    obraz.onload = gotowe;
+    obraz.onerror = () => blad(new Error("nie udało się złożyć obrazu"));
+    obraz.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  });
+
+  const plotno = document.createElement("canvas");
+  plotno.width = kanwaOpis.w;
+  plotno.height = kanwaOpis.h;
+  const pedzel = plotno.getContext("2d");
+  if (!kanwaOpis.alpha) {
+    // kanwa bez przezroczystości dostaje pełne, nieprześwitujące tło
+    pedzel.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--p-navy").trim() || "#16243F";
+    pedzel.fillRect(0, 0, plotno.width, plotno.height);
+  }
+  pedzel.drawImage(obraz, 0, 0);
+
+  const blob = await new Promise((r) => plotno.toBlob(r, "image/png"));
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `palmieri-${stan.wyjazd}-${kanwaOpis.id}.png`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+
+const przyciskPobierz = document.getElementById("pobierz");
+const status = document.getElementById("status");
+
+przyciskPobierz.addEventListener("click", async () => {
+  przyciskPobierz.disabled = true;
+  const ile = stan.szablon.kanwy.length;
+  try {
+    for (let i = 0; i < ile; i++) {
+      status.textContent = ile > 1 ? `Zapisuję slajd ${i + 1} z ${ile}…` : "Zapisuję…";
+      await doPliku(stan.szablon.kanwy[i]);
+      if (i < ile - 1) await new Promise((r) => setTimeout(r, 350));
+    }
+    status.textContent = ile > 1 ? `Zapisano ${ile} pliki` : "Zapisano";
+  } catch (e) {
+    status.textContent = "Nie udało się zapisać: " + e.message;
+  } finally {
+    przyciskPobierz.disabled = false;
+    setTimeout(() => { status.textContent = "Plik zapisze się w folderze Pobrane"; }, 4000);
+  }
+});
+
+/* ─── panel ──────────────────────────────────────────────────────── */
+
+document.getElementById("znak-studia").innerHTML = SYGNET;
+
+const wyborSzablonu = document.getElementById("wybor-szablonu");
+let ostatniaGrupa = null;
+let biezacaGrupa = null;
+SZABLONY.forEach((s, i) => {
+  if (s.grupa !== ostatniaGrupa) {
+    ostatniaGrupa = s.grupa;
+    biezacaGrupa = document.createElement("optgroup");
+    biezacaGrupa.label = s.grupa;
+    wyborSzablonu.appendChild(biezacaGrupa);
+  }
+  const opcja = document.createElement("option");
+  opcja.value = String(i);
+  opcja.textContent = s.nazwa;
+  biezacaGrupa.appendChild(opcja);
+});
+
+const wyborWyjazdu = document.getElementById("wybor-wyjazdu");
+Object.entries(PALMIERI.wyjazdy).forEach(([slug, w]) => {
+  const opcja = document.createElement("option");
+  opcja.value = slug;
+  opcja.textContent = w.kierunek;
+  wyborWyjazdu.appendChild(opcja);
+});
+wyborWyjazdu.value = stan.wyjazd;
+
+/* Formularz pokazuje tylko te pola, których używa wybrany szablon —
+   panel nie puchnie od wartości, które i tak nigdzie się nie pojawią. */
+function rysujPola() {
+  const uzywane = new Set();
+  stan.szablon.kanwy.forEach((k) => {
+    const tymczasowy = document.createElement("div");
+    tymczasowy.innerHTML = k.html;
+    tymczasowy.querySelectorAll("[data-p]").forEach((el) => uzywane.add(el.dataset.p));
+    tymczasowy.querySelectorAll("[data-p-list]").forEach((el) => uzywane.add(el.dataset.pList));
+    tymczasowy.querySelectorAll("[data-p-program]").forEach((el) => uzywane.add(el.dataset.pProgram));
+  });
+
+  const zrodlo = dane();
+  const gniazdo = document.getElementById("pola");
+  gniazdo.innerHTML = "";
+
+  ETYKIETY.filter(([klucz]) => uzywane.has(klucz)).forEach(([klucz, etykieta, rodzaj]) => {
+    const label = document.createElement("label");
+    const opis = document.createElement("span");
+    opis.textContent = etykieta;
+    const kontrolka = document.createElement(rodzaj === "textarea" ? "textarea" : "input");
+    if (rodzaj !== "textarea") kontrolka.type = "text";
+    kontrolka.value = zrodlo[klucz] != null ? zrodlo[klucz] : "";
+    kontrolka.addEventListener("input", () => {
+      stan.nadpisania[klucz] = kontrolka.value;
+      rysuj();
+    });
+    label.append(opis, kontrolka);
+    gniazdo.appendChild(label);
+  });
+
+  if (uzywane.has("punkty") || uzywane.has("program")) {
+    const nota = document.createElement("p");
+    nota.style.cssText = "font-size:12px;color:rgb(239 231 210 / .45);margin:4px 0 0";
+    nota.textContent = uzywane.has("program")
+      ? "Kolejne dni programu zmieniasz w pliku content/wyjazdy.js."
+      : "Punkty listy zmieniasz w pliku content/wyjazdy.js.";
+    gniazdo.appendChild(nota);
+  }
+}
+
+wyborSzablonu.addEventListener("change", () => {
+  stan.szablon = SZABLONY[+wyborSzablonu.value];
+  rysujPola();
+  rysuj();
+});
+
+wyborWyjazdu.addEventListener("change", () => {
+  stan.wyjazd = wyborWyjazdu.value;
+  stan.nadpisania = {};   // nowy wyjazd zaczyna od własnych, nietkniętych danych
+  rysujPola();
+  rysuj();
+});
+
+document.getElementById("wybor-stref").addEventListener("change", (e) => {
+  stan.strefy = e.target.checked;
+  rysuj();
+});
+
+/* ─── zdjęcie ────────────────────────────────────────────────────── */
+
+const zrzutnia = document.getElementById("zrzutnia");
+const wejsciePliku = document.getElementById("plik");
+const suwaki = document.getElementById("suwaki");
+
+function wczytaj(plik) {
+  if (!plik || !plik.type.startsWith("image/")) return;
+  const czytnik = new FileReader();
+  czytnik.onload = () => {
+    stan.zdjecie = czytnik.result;
+    zrzutnia.classList.add("ma-zdjecie");
+    zrzutnia.querySelector("b").textContent = plik.name;
+    zrzutnia.querySelector("span").textContent = "kliknij, żeby podmienić";
+    suwaki.classList.add("widoczne");
+    rysuj();
+  };
+  czytnik.readAsDataURL(plik);
+}
+
+zrzutnia.addEventListener("click", () => wejsciePliku.click());
+zrzutnia.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") { e.preventDefault(); wejsciePliku.click(); }
+});
+wejsciePliku.addEventListener("change", () => wczytaj(wejsciePliku.files[0]));
+
+["dragenter", "dragover"].forEach((zdarzenie) =>
+  zrzutnia.addEventListener(zdarzenie, (e) => { e.preventDefault(); zrzutnia.classList.add("nad"); })
+);
+["dragleave", "drop"].forEach((zdarzenie) =>
+  zrzutnia.addEventListener(zdarzenie, (e) => { e.preventDefault(); zrzutnia.classList.remove("nad"); })
+);
+zrzutnia.addEventListener("drop", (e) => wczytaj(e.dataTransfer.files[0]));
+
+// upuszczenie gdziekolwiek na scenie działa tak samo
+["dragover", "drop"].forEach((zdarzenie) =>
+  scena.addEventListener(zdarzenie, (e) => { e.preventDefault(); if (zdarzenie === "drop") wczytaj(e.dataTransfer.files[0]); })
+);
+
+document.getElementById("poz-x").addEventListener("input", (e) => { stan.pozX = +e.target.value; rysuj(); });
+document.getElementById("poz-y").addEventListener("input", (e) => { stan.pozY = +e.target.value; rysuj(); });
+
+const suwakMocy = document.getElementById("moc");
+suwakMocy.addEventListener("input", (e) => {
+  stan.moc = +e.target.value / 100;
+  document.getElementById("moc-opis").textContent = e.target.value + "%";
+  rysuj();
+});
+
+document.getElementById("duoton").addEventListener("change", (e) => {
+  stan.duoton = e.target.checked;
+  rysuj();
+});
+
+document.getElementById("usun-zdjecie").addEventListener("click", () => {
+  stan.zdjecie = null;
+  zrzutnia.classList.remove("ma-zdjecie");
+  zrzutnia.querySelector("b").textContent = "Przeciągnij zdjęcie";
+  zrzutnia.querySelector("span").textContent = "albo kliknij i wybierz plik";
+  suwaki.classList.remove("widoczne");
+  wejsciePliku.value = "";
+  rysuj();
+});
+
+window.addEventListener("resize", rysuj);
+
+rysujPola();
+rysuj();
+</script>
+</body>
+</html>

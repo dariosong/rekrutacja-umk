@@ -5,8 +5,12 @@ identyfikacji wizualnej” (wersja skrócona, 2026): barwy, kroje pisma i zasady
 użycia znaku przełożone na bibliotekę komponentów i **piętnaście szablonów**
 do Shorts, relacji i reklam wyjazdów.
 
-Otwórz `index.html` w przeglądarce — to przewodnik po systemie razem z żywą
-galerią wszystkich szablonów.
+**Chcesz po prostu zrobić grafikę?** Otwórz `studio.html` dwuklikiem: wybierasz
+szablon, przeciągasz zdjęcie, poprawiasz teksty i klikasz „Pobierz PNG”.
+Nie trzeba niczego instalować ani mieć internetu — cały system siedzi w tym
+jednym pliku.
+
+`index.html` to przewodnik po systemie razem z żywą galerią wszystkich szablonów.
 
 ![Podgląd szablonów](podglad.png)
 
@@ -16,6 +20,7 @@ galerią wszystkich szablonów.
 
 ```
 palmieri/
+├── studio.html             ← OTWÓRZ TO: robi grafiki w przeglądarce, bez instalacji
 ├── index.html              przewodnik po systemie + galeria szablonów
 ├── podglad.png             kontaktówka wszystkich kadrów
 ├── brand/                  fundament — nie edytuj bez potrzeby
@@ -33,7 +38,9 @@ palmieri/
 │   ├── photos/             tu wrzucasz własne zdjęcia
 │   └── photos-zastepcze/   makiety w barwach marki
 ├── tools/
-│   ├── export.py           eksport szablonów do PNG
+│   ├── export.py           eksport wsadowy szablonów do PNG
+│   ├── build-studio.py     skleja studio.html po zmianach w systemie
+│   ├── studio.template.html szkielet studia
 │   └── make-placeholders.py generator makiet tła
 └── export/                 wyniki eksportu (poza repozytorium)
 ```
@@ -58,7 +65,25 @@ palmieri/
 | `ad-04-link-1200x628` | reklama linkowa i obraz Open Graph | 1200 × 628 |
 | `ad-05-karuzela` | karuzela: obietnica → treść → decyzja | 3 × 1080 × 1080 |
 
-## Codzienna praca
+## Codzienna praca — w przeglądarce
+
+Otwórz `studio.html`. Panel po lewej ma wszystko, czego potrzebujesz:
+
+- **Szablon i wyjazd** — przełączasz, podgląd zmienia się od razu.
+- **Zdjęcie** — przeciągasz plik na stronę. Suwaki ustawiają kadr i siłę
+  przyciemnienia, a przełącznik „Duoton marki” decyduje, czy zdjęcie ma zostać
+  w naturalnych barwach, czy przejść w granatowo-złoty ton marki.
+- **Treść** — panel pokazuje tylko te pola, których używa wybrany szablon.
+- **Pobierz PNG** — plik ląduje w folderze Pobrane, w docelowej rozdzielczości.
+  Karuzela zapisuje od razu trzy pliki.
+
+Zmiany w studiu są jednorazowe — dotyczą tylko materiału, który właśnie robisz.
+Żeby poprawić dane na stałe, edytuj `content/wyjazdy.js` (patrz niżej)
+i przebuduj studio: `python3 tools/build-studio.py`.
+
+## Praca wsadowa — komendą
+
+Kiedy potrzebujesz kompletu materiałów dla całego wyjazdu naraz:
 
 **1. Zmień treść.** Wszystkie teksty siedzą w `content/wyjazdy.js`. Nowy wyjazd
 to skopiowanie jednego bloku i podmiana wartości — szablony podłączą się same.
