@@ -3,449 +3,447 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="claude:viewport-fit-sides" content="cover">
 <title>Stowarzyszenie Biblistów Polskich</title>
 <meta name="description" content="Stowarzyszenie Biblistów Polskich">
 <link rel="icon" href="assets/logo-ciemne.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Schibsted+Grotesk:wght@400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400..600&display=swap">
 <style>
-/* Layout: strona wydania krytycznego — nagłówek sekcji stoi na marginesie (lewa szpalta, przyklejona),
-   treść płynie w szerokiej kolumnie obok; czerwień rubryk tylko dla sygli i etykiet. */
+/* Układ: plakat, nie gablota. Jedno śmiałe miejsce — nagłówek, w którego literach przesuwa się prawdziwy rękopis;
+   dalej pola czystego koloru, kafle i typografia w skali plakatu. Sygle i daty zawsze pismem maszynowym. */
 :root{
-  --paper:#F1F2F5; --surface:#FFFFFF; --ink:#12172B; --muted:#565E76;
-  --lapis:#223C8F; --lapis-soft:#E3E8F6; --rubric:#A6291D; --gold:#D9A441;
-  --line:rgba(18,23,43,.14); --line-strong:rgba(18,23,43,.32);
-  --band:#111A3D; --band-ink:#EEF1FA; --band-muted:#A9B3D4; --band-line:rgba(238,241,250,.18); --band-accent:#F0B45A;
-  --on-img:#F5F7FC; --on-img-muted:rgba(245,247,252,.78); --scrim:10,14,34;
-  --head-bg:rgba(241,242,245,.9);
-  --f-display:"Newsreader","Iowan Old Style","Palatino Linotype",Georgia,serif;
-  --f-body:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
-  --wrap:1240px; --rail:17rem; --ease:cubic-bezier(.2,.7,.2,1);
+  --paper:#EEEFF3; --card:#FFFFFF; --ink:#0A0B10; --muted:#5B5F6E; --line:rgba(10,11,16,.14);
+  --blue:#2233F0; --on-blue:#FFFFFF; --blue-muted:rgba(255,255,255,.74); --blue-line:rgba(255,255,255,.26);
+  --coral:#FF5A36; --on-coral:#0A0B10;
+  --night:#0A0B10; --on-night:#F1F1EC; --night-muted:#9A9DAB; --night-line:rgba(241,241,236,.16); --night-card:#16171F;
+  --tint:#DDE0FB;
+  --f-d:"Bricolage Grotesque","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --f-b:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  --f-m:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --wrap:1480px; --r:22px; --ease:cubic-bezier(.19,.8,.2,1);
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --paper:#0B0F1F; --surface:#131930; --ink:#E8EBF5; --muted:#9BA4BF;
-    --lapis:#9DB2FF; --lapis-soft:#1B2447; --rubric:#F08A76; --gold:#E3B45C;
-    --line:rgba(232,235,245,.14); --line-strong:rgba(232,235,245,.34);
-    --band:#161F47; --head-bg:rgba(11,15,31,.88); color-scheme:dark;
+    --paper:#0D0E13; --card:#17181F; --ink:#F1F1EC; --muted:#9A9DAB; --line:rgba(241,241,236,.16);
+    --night:#000000; --night-card:#111218; --tint:#1B1F52; color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --paper:#0B0F1F; --surface:#131930; --ink:#E8EBF5; --muted:#9BA4BF;
-  --lapis:#9DB2FF; --lapis-soft:#1B2447; --rubric:#F08A76; --gold:#E3B45C;
-  --line:rgba(232,235,245,.14); --line-strong:rgba(232,235,245,.34);
-  --band:#161F47; --head-bg:rgba(11,15,31,.88); color-scheme:dark;
+  --paper:#0D0E13; --card:#17181F; --ink:#F1F1EC; --muted:#9A9DAB; --line:rgba(241,241,236,.16);
+  --night:#000000; --night-card:#111218; --tint:#1B1F52; color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:border-box}
 html{font-size:100%;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 html[data-fs="1"]{font-size:112.5%} html[data-fs="2"]{font-size:125%}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:1.0625rem;line-height:1.65;
-  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-img,video{display:block;max-width:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-b);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%}
 [hidden]{display:none!important}
 a{color:inherit}
 p{margin:0}
-h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:400;text-wrap:balance;letter-spacing:-.012em}
+h1,h2,h3,h4{margin:0;font-family:var(--f-d);font-weight:700;font-stretch:80%;letter-spacing:-.02em;line-height:.95;text-wrap:balance}
 ul,ol{margin:0;padding:0;list-style:none}
-button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
-:focus-visible{outline:2px solid var(--lapis);outline-offset:3px;border-radius:2px}
-.hero :focus-visible,.band :focus-visible,.top:not(.solid) :focus-visible{outline-color:var(--band-accent)}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:6px}
 .wrap{max-width:var(--wrap);margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-.skip{position:absolute;left:-999px;top:0;background:var(--surface);color:var(--ink);padding:.6rem 1rem;z-index:100}
+.mono{font-family:var(--f-m);font-size:.78rem;font-weight:500;letter-spacing:.02em;text-transform:uppercase}
+.skip{position:absolute;left:-999px;top:0;background:var(--coral);color:var(--on-coral);padding:.7rem 1rem;z-index:200;border-radius:999px}
 .skip:focus{left:1rem;top:1rem}
 
-/* ---------- odsyłacze ---------- */
-.lnk{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;padding-bottom:.08em;transition:background-size .45s var(--ease),color .2s}
-.lnk:hover{background-size:0 1px;background-position:100% 100%}
-.prose a{color:var(--lapis);text-underline-offset:.18em;text-decoration-thickness:1px}
-.prose a:hover{text-decoration-thickness:2px}
-.arrow{display:inline-block;width:1.15em;height:.7em;margin-left:.5em;vertical-align:.02em;transition:transform .35s var(--ease)}
-a:hover>.arrow,button:hover>.arrow{transform:translateX(.3em)}
-.btn{display:inline-flex;align-items:center;gap:.2em;padding:.85rem 1.35rem;border:1px solid currentColor;border-radius:999px;text-decoration:none;
-  font-size:.95rem;font-weight:600;letter-spacing:.01em;transition:background-color .25s,color .25s,border-color .25s}
-.btn.fill{background:var(--lapis);border-color:var(--lapis);color:var(--paper)}
-.btn.fill:hover{background:var(--ink);border-color:var(--ink)}
-.btn.ghost:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
-.label{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--rubric)}
+.go{display:inline-grid;place-items:center;width:2.9rem;height:2.9rem;border-radius:50%;background:var(--ink);color:var(--paper);flex:none;transition:transform .5s var(--ease),background-color .25s,color .25s}
+.go svg{width:1.05rem;height:1.05rem;transition:transform .5s var(--ease)}
+a:hover .go svg,button:hover .go svg{transform:rotate(-45deg)}
+.pill{display:inline-flex;align-items:center;gap:.6rem;padding:.8rem 1.35rem;border-radius:999px;font-weight:600;font-size:.98rem;text-decoration:none;border:1.5px solid currentColor;transition:background-color .25s,color .25s,border-color .25s}
+.pill svg{width:.95rem;height:.95rem;transition:transform .5s var(--ease)}
+.pill:hover svg{transform:rotate(-45deg)}
+.pill.solid{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.pill.solid:hover{background:var(--coral);border-color:var(--coral);color:var(--on-coral)}
+.pill:not(.solid):hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 
-/* ---------- nagłówek ---------- */
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--band)}
-.top{position:fixed;inset:env(safe-area-inset-top,0px) 0 auto;z-index:50;color:var(--on-img);transition:background-color .35s,color .35s,box-shadow .35s}
-.top.solid{background:var(--head-bg);color:var(--ink);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);box-shadow:0 1px 0 var(--line)}
-.top-in{display:flex;align-items:center;gap:1rem;min-height:4.75rem}
-.brand{display:flex;align-items:center;gap:.8rem;text-decoration:none;margin-right:auto;flex:none}
-.brand img{width:2.9rem;height:auto;flex:none}
-.brand .lg-d{display:none}
-.top.solid .brand .lg-l{display:none}.top.solid .brand .lg-d{display:block}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .top.solid .brand .lg-l{display:block}:root:not([data-theme="light"]) .top.solid .brand .lg-d{display:none}}
-:root[data-theme="dark"] .top.solid .brand .lg-l{display:block}:root[data-theme="dark"] .top.solid .brand .lg-d{display:none}
-.brand span{font-family:var(--f-display);font-size:1.12rem;line-height:1.12;letter-spacing:0;white-space:nowrap}
-.nav{display:flex;align-items:center;gap:.25rem}
+/* ---------- nawigacja: pływająca kapsuła ---------- */
+.top{position:fixed;z-index:80;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 14px);pointer-events:none}
+.bar{pointer-events:auto;display:flex;align-items:center;gap:.5rem;background:var(--night);color:var(--on-night);border-radius:999px;padding:.4rem .45rem .4rem 1rem;box-shadow:0 0 0 1px var(--night-line),0 18px 40px -18px rgba(0,0,0,.5)}
+.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;margin-right:auto;flex:none}
+.brand img{width:2.3rem;height:auto}
+.brand span{font-family:var(--f-d);font-weight:700;font-stretch:80%;font-size:1.02rem;line-height:1;letter-spacing:-.02em;white-space:nowrap}
+.nav{display:flex;align-items:center}
 .nav>li{position:relative}
-.nav>li>a,.nav>li>button{display:block;padding:.7rem .6rem;font-size:.9rem;font-weight:500;text-decoration:none;white-space:nowrap}
-.nav>li>button::after{content:"";display:inline-block;width:.38em;height:.38em;border-right:1.5px solid;border-bottom:1.5px solid;transform:rotate(45deg) translateY(-.2em);margin-left:.5em;opacity:.7}
-.sub{position:absolute;top:100%;left:0;min-width:17rem;padding:.6rem;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;
-  box-shadow:0 24px 50px -24px rgba(var(--scrim),.45);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s,transform .25s var(--ease),visibility .2s}
+.nav>li>a,.nav>li>button{display:block;padding:.7rem .8rem;font-size:.92rem;font-weight:500;text-decoration:none;white-space:nowrap;border-radius:999px;transition:background-color .2s}
+.nav>li>a:hover,.nav>li>button:hover,.nav>li.open>button{background:var(--night-line)}
+.sub{position:absolute;top:calc(100% + .7rem);left:0;min-width:18rem;padding:.5rem;background:var(--night);color:var(--on-night);border-radius:18px;box-shadow:0 0 0 1px var(--night-line),0 24px 50px -20px rgba(0,0,0,.6);
+  opacity:0;visibility:hidden;transform:translateY(-8px) scale(.98);transform-origin:0 0;transition:opacity .2s,transform .3s var(--ease),visibility .2s}
 .nav>li:hover>.sub,.nav>li:focus-within>.sub,.nav>li.open>.sub{opacity:1;visibility:visible;transform:none}
-.sub a{display:block;padding:.5rem .7rem;border-radius:6px;font-size:.93rem;line-height:1.35;text-decoration:none}
-.sub a:hover{background:var(--lapis-soft)}
-.sub .lvl2{padding-left:1.5rem;font-size:.86rem;color:var(--muted)}
-.tools{display:flex;align-items:center;gap:.35rem}
-.tools button,.tools a{font-size:.82rem;font-weight:600;letter-spacing:.06em;padding:.5rem .55rem;text-decoration:none;border-radius:6px}
-.tools .cta{white-space:nowrap;border:1px solid currentColor;border-radius:999px;padding:.5rem 1rem;letter-spacing:.01em;font-size:.88rem;margin-left:.4rem;transition:background-color .25s,color .25s}
-.top .tools .cta:hover{background:var(--on-img);color:var(--band)}
-.top.solid .tools .cta:hover{background:var(--ink);color:var(--paper)}
-.burger{display:none;font-size:.88rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.6rem 0 .6rem .6rem}
-.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--rubric);transform-origin:0 50%;transform:scaleX(0)}
-@media (max-width:1240px){
-  .burger{display:block}
-  .tools .fs,.tools .srch{display:none}
-  .navbox{position:fixed;inset:0;z-index:-1;background:var(--band);color:var(--band-ink);padding:calc(6.5rem + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) 2rem max(20px,env(safe-area-inset-left,0px));
-    overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
-  .menu-open .navbox{opacity:1;visibility:visible}
-  .menu-open .top{color:var(--band-ink);background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
-  .menu-open .top .brand .lg-l{display:block}.menu-open .top .brand .lg-d{display:none}
-  .nav{flex-direction:column;align-items:stretch;gap:0}
-  .nav>li{border-bottom:1px solid var(--band-line)}
-  .nav>li>a,.nav>li>button{width:100%;text-align:left;padding:1rem 0;font-family:var(--f-display);font-size:1.6rem;font-weight:400;white-space:normal}
-  .nav>li>button::after{display:none}
-  .sub{position:static;opacity:1;visibility:visible;transform:none;background:none;border:0;box-shadow:none;color:var(--band-muted);padding:0 0 1rem;min-width:0}
-  .sub a{padding:.35rem 0}.sub a:hover{background:none;color:var(--band-ink)}.sub .lvl2{color:var(--band-muted)}
+.sub::before{content:"";position:absolute;left:0;right:0;top:-.8rem;height:.8rem}
+.sub a{display:block;padding:.55rem .8rem;border-radius:12px;font-size:.93rem;line-height:1.3;text-decoration:none}
+.sub a:hover{background:var(--blue);color:var(--on-blue)}
+.sub .lvl2{padding-left:1.6rem;font-size:.84rem;color:var(--night-muted)}
+.tools{display:flex;align-items:center;gap:.15rem}
+.tools .t{font-family:var(--f-m);font-size:.74rem;font-weight:500;padding:.6rem .55rem;border-radius:999px;text-decoration:none;color:var(--night-muted)}
+.tools .t:hover{color:var(--on-night)}
+.tools .cta{background:var(--coral);color:var(--on-coral);border-radius:999px;padding:.7rem 1.1rem;font-size:.9rem;font-weight:600;text-decoration:none;white-space:nowrap;margin-left:.3rem;transition:background-color .25s,color .25s}
+.tools .cta:hover{background:var(--on-night);color:var(--night)}
+.burger{display:none;background:var(--on-night);color:var(--night);border-radius:999px;padding:.7rem 1.1rem;font-size:.9rem;font-weight:600;margin-left:.3rem}
+@media (max-width:1260px){
+  .burger{display:block}.tools .t{display:none}
+  .navbox{position:fixed;inset:0;z-index:-1;pointer-events:auto;background:var(--blue);color:var(--on-blue);overflow-y:auto;
+    padding:calc(6.5rem + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) 2.5rem max(20px,env(safe-area-inset-left,0px));
+    clip-path:circle(0 at calc(100% - 4rem) 2.5rem);visibility:hidden;transition:clip-path .7s var(--ease),visibility .7s}
+  .menu-open .navbox{clip-path:circle(150% at calc(100% - 4rem) 2.5rem);visibility:visible}
+  .nav{flex-direction:column;align-items:stretch}
+  .nav>li{border-bottom:1px solid var(--blue-line)}
+  .nav>li>a,.nav>li>button{width:100%;padding:.9rem 0;font-family:var(--f-d);font-stretch:80%;font-weight:700;font-size:clamp(2rem,9vw,3.2rem);letter-spacing:-.015em;line-height:1;white-space:normal;border-radius:0}
+  .nav>li>a:hover,.nav>li>button:hover,.nav>li.open>button{background:none}
+  .sub{position:static;opacity:1;visibility:visible;transform:none;background:none;box-shadow:none;color:var(--blue-muted);padding:0 0 1rem;min-width:0}
+  .sub a{padding:.3rem 0;border-radius:0}.sub a:hover{background:none;color:var(--on-blue)}.sub .lvl2{color:var(--blue-muted);padding-left:1rem}
 }
-@media (max-width:560px){.brand span{font-size:1rem}.tools .cta{display:none}}
+@media (max-width:520px){.tools .cta{display:none}.brand span{font-size:.95rem}}
 
 /* ---------- hero ---------- */
-.hero{position:relative;isolation:isolate;color:var(--on-img);background:var(--band);overflow:hidden}
-.hero-media{position:absolute;inset:0;z-index:-2}
-.hero-media img,.hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 40%}
-.hero-media video{opacity:0;transition:opacity 1.2s}
-.hero-media video.on{opacity:1}
-.hero::before{content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(90deg,rgba(var(--scrim),.78) 0%,rgba(var(--scrim),.42) 46%,rgba(var(--scrim),0) 78%),linear-gradient(0deg,rgba(var(--scrim),.82) 0%,rgba(var(--scrim),0) 42%),linear-gradient(180deg,rgba(var(--scrim),.5) 0%,rgba(var(--scrim),0) 22%)}
-.hero-in{display:flex;flex-direction:column;justify-content:flex-end;min-height:clamp(36rem,84vh,52rem);padding-top:8.5rem}
-.hero h1{font-size:clamp(3rem,8.2vw,7.4rem);line-height:.96;font-weight:300;letter-spacing:-.03em}
-.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.08em}
-.hero h1 .ln>span{display:block;animation:rise 1.25s var(--ease) both}
-.hero h1 .ln:nth-child(2)>span{animation-delay:.14s;font-style:italic}
-.hero-quote{max-width:38rem;margin-top:2.2rem;padding-top:1.4rem;position:relative;font-family:var(--f-display);font-size:clamp(1.12rem,1.5vw,1.32rem);line-height:1.5;color:var(--on-img-muted);animation:fade 1.2s .7s both}
-.hero-quote::before{content:"";position:absolute;left:0;top:0;height:1px;width:100%;background:var(--gold);transform-origin:0 50%;animation:draw 1.6s .55s var(--ease) both}
-.hero-quote cite{display:block;margin-top:.7rem;font-family:var(--f-body);font-style:normal;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--band-accent)}
-.hero-cta{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem;animation:fade 1.2s .9s both}
-.hero-cta .btn.fill{background:var(--on-img);border-color:var(--on-img);color:var(--band)}
-.hero-cta .btn.fill:hover{background:var(--band-accent);border-color:var(--band-accent)}
-.hero-cta .btn.ghost:hover{background:var(--on-img);border-color:var(--on-img);color:var(--band)}
-.quick{display:grid;grid-template-columns:repeat(4,1fr);margin-top:3.5rem;border-top:1px solid var(--band-line);animation:fade 1.2s 1.05s both}
-.quick a{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding:1.35rem 1.25rem 1.6rem 0;text-decoration:none;font-family:var(--f-display);font-size:1.3rem;line-height:1.2;position:relative}
-.quick a+a{padding-left:1.25rem;border-left:1px solid var(--band-line)}
-.quick a::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:var(--band-accent);transform:scaleX(0);transform-origin:0 50%;transition:transform .5s var(--ease)}
-.quick a:hover::before{transform:scaleX(1)}
-@keyframes rise{from{transform:translateY(105%)}to{transform:none}}
-@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-@keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@media (max-width:820px){.quick{grid-template-columns:1fr 1fr}.quick a{padding:1rem .75rem 1.1rem 0;font-size:1.1rem}.quick a+a{padding-left:0;border-left:0}.quick a:nth-child(even){padding-left:.9rem;border-left:1px solid var(--band-line)}.quick a:nth-child(n+3){border-top:1px solid var(--band-line)}
-  .hero::before{background:linear-gradient(0deg,rgba(var(--scrim),.9) 0%,rgba(var(--scrim),.5) 55%,rgba(var(--scrim),.35) 100%)}}
+.hero{position:relative;background:var(--blue);color:var(--on-blue);overflow:hidden;isolation:isolate}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.5;mix-blend-mode:overlay;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.hero-in{padding-top:calc(7.2rem + env(safe-area-inset-top,0px));padding-bottom:1.4rem}
+.hero-meta{display:flex;justify-content:space-between;gap:1rem;color:var(--blue-muted);margin-bottom:1.2rem}
+.h1box{position:relative}
+.hero h1,.hero .h1b{margin:0;font-family:var(--f-d);font-weight:800;font-stretch:75%;font-size:var(--h1fs,13.6vw);line-height:.84;letter-spacing:-.02em;white-space:nowrap;text-transform:uppercase;padding-top:.04em;padding-bottom:.02em}
+.hero .ln{display:block;width:max-content}
+.hero .ln:nth-child(2){margin-left:auto}
+.fill{color:var(--on-blue)}
+.h1b{display:none}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .fill{color:transparent;-webkit-background-clip:text;background-clip:text;background-color:#F4EFE2;background-repeat:no-repeat;background-size:210% auto;background-position:60% 40%;filter:contrast(1.3) brightness(1.06);animation:pan 46s ease-in-out infinite alternate}
+  .fill.a{background-image:url(assets/rekopis.webp)}
+  .h1b{display:block;position:absolute;inset:0;background-image:url(assets/tekst-grecki.webp);background-size:170% auto;animation:pan2 52s ease-in-out infinite alternate-reverse,swap 18s ease-in-out infinite}
+}
+@keyframes pan{from{background-position:38% 20%}to{background-position:100% 80%}}
+@keyframes pan2{from{background-position:10% 15%}to{background-position:90% 85%}}
+@keyframes swap{0%,38%{opacity:0}50%,88%{opacity:1}100%{opacity:0}}
+.h1box{animation:up 1.1s var(--ease) both}
+@keyframes up{from{transform:translateY(2.5rem);opacity:0}to{transform:none;opacity:1}}
+.hero-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,34rem);gap:2rem 4rem;align-items:end;margin-top:clamp(1.6rem,3vw,3rem)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.7rem}
+.hero .pill{border-color:var(--on-blue)}
+.hero .pill.solid{background:var(--on-blue);border-color:var(--on-blue);color:var(--blue)}
+.hero .pill.solid:hover{background:var(--coral);border-color:var(--coral);color:var(--on-coral)}
+.hero .pill:not(.solid):hover{background:var(--on-blue);color:var(--blue)}
+.hero-quote{font-size:clamp(1.1rem,1.45vw,1.4rem);line-height:1.38;font-weight:500;margin:0}
+.hero-quote cite{display:block;margin-top:.9rem;font-style:normal;color:#FFC2B3}
+.quick{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.6rem;margin-top:clamp(2rem,4vw,3.6rem)}
+.quick a{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;min-height:7.2rem;padding:1.1rem 1.1rem 1.1rem 1.3rem;border-radius:var(--r);text-decoration:none;background:rgba(255,255,255,.12);
+  font-family:var(--f-d);font-weight:700;font-stretch:80%;font-size:clamp(1.25rem,1.9vw,1.8rem);line-height:1;letter-spacing:-.015em;transition:background-color .3s,color .3s,transform .5s var(--ease)}
+.quick a:hover{background:var(--on-blue);color:var(--blue);transform:translateY(-4px)}
+.quick .go{background:var(--on-blue);color:var(--blue);width:2.5rem;height:2.5rem}
+.quick a:hover .go{background:var(--blue);color:var(--on-blue)}
+@media (max-width:860px){.hero-row{grid-template-columns:1fr}.quick{grid-template-columns:1fr 1fr}.quick a{min-height:5.6rem}.hero-meta span:last-child{display:none}}
+
+/* ---------- taśma ---------- */
+.tape{background:var(--coral);color:var(--on-coral);overflow:hidden;padding:.95rem 0;display:flex;user-select:none}
+.tape ul{display:flex;flex:none;animation:tape 70s linear infinite}
+.tape:hover ul{animation-play-state:paused}
+.tape li{display:flex;align-items:center;white-space:nowrap;font-family:var(--f-d);font-weight:700;font-stretch:80%;font-size:1.25rem;letter-spacing:-.02em}
+.tape li::after{content:"";width:.6rem;height:.6rem;border-radius:50%;background:currentColor;margin:0 1.6rem}
+@keyframes tape{to{transform:translateX(-100%)}}
 
 /* ---------- sekcje ---------- */
-.sec{padding-block:clamp(4rem,9vw,7.5rem)}
-.sec+.sec:not(.band){border-top:1px solid var(--line)}
-.grid{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);gap:2rem clamp(2rem,5vw,5rem);align-items:start}
-.rail{position:sticky;top:calc(6.5rem + env(safe-area-inset-top,0px))}
-.rail h2{font-size:clamp(2.2rem,3.6vw,3.25rem);line-height:1.02}
-.rail .label{display:block;margin-bottom:1rem}
-.rail .more{display:inline-block;margin-top:1.4rem;font-size:.93rem;font-weight:600;color:var(--lapis);text-decoration:none}
-.main{min-width:0}
-.prose{max-width:41rem;display:grid;gap:1.1em}
+.sec{padding-block:clamp(4.5rem,9vw,8.5rem)}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.5rem 3rem;margin-bottom:clamp(2rem,4vw,3.5rem)}
+.head h2{font-weight:800;font-stretch:75%;font-size:clamp(3rem,9.5vw,9rem);line-height:.86;letter-spacing:-.025em}
+.head .mono{display:block;margin-bottom:1rem;color:var(--muted)}
+.dark .head .mono,.blue .head .mono{color:inherit;opacity:.7}
+.dark{background:var(--night);color:var(--on-night)}
+.blue{background:var(--blue);color:var(--on-blue)}
+.prose{display:grid;gap:1.05em;max-width:42rem}
 .prose strong{font-weight:650}
-.prose ul{display:grid;gap:.7em;padding-left:1.1rem;list-style:none}
-.prose ul li{position:relative}
-.prose ul li::before{content:"";position:absolute;left:-1.1rem;top:.72em;width:.45rem;height:1px;background:var(--rubric)}
-@media (max-width:900px){.grid{grid-template-columns:1fr}.rail{position:static}}
+.prose a{color:var(--blue);font-weight:600;text-underline-offset:.2em}
+.prose ul{display:grid;gap:.7em}
+.prose ul li{padding-left:1.3rem;position:relative}
+.prose ul li::before{content:"";position:absolute;left:0;top:.62em;width:.5rem;height:.5rem;border-radius:50%;background:var(--coral)}
 
-/* ---------- aktualności ---------- */
-.news{border-top:1px solid var(--line-strong)}
-.news details{border-bottom:1px solid var(--line)}
-.news summary{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.5rem;align-items:center;padding:1.5rem 0;cursor:pointer;list-style:none}
-.news summary::-webkit-details-marker{display:none}
-.news h3{font-size:clamp(1.3rem,2.1vw,1.72rem);line-height:1.2;transition:color .2s}
-.news summary:hover h3,.news details[open] h3{color:var(--lapis)}
-.pm{position:relative;width:2.4rem;height:2.4rem;border:1px solid var(--line-strong);border-radius:50%;flex:none;transition:background-color .25s,border-color .25s,transform .45s var(--ease)}
-.pm::before,.pm::after{content:"";position:absolute;left:50%;top:50%;width:.8rem;height:1.5px;background:currentColor;transform:translate(-50%,-50%);transition:transform .45s var(--ease)}
-.pm::after{transform:translate(-50%,-50%) rotate(90deg)}
-details[open] .pm{background:var(--lapis);border-color:var(--lapis);color:var(--paper)}
-details[open] .pm::after{transform:translate(-50%,-50%) rotate(0deg)}
-.news-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,15rem);gap:2rem 3rem;padding:.25rem 0 2.5rem;align-items:start}
-.news-body.solo{grid-template-columns:minmax(0,1fr)}
-.news-body.posters{grid-template-columns:repeat(auto-fill,minmax(11rem,15rem))}
-details[open] .news-body{animation:fade .5s var(--ease) both}
-.poster{display:block;overflow:hidden;border-radius:4px;background:var(--surface);box-shadow:0 0 0 1px var(--line),0 22px 40px -28px rgba(var(--scrim),.55)}
-.poster img{width:100%;height:auto;transition:transform .9s var(--ease)}
-.poster:hover img{transform:scale(1.035)}
-.pager{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem;margin-top:2rem;font-size:.93rem;font-variant-numeric:tabular-nums}
-.pager a,.pager span{min-width:2.4rem;height:2.4rem;padding:0 .7rem;display:inline-grid;place-items:center;border-radius:999px;text-decoration:none;color:var(--muted)}
-.pager a:hover{background:var(--lapis-soft);color:var(--ink)}
-.pager .cur{background:var(--ink);color:var(--paper)}
-.pager .off{opacity:.45}
-.pager .sp{margin-left:auto}
-@media (max-width:700px){.pager a,.pager span{min-width:2.1rem;height:2.1rem;padding:0 .45rem}.news-body{grid-template-columns:1fr}.news-body .poster{max-width:15rem}}
+/* ---------- aktualności: kafle ---------- */
+.pager{display:flex;flex-wrap:wrap;align-items:center;gap:.3rem;font-family:var(--f-m);font-size:.82rem}
+.pager a,.pager span{min-width:2.6rem;height:2.6rem;padding:0 .8rem;display:inline-grid;place-items:center;border-radius:999px;text-decoration:none;border:1.5px solid var(--line)}
+.pager a:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.pager .cur{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
+.pager .off{opacity:.4}
+.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:.9rem}
+.tile{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:2rem;min-height:21rem;padding:1.5rem;border-radius:var(--r);background:var(--card);overflow:hidden;width:100%;
+  transition:transform .6s var(--ease),box-shadow .6s var(--ease)}
+.tile:hover{transform:translateY(-6px);box-shadow:0 30px 60px -34px rgba(10,11,16,.55)}
+.tile h3{font-size:clamp(1.5rem,2.2vw,2.3rem);line-height:.98}
+.tile .when{font-family:var(--f-m);font-size:.82rem;font-weight:500}
+.tile .foot{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;position:relative;z-index:1}
+.tile .foot span:first-child{font-weight:600;font-size:.95rem}
+.tile .txt{position:relative;z-index:1;display:grid;gap:1rem}
+.t1{grid-column:span 7;min-height:30rem;background:var(--blue);color:var(--on-blue)}
+.t1 h3{font-size:clamp(1.9rem,3.6vw,3.7rem);font-weight:800;font-stretch:75%;letter-spacing:-.02em;line-height:.94}
+.t1 .lead{font-size:1.15rem;line-height:1.4;max-width:34rem;color:var(--blue-muted)}
+.t1 .go{background:var(--on-blue);color:var(--blue)}
+.t2{grid-column:span 5;min-height:30rem;background:var(--night);color:var(--on-night)}
+.t2 .go,.t5 .go{background:var(--coral);color:var(--on-coral)}
+.t3,.t4,.t5{grid-column:span 4}
+.t4{background:var(--tint)}
+.t5{background:var(--night);color:var(--on-night)}
+.tile .pic{position:absolute;right:-1rem;bottom:-3.5rem;width:40%;max-width:15rem;border-radius:10px;overflow:hidden;transform:rotate(7deg);box-shadow:0 20px 40px -18px rgba(0,0,0,.6);transition:transform .8s var(--ease)}
+.tile:hover .pic{transform:rotate(2deg) translateY(-1.4rem) scale(1.04)}
+.tile.has-pic .txt{max-width:54%}
+.tile.has-pic .foot{max-width:50%}
+@media (max-width:1000px){.t1,.t2{grid-column:span 12;min-height:24rem}.t3,.t4,.t5{grid-column:span 12}}
 
-/* ---------- pasmo: liturgia ---------- */
-.band{background:var(--band);color:var(--band-ink);position:relative;overflow:hidden}
-.band .label{color:var(--band-accent)}
-.band .rail .more{color:var(--band-ink)}
-.band-bg{position:absolute;inset:0;opacity:.09;mix-blend-mode:luminosity;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 55%);mask-image:linear-gradient(90deg,transparent 0%,#000 55%)}
-.band-bg img{width:100%;height:100%;object-fit:cover}
-.band .wrap{position:relative}
-.lit-date{font-family:var(--f-display);font-size:1.5rem;line-height:1.2;font-variant-numeric:tabular-nums}
-.lit-sub{margin-top:.5rem;color:var(--band-muted);max-width:44rem}
-.tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin:2rem 0 0}
-.tabs button{padding:.6rem 1.05rem;border:1px solid var(--band-line);border-radius:999px;font-size:.9rem;font-weight:500;color:var(--band-muted);transition:background-color .25s,color .25s,border-color .25s;text-align:left}
-.tabs button:hover{color:var(--band-ink);border-color:var(--band-muted)}
-.tabs button[aria-selected="true"]{background:var(--band-ink);border-color:var(--band-ink);color:var(--band)}
-.lit-panels{margin-top:2.2rem;padding-top:2.2rem;border-top:1px solid var(--band-line);min-height:19rem}
-.lit-panels [role=tabpanel]{max-width:42rem;display:grid;gap:1.1em;font-family:var(--f-display);font-size:1.28rem;line-height:1.6;animation:fade .55s var(--ease) both}
-.lit-panels [role=tabpanel]:focus-visible{outline-offset:8px}
-.lit-lead{font-family:var(--f-body);font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--band-accent)}
+/* ---------- okno z wpisem ---------- */
+dialog.sheet{border:0;padding:0;margin:0 0 0 auto;width:min(46rem,100%);max-width:100%;height:100dvh;max-height:100dvh;background:var(--paper);color:var(--ink);overflow:hidden}
+dialog.sheet::backdrop{background:rgba(10,11,16,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+dialog.sheet[open]{display:flex;flex-direction:column;animation:sheet .6s var(--ease) both}
+@keyframes sheet{from{transform:translateX(100%)}to{transform:none}}
+.sheet-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1.5rem;padding:calc(1.4rem + env(safe-area-inset-top,0px)) 1.6rem 1.2rem;border-bottom:1px solid var(--line)}
+.sheet-top h3{font-size:clamp(1.5rem,3vw,2.2rem);line-height:1}
+.x{flex:none;width:2.9rem;height:2.9rem;border-radius:50%;background:var(--ink);color:var(--paper);position:relative;transition:transform .5s var(--ease),background-color .25s}
+.x:hover{transform:rotate(90deg);background:var(--coral)}
+.x::before,.x::after{content:"";position:absolute;left:50%;top:50%;width:1rem;height:2px;background:currentColor;transform:translate(-50%,-50%) rotate(45deg)}
+.x::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.sheet-body{overflow-y:auto;padding:1.6rem 1.6rem calc(3rem + env(safe-area-inset-bottom,0px));display:grid;gap:2rem;align-content:start}
+.sheet-body .poster{display:block;border-radius:14px;overflow:hidden;max-width:26rem;box-shadow:0 0 0 1px var(--line)}
+.sheet-body .poster img{width:100%;height:auto}
+
+/* ---------- liturgia ---------- */
+.lit{display:grid;grid-template-columns:minmax(0,22rem) minmax(0,1fr);gap:2.5rem clamp(2rem,6vw,6rem);align-items:start}
+.lit-date{font-family:var(--f-d);font-weight:800;font-stretch:75%;font-size:clamp(2.6rem,5.2vw,5rem);line-height:.9;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.lit-sub{margin-top:1rem;color:var(--night-muted);font-size:.98rem}
+.tabs{display:grid;gap:.4rem;margin-top:2rem}
+.tabs button{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.95rem 1.2rem;border-radius:16px;background:var(--night-card);font-family:var(--f-m);font-size:.84rem;font-weight:500;color:var(--night-muted);transition:background-color .25s,color .25s,transform .4s var(--ease)}
+.tabs button::after{content:"";width:.55rem;height:.55rem;border-radius:50%;background:currentColor;opacity:.35;flex:none}
+.tabs button:hover{color:var(--on-night);transform:translateX(4px)}
+.tabs button[aria-selected="true"]{background:var(--coral);color:var(--on-coral)}
+.tabs button[aria-selected="true"]::after{opacity:1}
+.lit-panels [role=tabpanel]{display:grid;gap:1.1em;font-size:clamp(1.2rem,1.75vw,1.6rem);line-height:1.5;font-weight:450;max-width:46rem;animation:in .6s var(--ease) both}
+.lit-lead{font-family:var(--f-m);font-size:.8rem;font-weight:500;text-transform:uppercase;letter-spacing:.02em;color:var(--coral)}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (max-width:900px){.lit{grid-template-columns:1fr}}
 
 /* ---------- o stowarzyszeniu ---------- */
-.about-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,20rem);gap:3rem;align-items:start}
-.lead{font-family:var(--f-display);font-size:clamp(1.35rem,2.1vw,1.72rem);line-height:1.42;max-width:41rem}
-.fig{overflow:hidden;border-radius:4px;background:var(--lapis-soft)}
-.fig img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
-.fig:hover img{transform:scale(1.04)}
-.about-top .fig{aspect-ratio:3/4}
-blockquote{margin:1.6rem 0;padding:0 0 0 1.5rem;border-left:2px solid var(--rubric);font-family:var(--f-display);font-size:1.3rem;line-height:1.5;max-width:41rem}
-.dl{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem;margin-top:2rem}
-.dl p{color:var(--muted);font-size:.96rem}
-.board{margin-top:4.5rem;padding-top:2.5rem;border-top:1px solid var(--line-strong)}
-.board-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.5rem 2rem;margin-bottom:2rem}
-.board-head h3{font-size:2rem}
-.board-head p{color:var(--muted);font-variant-numeric:tabular-nums}
-.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(15.5rem,1fr));gap:0 2.5rem}
-.people li{padding:1.05rem 0;border-top:1px solid var(--line)}
-.people .label{display:block;margin-bottom:.25rem;letter-spacing:.1em}
-.people .nm{font-family:var(--f-display);font-size:1.25rem;line-height:1.25}
-.people .nt{font-size:.9rem;color:var(--muted)}
-@media (max-width:700px){.about-top{grid-template-columns:1fr}.about-top .fig{aspect-ratio:16/10;order:-1}}
+.big{font-family:var(--f-d);font-weight:600;font-stretch:80%;font-size:clamp(1.9rem,4.2vw,4.1rem);line-height:1.04;letter-spacing:-.02em;max-width:62rem;text-wrap:pretty}
+.big strong{font-weight:800;color:var(--blue)}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem 3.5rem;margin-top:clamp(2.5rem,5vw,4.5rem)}
+.cols p{max-width:42rem}
+.strip{height:clamp(11rem,26vw,22rem);border-radius:var(--r);overflow:hidden;margin-top:clamp(2.5rem,5vw,4.5rem);background:var(--blue);position:relative}
+.strip img{width:100%;height:130%;object-fit:cover;filter:grayscale(1) contrast(1.25);will-change:transform}
+.strip::after{content:"";position:absolute;inset:0;background:var(--blue);mix-blend-mode:screen}
+.essay{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:2rem 3.5rem;margin-top:clamp(2.5rem,5vw,4.5rem);padding:clamp(1.5rem,3vw,2.6rem);border-radius:var(--r);background:var(--card)}
+.essay h3{font-size:clamp(1.8rem,3vw,2.9rem);margin-top:1rem}
+.essay .dl{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem;margin-top:1.6rem}
+.essay .dl p{color:var(--muted);font-size:.95rem}
+.board{margin-top:clamp(3.5rem,7vw,6.5rem)}
+.board-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem 2rem;margin-bottom:1.5rem}
+.board-head h3{font-weight:800;font-stretch:75%;font-size:clamp(2.6rem,6vw,5.6rem);letter-spacing:-.025em;line-height:.86}
+.chip{font-family:var(--f-m);font-size:.8rem;font-weight:500;padding:.55rem 1rem;border-radius:999px;background:var(--ink);color:var(--paper)}
+.people li{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr) auto;gap:.3rem 2rem;align-items:baseline;padding:1.05rem 1rem;border-top:1.5px solid var(--line);transition:background-color .3s,color .3s,padding .5s var(--ease),border-radius .3s}
+.people li:last-child{border-bottom:1.5px solid var(--line)}
+.people li:hover{background:var(--blue);color:var(--on-blue);padding-left:1.8rem;border-radius:16px;border-color:transparent}
+.people li:hover+li{border-top-color:transparent}
+.people .role{font-family:var(--f-m);font-size:.78rem;font-weight:500;text-transform:uppercase;opacity:.7}
+.people .nm{font-family:var(--f-d);font-weight:700;font-stretch:80%;font-size:clamp(1.4rem,2.6vw,2.4rem);letter-spacing:-.015em;line-height:1}
+.people .nt{font-family:var(--f-m);font-size:.78rem;opacity:.7}
+@media (max-width:820px){.cols,.essay{grid-template-columns:1fr}.people li{grid-template-columns:1fr}}
 
 /* ---------- sympozja ---------- */
-.sy-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2.5rem 3rem;align-items:end;margin-bottom:2.5rem}
-.sy-hero .fig{aspect-ratio:4/3}
-.sy-hero h3{font-size:clamp(1.7rem,3vw,2.5rem);line-height:1.1}
-.sy-hero p{margin-top:.9rem;color:var(--muted)}
-.sy-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 1.5rem;border-bottom:1px solid var(--line-strong)}
-.sy-tabs button{line-height:1.35;padding:.9rem 0;font-size:.93rem;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s;text-align:left}
-.sy-tabs button:hover{color:var(--ink)}
-.sy-tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--rubric)}
-.prog{animation:fade .5s var(--ease) both}
-.prog li{display:grid;grid-template-columns:4.6rem minmax(0,1fr);gap:1rem;padding:.85rem 0;border-bottom:1px solid var(--line);line-height:1.5}
-.prog .t{font-variant-numeric:tabular-nums;font-weight:600;color:var(--lapis)}
+.sy{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:2.5rem clamp(2rem,5vw,5rem);align-items:start}
+.sy-left{position:sticky;top:6.5rem}
+.sy-left .num{margin-top:0;font-family:var(--f-d);font-weight:800;font-stretch:75%;font-size:clamp(9rem,27vw,26rem);line-height:.76;letter-spacing:-.04em;color:var(--blue);margin-left:-.03em}
+.sy-left h3{font-size:clamp(1.7rem,2.9vw,2.8rem);margin-top:1.6rem;max-width:32rem}
+.sy-left p{margin-top:1rem;color:var(--muted)}
+.seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.4rem;padding:.4rem;border-radius:20px;background:var(--card)}
+.seg button{padding:.9rem 1rem;border-radius:15px;font-size:.88rem;font-weight:600;line-height:1.25;color:var(--muted);transition:background-color .25s,color .25s}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+.prog{margin-top:1rem;animation:in .6s var(--ease) both}
+.prog li{display:grid;grid-template-columns:4.4rem minmax(0,1fr);gap:1.2rem;padding:1rem 0;border-bottom:1.5px solid var(--line);line-height:1.45}
+.prog .t{font-family:var(--f-m);font-size:.9rem;font-weight:600;color:var(--blue);padding-top:.1em}
 .prog li.nt .d{grid-column:2}
-.prog em{font-family:var(--f-display);font-size:1.12em}
-.prog strong{font-weight:650}
-.past{display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));gap:3rem;margin-top:3.5rem}
-.past h4{font-family:var(--f-body);font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--rubric);margin-bottom:.6rem}
-.rows a{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:.8rem 0;border-top:1px solid var(--line);text-decoration:none;font-family:var(--f-display);font-size:1.15rem;line-height:1.3;transition:color .2s,padding-left .35s var(--ease)}
-.rows a:hover{color:var(--lapis);padding-left:.4rem}
-.rows .arrow{flex:none}
-@media (max-width:700px){.sy-tabs{grid-template-columns:1fr;border-bottom:0}.sy-tabs button{border-bottom:1px solid var(--line);margin:0}.sy-tabs button[aria-selected="true"]{border-bottom-width:2px}.sy-hero{grid-template-columns:1fr}.prog li{grid-template-columns:3.6rem minmax(0,1fr);gap:.6rem}}
+.prog strong{font-weight:700}
+.lists{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem clamp(2rem,5vw,5rem);margin-top:clamp(3rem,6vw,5.5rem)}
+.lists h4{font-family:var(--f-m);font-size:.8rem;font-weight:500;text-transform:uppercase;letter-spacing:.02em;color:var(--muted);margin-bottom:.8rem}
+.rows a{display:flex;align-items:center;justify-content:space-between;gap:1.2rem;padding:1rem 0;border-top:1.5px solid var(--line);text-decoration:none;font-family:var(--f-d);font-weight:600;font-stretch:80%;font-size:clamp(1.15rem,1.6vw,1.45rem);letter-spacing:-.02em;line-height:1.1;transition:color .2s,padding-left .5s var(--ease)}
+.rows a:hover{color:var(--blue);padding-left:.6rem}
+.rows .go{width:2.2rem;height:2.2rem}.rows .go svg{width:.85rem;height:.85rem}
+.rows a:hover .go{background:var(--blue);color:var(--on-blue)}
+@media (max-width:900px){.sy,.lists{grid-template-columns:1fr}.sy-left{position:static}.seg{grid-template-columns:1fr}}
 
-/* ---------- publikacje + nagroda ---------- */
-.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3rem clamp(2rem,4vw,4rem);align-items:start}
-.two .fig{aspect-ratio:4/5;position:sticky;top:calc(6.5rem + env(safe-area-inset-top,0px))}
-.issues{border-top:1px solid var(--line-strong)}
-.issues details{border-bottom:1px solid var(--line)}
-.issues summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.05rem 0;cursor:pointer;list-style:none;font-family:var(--f-display);font-size:1.3rem}
-.issues summary::-webkit-details-marker{display:none}
-.issues .pm{width:2rem;height:2rem}
-.toc{padding:0 0 1.6rem;display:grid;gap:.55rem;font-size:.98rem;line-height:1.5}
-.toc .label{margin:.4rem 0 .1rem}
-.issues a.row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.05rem 0;border-bottom:1px solid var(--line);text-decoration:none;font-family:var(--f-display);font-size:1.3rem;transition:color .2s}
-.issues a.row:hover{color:var(--lapis)}
-.award{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr);gap:2.5rem 3.5rem;align-items:start}
-.award .fig{aspect-ratio:3/4}
-.docs{display:grid;gap:0;margin-top:1.8rem;border-top:1px solid var(--line-strong)}
-.docs li{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1rem 0;border-bottom:1px solid var(--line)}
-.docs a{flex:none;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--lapis);text-decoration:none}
-.docs a:hover{color:var(--rubric)}
-.laur{margin-top:2rem;display:grid;gap:1rem}
-.laur li{padding-left:1.5rem;border-left:2px solid var(--gold);font-family:var(--f-display);font-size:1.18rem;line-height:1.4}
-@media (max-width:820px){.two .fig{position:static;aspect-ratio:4/3}.two{grid-template-columns:1fr}.award{grid-template-columns:1fr}.award .fig{aspect-ratio:16/10}}
+/* ---------- zeszyty ---------- */
+.shelf{display:flex;gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-block:.6rem 1rem;scrollbar-width:thin}
+.cover{flex:none;width:clamp(15rem,23vw,20.5rem);aspect-ratio:3/4;scroll-snap-align:start;border-radius:var(--r);padding:1.4rem;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;position:relative;overflow:hidden;transition:transform .6s var(--ease)}
+.cover:hover{transform:translateY(-8px) rotate(-1.2deg)}
+.cover .no{font-family:var(--f-d);font-weight:800;font-stretch:75%;font-size:clamp(4.2rem,7vw,6.6rem);line-height:.82;letter-spacing:-.015em}
+.cover .no small{display:block;font-size:.42em;letter-spacing:-.015em;margin-top:.25em;opacity:.75}
+.cover .ttl{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;font-weight:600;line-height:1.2}
+.c1{background:var(--coral);color:var(--on-coral)}.c2{background:var(--blue);color:var(--on-blue)}.c3{background:var(--night);color:var(--on-night)}.c4{background:var(--tint);color:var(--ink)}.c5{background:var(--card);color:var(--ink)}
+.c1 .go{background:var(--on-coral);color:var(--coral)}.c2 .go{background:var(--on-blue);color:var(--blue)}.c3 .go{background:var(--coral);color:var(--on-coral)}
+.toc{flex:none;width:clamp(18rem,34vw,30rem);scroll-snap-align:start;border-radius:var(--r);padding:1.6rem;background:var(--card);display:grid;gap:.75rem;align-content:start;font-size:.98rem;line-height:1.4}
+.toc .mono{color:var(--muted);margin-bottom:.3rem}
+.toc p+p{padding-top:.75rem;border-top:1px solid var(--line)}
+.toc .mono+p{border-top:0;padding-top:0}
+
+/* ---------- nagroda ---------- */
+.award{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:3rem clamp(2rem,6vw,6rem);align-items:start}
+.award .big{font-size:clamp(1.7rem,3.2vw,3.1rem)}
+.laur{display:grid;gap:.9rem}
+.laur li{padding:1.4rem;border-radius:var(--r);background:var(--night-card);display:grid;gap:.8rem}
+.laur .yr{font-family:var(--f-d);font-weight:800;font-stretch:75%;font-size:clamp(3.4rem,6vw,5.6rem);line-height:.82;letter-spacing:-.015em;color:var(--coral)}
+.laur p{font-size:1.02rem;line-height:1.4}
+.docs{display:grid;gap:.5rem;margin-top:2.2rem}
+.docs a{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1rem 1.1rem 1rem 1.3rem;border-radius:18px;border:1.5px solid currentColor;text-decoration:none;font-weight:500;transition:background-color .25s,color .25s,border-color .25s}
+.docs a b{font-family:var(--f-m);font-size:.78rem;font-weight:600;text-transform:uppercase;flex:none}
+.dark .docs a{border-color:var(--night-line)}
+.dark .docs a:hover{background:var(--on-night);border-color:var(--on-night);color:var(--night)}
+.blue .docs a{border-color:var(--blue-line)}
+.blue .docs a:hover{background:var(--on-blue);border-color:var(--on-blue);color:var(--blue)}
+@media (max-width:900px){.award{grid-template-columns:1fr}}
 
 /* ---------- członkostwo ---------- */
-.join{background:var(--surface)}
-.forms{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem;margin-top:2.5rem}
-.forms a{display:flex;flex-direction:column;justify-content:space-between;gap:2.2rem;min-height:9.5rem;padding:1.3rem 1.3rem 1.2rem;border:1px solid var(--line-strong);border-radius:6px;text-decoration:none;
-  font-family:var(--f-display);font-size:1.22rem;line-height:1.25;transition:background-color .3s,color .3s,border-color .3s,transform .4s var(--ease)}
-.forms a:hover{background:var(--lapis);border-color:var(--lapis);color:var(--paper);transform:translateY(-3px)}
-.forms .arrow{margin:0}
+.blue .big{color:var(--on-blue);max-width:70rem;font-size:clamp(1.7rem,3.3vw,3.2rem)}
+.join{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:2.5rem clamp(2rem,5vw,5rem);margin-top:clamp(2.5rem,5vw,4.5rem);align-items:start}
+.join .txt{color:var(--blue-muted);max-width:40rem}
+.forms{display:grid;gap:.6rem}
+.forms a{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1.3rem 1.3rem 1.3rem 1.6rem;border-radius:var(--r);background:var(--on-blue);color:var(--blue);text-decoration:none;
+  font-family:var(--f-d);font-weight:700;font-stretch:80%;font-size:clamp(1.3rem,2.1vw,2rem);letter-spacing:-.015em;line-height:1;transition:background-color .3s,color .3s,transform .5s var(--ease)}
+.forms a:hover{background:var(--coral);color:var(--on-coral);transform:translateX(8px)}
+.forms .go{background:var(--blue);color:var(--on-blue)}
+.forms a:hover .go{background:var(--on-coral);color:var(--coral)}
+@media (max-width:900px){.join{grid-template-columns:1fr}}
 
 /* ---------- narzędzia ---------- */
-.toolsbar{padding-block:2.6rem;border-top:1px solid var(--line)}
-.toolsbar ul{display:grid;grid-template-columns:repeat(auto-fill,minmax(13.5rem,1fr));gap:0 2rem}
-.toolsbar a{display:block;padding:.8rem 0;border-bottom:1px solid var(--line);text-decoration:none;transition:color .2s}
-.toolsbar a:hover{color:var(--lapis)}
-.toolsbar b{display:block;font-family:var(--f-display);font-weight:400;font-size:1.15rem;line-height:1.25}
-.toolsbar small{font-size:.82rem;color:var(--muted)}
+.links{display:flex;flex-wrap:wrap;gap:.5rem}
+.links a{display:inline-flex;align-items:baseline;gap:.7rem;padding:.85rem 1.3rem;border-radius:999px;background:var(--card);text-decoration:none;transition:background-color .25s,color .25s,transform .4s var(--ease)}
+.links a:hover{background:var(--blue);color:var(--on-blue);transform:translateY(-3px)}
+.links b{font-family:var(--f-d);font-weight:700;font-stretch:80%;font-size:1.25rem;letter-spacing:-.02em}
+.links small{font-family:var(--f-m);font-size:.74rem;opacity:.65}
 
-/* ---------- kontakt + stopka ---------- */
-.contact{background:var(--band);color:var(--band-ink)}
-.contact .label{color:var(--band-accent)}
-.contact h2{font-size:clamp(2.2rem,3.6vw,3.25rem);line-height:1.02}
-.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:2.5rem 3rem}
-.cgrid>div{padding-top:1.3rem;border-top:1px solid var(--band-line)}
-.cgrid .label{display:block;margin-bottom:.7rem}
-.cgrid p{line-height:1.6}
-.cgrid .big{font-family:var(--f-display);font-size:1.4rem;line-height:1.35}
-.cgrid .acct{font-family:var(--f-display);font-size:1.5rem;line-height:1.3;font-variant-numeric:tabular-nums;letter-spacing:.01em;margin:.5rem 0;user-select:all}
-.cgrid .mut{color:var(--band-muted);font-size:.95rem}
-.cgrid a.mail{word-break:break-word}
-.contact .btn{margin-top:1.3rem}
-.contact .btn.fill{background:var(--band-ink);border-color:var(--band-ink);color:var(--band)}
-.contact .btn.fill:hover{background:var(--band-accent);border-color:var(--band-accent)}
-.contact .btn.ghost:hover{background:var(--band-ink);border-color:var(--band-ink);color:var(--band)}
-.foot{margin-top:5rem;padding-top:2rem;border-top:1px solid var(--band-line);display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1.5rem 3rem;align-items:center;font-size:.9rem;color:var(--band-muted)}
-.foot .brand{color:var(--band-ink);margin:0}
+/* ---------- kontakt ---------- */
+#mailbox{overflow:hidden}
+.mailbig{display:inline-block;font-family:var(--f-d);font-weight:800;font-stretch:75%;font-size:clamp(1.3rem,6vw,6.4rem);line-height:.95;letter-spacing:-.02em;text-decoration:none;white-space:nowrap;transition:color .25s}
+.mailbig:hover{color:var(--coral)}
+.cgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem;margin-top:clamp(2.5rem,5vw,4.5rem)}
+.cgrid>div{padding:1.5rem;border-radius:var(--r);background:var(--night-card);display:flex;flex-direction:column;gap:.7rem;align-items:flex-start}
+.cgrid .mono{color:var(--coral)}
+.cgrid .lg{font-family:var(--f-d);font-weight:700;font-stretch:80%;font-size:clamp(1.4rem,2vw,1.9rem);letter-spacing:-.015em;line-height:1.05}
+.cgrid .acct{font-family:var(--f-m);font-size:clamp(1.05rem,1.5vw,1.35rem);font-weight:500;line-height:1.35;user-select:all}
+.cgrid .mut{color:var(--night-muted);font-size:.95rem}
+.cgrid .pill{margin-top:auto;border-color:var(--night-line)}
+.cgrid .pill:hover,.cgrid .pill.solid{background:var(--on-night);border-color:var(--on-night);color:var(--night)}
+.cgrid .pill.solid:hover{background:var(--coral);border-color:var(--coral);color:var(--on-coral)}
+.cgrid a.u{text-underline-offset:.2em;word-break:break-word}
+.foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.2rem 3rem;margin-top:clamp(3rem,6vw,5rem);padding-top:1.6rem;border-top:1px solid var(--night-line);font-size:.9rem;color:var(--night-muted)}
 .foot ul{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem}
-.foot a{text-decoration:none}.foot ul a:hover,.foot p a:hover{color:var(--band-ink)}
-.foot p{font-variant-numeric:tabular-nums}
-@media (max-width:820px){.foot{grid-template-columns:1fr}}
+.foot a{text-decoration:none}.foot a:hover{color:var(--on-night)}
+.foot p{font-family:var(--f-m);font-size:.76rem}
+@media (max-width:900px){.cgrid{grid-template-columns:1fr}}
 
-/* ---------- ruch ---------- */
-.rv-wait{opacity:0;transform:translateY(18px)}
-.rv{transition:opacity .9s var(--ease),transform .9s var(--ease)}
+/* ---------- pasek postępu + ruch ---------- */
+.progress{position:fixed;left:0;top:0;height:3px;width:100%;z-index:90;background:var(--coral);transform-origin:0 50%;transform:scaleX(0)}
+.rv{transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv-wait{opacity:0;transform:translateY(28px)}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
-  html{scroll-behavior:auto}.rv-wait{opacity:1;transform:none}
+  html{scroll-behavior:auto}.rv-wait{opacity:1;transform:none}.h1b{display:none!important}
 }
 </style>
 </head>
 <body>
 <a class="skip" href="#aktualnosci">Aktualności</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
 <header class="top" id="top">
-  <div class="wrap top-in">
-    <a class="brand" href="#start" aria-label="Stowarzyszenie Biblistów Polskich">
-      <img class="lg-l" src="assets/logo-jasne.png" width="360" height="234" alt="Logo SBP">
-      <img class="lg-d" src="assets/logo-ciemne.png" width="360" height="236" alt="Logo SBP">
-      <span>Stowarzyszenie<br>Biblistów Polskich</span>
-    </a>
-    <nav class="navbox" id="navbox" aria-label="Menu">
-      <ul class="nav">
-        <li><button type="button" aria-expanded="false">O Stowarzyszeniu</button>
-          <div class="sub">
-            <a href="#zarzad">Zarząd</a>
-            <a href="https://www.stowarzyszenie-biblistow.pl/stowarzyszenie/statut-1.html">Statut SBP</a>
-            <a href="#o-stowarzyszeniu">Historia</a>
-            <a href="#nagroda">Nagroda SBP</a>
-            <a href="https://www.stowarzyszenie-biblistow.pl/stowarzyszenie/archiwum.html">Archiwum</a>
-            <a href="https://www.stowarzyszenie-biblistow.pl/stowarzyszenie/regulaminy.html">Regulaminy</a>
-          </div>
-        </li>
-        <li><button type="button" aria-expanded="false">Informacje</button>
-          <div class="sub">
-            <a href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria.html">Galeria</a>
-            <a class="lvl2" href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria/63-sympozjum-stowarzyszenia-biblistow-polskich-17-19-09-2026.html">63. Sympozjum Stowarzyszenia Biblistów Polskich 17-19.09.2026</a>
-            <a class="lvl2" href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria/galeria-podrzedna.html">62. Sympozjum Stowarzyszenia Biblistów Polskich 15-17.09.2025</a>
-            <a class="lvl2" href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria/57-sympozjum-biblistow-polskich-16-18-09-2019.html">57. Sympozjum Biblistów Polskich 16-18.09.2019</a>
-            <a class="lvl2" href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria/x-walne-zebranie-stowarzyszenia-biblistow-polskich-17-19-09-2013.html">X. Walne Zebranie Stowarzyszenia Biblistów Polskich 17-19.09.2013</a>
-            <a href="#sympozja">Sympozja</a>
-          </div>
-        </li>
-        <li><a href="https://www.stowarzyszenie-biblistow.pl/kalendarz.html">Wydarzenia</a></li>
-        <li><button type="button" aria-expanded="false">Publikacje</button>
-          <div class="sub">
-            <a href="#publikacje">Zeszyty Naukowe</a>
-          </div>
-        </li>
-        <li><button type="button" aria-expanded="false">Członkostwo</button>
-          <div class="sub">
-            <a href="#czlonkostwo">Zasady członkostwa</a>
-            <a href="https://www.stowarzyszenie-biblistow.pl/czlonkostwo/formularze-czlonkostwa.html">Formularze członkostwa</a>
-          </div>
-        </li>
-        <li><a href="#kontakt">Kontakt</a></li>
-      </ul>
-    </nav>
-    <div class="tools">
-      <button type="button" class="fs" id="fs-up" aria-label="A+">A+</button>
-      <button type="button" class="fs" id="fs-down" aria-label="A-">A-</button>
-      <a class="srch" href="https://www.stowarzyszenie-biblistow.pl/szukaj.html">SZUKAJ</a>
-      <a class="cta" href="https://www.stowarzyszenie-biblistow.pl/spisy-czlonkow.html">Strefa dla członków</a>
-      <button type="button" class="burger" id="burger" aria-controls="navbox" aria-expanded="false">Menu</button>
+  <div class="wrap">
+    <div class="bar">
+      <a class="brand" href="#start" aria-label="Stowarzyszenie Biblistów Polskich">
+        <img src="assets/logo-jasne.png" width="360" height="234" alt="Logo SBP">
+        <span>Stowarzyszenie<br>Biblistów Polskich</span>
+      </a>
+      <nav class="navbox" id="navbox" aria-label="Menu">
+        <ul class="nav">
+          <li><button type="button" aria-expanded="false">O Stowarzyszeniu</button>
+            <div class="sub">
+              <a href="#zarzad">Zarząd</a>
+              <a href="https://www.stowarzyszenie-biblistow.pl/stowarzyszenie/statut-1.html">Statut SBP</a>
+              <a href="#o-stowarzyszeniu">Historia</a>
+              <a href="#nagroda">Nagroda SBP</a>
+              <a href="https://www.stowarzyszenie-biblistow.pl/stowarzyszenie/archiwum.html">Archiwum</a>
+              <a href="https://www.stowarzyszenie-biblistow.pl/stowarzyszenie/regulaminy.html">Regulaminy</a>
+            </div>
+          </li>
+          <li><button type="button" aria-expanded="false">Informacje</button>
+            <div class="sub">
+              <a href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria.html">Galeria</a>
+              <a class="lvl2" href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria/63-sympozjum-stowarzyszenia-biblistow-polskich-17-19-09-2026.html">63. Sympozjum Stowarzyszenia Biblistów Polskich 17-19.09.2026</a>
+              <a class="lvl2" href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria/galeria-podrzedna.html">62. Sympozjum Stowarzyszenia Biblistów Polskich 15-17.09.2025</a>
+              <a class="lvl2" href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria/57-sympozjum-biblistow-polskich-16-18-09-2019.html">57. Sympozjum Biblistów Polskich 16-18.09.2019</a>
+              <a class="lvl2" href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria/x-walne-zebranie-stowarzyszenia-biblistow-polskich-17-19-09-2013.html">X. Walne Zebranie Stowarzyszenia Biblistów Polskich 17-19.09.2013</a>
+              <a href="#sympozja">Sympozja</a>
+            </div>
+          </li>
+          <li><a href="https://www.stowarzyszenie-biblistow.pl/kalendarz.html">Wydarzenia</a></li>
+          <li><button type="button" aria-expanded="false">Publikacje</button>
+            <div class="sub"><a href="#publikacje">Zeszyty Naukowe</a></div>
+          </li>
+          <li><button type="button" aria-expanded="false">Członkostwo</button>
+            <div class="sub">
+              <a href="#czlonkostwo">Zasady członkostwa</a>
+              <a href="https://www.stowarzyszenie-biblistow.pl/czlonkostwo/formularze-czlonkostwa.html">Formularze członkostwa</a>
+            </div>
+          </li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+      <div class="tools">
+        <button type="button" class="t" id="fs-up" aria-label="A+">A+</button>
+        <button type="button" class="t" id="fs-down" aria-label="A-">A-</button>
+        <a class="t" href="https://www.stowarzyszenie-biblistow.pl/szukaj.html">SZUKAJ</a>
+        <a class="cta" href="https://www.stowarzyszenie-biblistow.pl/spisy-czlonkow.html">Strefa dla członków</a>
+        <button type="button" class="burger" id="burger" aria-controls="navbox" aria-expanded="false">Menu</button>
+      </div>
     </div>
   </div>
-  <div class="progress" id="progress" aria-hidden="true"></div>
 </header>
 
 <main id="start">
-  <!-- ================= HERO ================= -->
   <section class="hero">
-    <div class="hero-media" aria-hidden="true">
-      <img src="assets/hero.webp" width="2200" height="1244" alt="" fetchpriority="high">
-      <video id="hero-video" muted loop playsinline preload="metadata" poster="assets/hero.webp">
-        <source src="assets/hero.mp4" type="video/mp4">
-      </video>
-    </div>
     <div class="wrap hero-in">
-      <h1><span class="ln"><span>Stowarzyszenie</span></span><span class="ln"><span>Biblistów Polskich</span></span></h1>
-      <blockquote class="hero-quote" style="border:0;padding-left:0;margin-bottom:0">
-        „Celem Stowarzyszenia jest pogłębianie znajomości Pisma Świętego poprzez badania naukowe i rozpowszechnianie Słowa Bożego zgodnie ze wskazaniami Kościoła, wyrażonymi w sposób szczególny przez Sobór Watykański II”
-        <cite>Statut SBP, art. 6</cite>
-      </blockquote>
-      <div class="hero-cta">
-        <a class="btn fill" href="#aktualnosci">więcej informacji <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-        <a class="btn ghost" href="#czlonkostwo">Członkostwo</a>
+      <div class="hero-meta mono"><span>ul. Dewajtis 5, 01-815 Warszawa</span><span>V kadencja (lata 2023-2028)</span></div>
+      <div class="h1box" id="h1box">
+        <h1 class="fill a"><span class="ln">Stowarzyszenie</span><span class="ln">Biblistów</span><span class="ln">Polskich</span></h1>
+        <div class="h1b fill" aria-hidden="true"><span class="ln">Stowarzyszenie</span><span class="ln">Biblistów</span><span class="ln">Polskich</span></div>
+      </div>
+      <div class="hero-row">
+        <div class="hero-cta">
+          <a class="pill solid" href="#aktualnosci">więcej informacji <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
+          <a class="pill" href="#czlonkostwo">Członkostwo</a>
+        </div>
+        <blockquote class="hero-quote">
+          „Celem Stowarzyszenia jest pogłębianie znajomości Pisma Świętego poprzez badania naukowe i rozpowszechnianie Słowa Bożego zgodnie ze wskazaniami Kościoła, wyrażonymi w sposób szczególny przez Sobór Watykański II”
+          <cite class="mono">Statut SBP, art. 6</cite>
+        </blockquote>
       </div>
       <nav class="quick" aria-label="Stowarzyszenie Biblistów Polskich">
-        <a href="https://www.stowarzyszenie-biblistow.pl/kalendarz.html">Kalendarz wydarzeń <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-        <a href="#nagroda">Nagroda SBP <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-        <a href="#publikacje">Zeszyty naukowe <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-        <a href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria.html">Galeria <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
+        <a href="https://www.stowarzyszenie-biblistow.pl/kalendarz.html">Kalendarz wydarzeń <span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a>
+        <a href="#nagroda">Nagroda SBP <span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a>
+        <a href="#publikacje">Zeszyty naukowe <span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a>
+        <a href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria.html">Galeria <span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a>
       </nav>
     </div>
   </section>
 
-  <!-- ================= AKTUALNOŚCI ================= -->
+  <div class="tape" aria-hidden="true" id="tape">
+    <ul>
+      <li>Zaproszenia do udziału w międzynarodowej konferencji biblijnej: The Faces of Suffering: Exploring the Lives of Biblical Figures</li>
+      <li>Jesienne Dni Biblijne 2026 - But Where Shall Wisdom Be Found?</li>
+      <li>INTERDYSCYPLINARNE SYMPOZJUM ŚWIAT BIBLII. BIBLIA W KULTURZE ŚWIATA IV EDYCJA</li>
+      <li>Życzenia Przewodniczącego SBP w dniu wspomnienia św. Hieronima</li>
+      <li>Sympozjum o proroku Eliaszu - Warszawa, 16-17 października 2026 r.</li>
+    </ul>
+  </div>
+
   <section class="sec" id="aktualnosci">
-    <div class="wrap grid">
-      <div class="rail rv">
+    <div class="wrap">
+      <div class="head rv">
         <h2>Aktualności</h2>
-      </div>
-      <div class="main">
-        <div class="news rv">
-          <details name="news" open>
-            <summary><h3>Zaproszenia do udziału w międzynarodowej konferencji biblijnej: The Faces of Suffering: Exploring the Lives of Biblical Figures</h3><span class="pm" aria-hidden="true"></span></summary>
-            <div class="news-body solo"><div class="prose"><p><strong>Oblicza cierpienia w Biblii – zaproszenie do zgłaszania referatów na konferencję w Lublinie</strong></p> <p><strong>21–22 października 2027 r.</strong> w Lublinie odbędzie się międzynarodowa konferencja biblijna „The Faces of Suffering: Exploring the Lives of Biblical Figures”. Organizatorzy zapraszają biblistów do zgłaszania referatów <strong>do 15 lutego 2027 r.</strong></p> <p>Jak postacie biblijne przeżywają cierpienie fizyczne, psychiczne, moralne czy duchowe? Jak interpretują to doświadczenie i jak na nie odpowiadają? Te pytania wyznaczają temat spotkania, które odbędzie się w Instytucie Nauk Biblijnych Katolickiego Uniwersytetu Lubelskiego Jana Pawła II przy Alejach Racławickich 14.</p> <p><strong>Zgłoszenia referatów i udział w konferencji</strong></p> <ul> <li><strong>Zgłoszenie referatu.</strong> Do 15 lutego 2027 r. należy przesłać tytuł i abstrakt za pomocą formularza zgłoszeniowego. Organizatorzy poinformują autorów o wynikach kwalifikacji <strong>1 marca 2027 r.</strong></li> <li><strong>Język i czas wystąpienia.</strong> Referaty będą wygłaszane w języku angielskim. Na każde wystąpienie przewidziano <strong>25 minut</strong>.</li> <li><strong>Forma udziału.</strong> Obrady odbędą się przede wszystkim stacjonarnie. Osoby, które nie mogą przyjechać do Lublina, będą mogły wygłosić referat online.</li> <li><strong>Rejestracja.</strong> Udział jest bezpłatny. Wcześniejsza rejestracja obowiązuje zarówno prelegentów, jak i słuchaczy.</li> </ul> <p>Konferencję organizują wspólnie Papieski Instytut Biblijny w Rzymie, Greckokatolicki Wydział Teologiczny Uniwersytetu Preszowskiego, Instytut Nauk Biblijnych Katolickiego Uniwersytetu Lubelskiego Jana Pawła II oraz Stowarzyszenie „Verbum Sacrum”.</p> <p><a href="https://forms.gle/NctMh8G8kbYEzR9K9" target="_blank" rel="noopener"><strong>Zgłoś referat lub zarejestruj się jako słuchacz</strong></a></p> <p><a href="https://conference.verbumsacrum.pl/" target="_blank" rel="noopener">Strona konferencji</a> · <a href="mailto:conference@verbumsacrum.pl">Kontakt z organizatorami</a></p></div></div>
-          </details>
-          <details name="news">
-            <summary><h3>Jesienne Dni Biblijne 2026 - But Where Shall Wisdom Be Found?</h3><span class="pm" aria-hidden="true"></span></summary>
-            <div class="news-body">
-              <div class="prose"><p>Instytut Nauk Biblijnych Katolickiego Uniwersytetu Lubelskiego Jana Pawła II zaprasza na międzynarodową konferencję naukową z cyklu <strong>Jesienne Dni Biblijne</strong>, która odbędzie się <strong>26–27 października 2026 r.</strong> Tematem tegorocznego spotkania będzie<strong> „Divine and Human Wisdom in the Bible and Ancient Non-Biblical Texts”.</strong> Obrady zostaną przeprowadzone <strong>online, w języku angielskim</strong>.</p> <p>Hasło przewodnie konferencji – <strong>„But Where Shall Wisdom Be Found?”</strong> – nawiązuje do pytania z Księgi Hioba (Hi 28,12a). Badacze reprezentujący polskie i zagraniczne ośrodki naukowe podejmą refleksję nad mądrością Bożą i ludzką, jej źródłami oraz znaczeniem w tradycjach biblijnych i literaturze świata starożytnego.</p> <p>Program obejmuje sześć sesji naukowych. Wśród poruszanych zagadnień znajdą się m.in. mądrość w Księdze Hioba, Księdze Syracha i Księdze Tobiasza, tradycje mądrościowe w Psalmach, starożytne egipskie pouczenia oraz teksty z Qumran. Różnorodność tematów pozwoli spojrzeć na biblijną mądrość w szerokim kontekście religijnym, literackim i kulturowym.</p> <p>Serdecznie zapraszamy biblistów, teologów, studentów oraz wszystkich zainteresowanych Biblią i dziedzictwem starożytności do udziału w tym wydarzeniu.</p></div>
-              <a class="poster" href="https://www.stowarzyszenie-biblistow.pl/uploaded/IMG_1061.png" target="_blank" rel="noopener"><img src="assets/plakat-jesienne-dni-biblijne.webp" width="706" height="1000" loading="lazy" alt="Jesienne Dni Biblijne 2026 - But Where Shall Wisdom Be Found?"></a>
-            </div>
-          </details>
-          <details name="news">
-            <summary><h3>INTERDYSCYPLINARNE SYMPOZJUM  ŚWIAT BIBLII. BIBLIA W KULTURZE ŚWIATA IV EDYCJA</h3><span class="pm" aria-hidden="true"></span></summary>
-            <div class="news-body posters">
-              <a class="poster" href="https://www.stowarzyszenie-biblistow.pl/start.html#parishNewses" target="_blank" rel="noopener"><img src="assets/plakat-swiat-biblii.webp" width="706" height="1000" loading="lazy" alt="INTERDYSCYPLINARNE SYMPOZJUM ŚWIAT BIBLII. BIBLIA W KULTURZE ŚWIATA IV EDYCJA"></a>
-            </div>
-          </details>
-          <details name="news">
-            <summary><h3>Życzenia Przewodniczącego SBP w dniu wspomnienia św. Hieronima</h3><span class="pm" aria-hidden="true"></span></summary>
-            <div class="news-body posters">
-              <a class="poster" href="https://www.stowarzyszenie-biblistow.pl/start.html#parishNewses" target="_blank" rel="noopener"><img src="assets/zyczenia-sw-hieronim.webp" width="900" height="1350" loading="lazy" alt="Życzenia Przewodniczącego SBP w dniu wspomnienia św. Hieronima"></a>
-            </div>
-          </details>
-          <details name="news">
-            <summary><h3>Sympozjum o proroku Eliaszu - Warszawa, 16-17 października 2026 r.</h3><span class="pm" aria-hidden="true"></span></summary>
-            <div class="news-body">
-              <div class="prose"><p>Zapraszamy na międzynarodowe sympozjum naukowe „The Wording of the Elijah Cycle and Its Early Reception”, które odbędzie się <strong>16–17 października 2026 r. w Collegium Bobolanum – Akademii Katolickiej w Warszawie</strong>.</p> <p>Spotkanie będzie poświęcone językowi, interpretacji i wczesnej recepcji biblijnego cyklu o proroku Eliaszu. W programie przewidziano wystąpienia badaczy z polskich i zagranicznych ośrodków naukowych oraz dyskusje.</p> <p>Wydarzenie odbywa się pod patronatem <strong>Stowarzyszenia Biblistów Polskich</strong>. Wstęp wolny. Szczegółowy program zamieszczono na plakacie.</p></div>
-              <a class="poster" href="https://www.stowarzyszenie-biblistow.pl/galerie/1/26-09-24-21-38-14-poster-elijah.png" target="_blank" rel="noopener"><img src="assets/plakat-eliasz.webp" width="667" height="1000" loading="lazy" alt="Sympozjum o proroku Eliaszu - Warszawa, 16-17 października 2026 r."></a>
-            </div>
-          </details>
-        </div>
         <nav class="pager" aria-label="Aktualności">
           <span class="off">poprzednia</span>
           <span class="cur" aria-current="page">1</span>
@@ -453,29 +451,64 @@ blockquote{margin:1.6rem 0;padding:0 0 0 1.5rem;border-left:2px solid var(--rubr
           <a href="https://www.stowarzyszenie-biblistow.pl/start--str-3.html?str=3#parishNewses">3</a>
           <a href="https://www.stowarzyszenie-biblistow.pl/start--str-4.html?str=4#parishNewses">4</a>
           <a href="https://www.stowarzyszenie-biblistow.pl/start--str-5.html?str=5#parishNewses">5</a>
-          <a class="sp" href="https://www.stowarzyszenie-biblistow.pl/start--str-2.html?str=2#parishNewses">następna</a>
+          <a href="https://www.stowarzyszenie-biblistow.pl/start--str-2.html?str=2#parishNewses">następna</a>
         </nav>
+      </div>
+      <div class="bento">
+        <button type="button" class="tile t1 rv" data-sheet="n115">
+          <span class="txt">
+            <span class="when">21–22 października 2027 r.</span>
+            <h3>Zaproszenia do udziału w międzynarodowej konferencji biblijnej: The Faces of Suffering: Exploring the Lives of Biblical Figures</h3>
+            <span class="lead">Oblicza cierpienia w Biblii – zaproszenie do zgłaszania referatów na konferencję w Lublinie</span>
+          </span>
+          <span class="foot"><span>Przeczytaj cały wpis</span><span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></span>
+        </button>
+        <button type="button" class="tile t2 has-pic rv" data-sheet="n114">
+          <span class="txt">
+            <span class="when">26–27 października 2026 r.</span>
+            <h3>Jesienne Dni Biblijne 2026 - But Where Shall Wisdom Be Found?</h3>
+          </span>
+          <span class="foot"><span>Przeczytaj cały wpis</span><span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></span>
+          <span class="pic"><img src="assets/plakat-jesienne-dni-biblijne.webp" width="706" height="1000" loading="lazy" alt=""></span>
+        </button>
+        <button type="button" class="tile t3 has-pic rv" data-sheet="n113">
+          <span class="txt"><h3>INTERDYSCYPLINARNE SYMPOZJUM  ŚWIAT BIBLII. BIBLIA W KULTURZE ŚWIATA IV EDYCJA</h3></span>
+          <span class="foot"><span>Przeczytaj cały wpis</span><span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></span>
+          <span class="pic"><img src="assets/plakat-swiat-biblii.webp" width="706" height="1000" loading="lazy" alt=""></span>
+        </button>
+        <button type="button" class="tile t4 has-pic rv" data-sheet="n112">
+          <span class="txt"><h3>Życzenia Przewodniczącego SBP w dniu wspomnienia św. Hieronima</h3></span>
+          <span class="foot"><span>Przeczytaj cały wpis</span><span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></span>
+          <span class="pic"><img src="assets/zyczenia-sw-hieronim.webp" width="900" height="1350" loading="lazy" alt=""></span>
+        </button>
+        <button type="button" class="tile t5 has-pic rv" data-sheet="n111">
+          <span class="txt">
+            <span class="when">16–17 października 2026 r.</span>
+            <h3>Sympozjum o proroku Eliaszu - Warszawa, 16-17 października 2026 r.</h3>
+          </span>
+          <span class="foot"><span>Przeczytaj cały wpis</span><span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></span>
+          <span class="pic"><img src="assets/plakat-eliasz.webp" width="667" height="1000" loading="lazy" alt=""></span>
+        </button>
       </div>
     </div>
   </section>
 
-  <!-- ================= LITURGIA ================= -->
-  <section class="sec band" id="liturgia">
-    <div class="band-bg" aria-hidden="true"><img src="assets/rekopis.webp" width="1600" height="817" loading="lazy" alt=""></div>
-    <div class="wrap grid">
-      <div class="rail rv">
-        <span class="label">Czytania na dzisiaj</span>
-        <h2>Liturgia</h2>
-        <a class="more lnk" href="https://www.stowarzyszenie-biblistow.pl/kalendarz.html">Kalendarz wydarzeń</a>
+  <section class="sec dark" id="liturgia">
+    <div class="wrap">
+      <div class="head rv">
+        <div><span class="mono">Czytania na dzisiaj</span><h2>Liturgia</h2></div>
+        <a class="pill" href="https://www.stowarzyszenie-biblistow.pl/kalendarz.html">Kalendarz wydarzeń <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
       </div>
-      <div class="main rv">
-        <p class="lit-date">23.11.2026, poniedziałek</p>
-        <p class="lit-sub">Rok A, II, Dzień Powszedni albo wspomnienie św. Klemensa I, papieża i męczennika albo wspomnienie św. Kolumbana, opata</p>
-        <div class="tabs" role="tablist" aria-label="Czytania na dzisiaj">
+      <div class="lit rv">
+        <div>
+          <p class="lit-date">23.11.2026, poniedziałek</p>
+          <p class="lit-sub">Rok A, II, Dzień Powszedni albo wspomnienie św. Klemensa I, papieża i męczennika albo wspomnienie św. Kolumbana, opata</p>
+          <div class="tabs" role="tablist" aria-label="Czytania na dzisiaj" aria-orientation="vertical">
           <button role="tab" id="lit-tab-0" aria-controls="lit-panel-0" aria-selected="true">Ap 14, 1-3, 4b-5</button>
           <button role="tab" id="lit-tab-1" aria-controls="lit-panel-1" aria-selected="false" tabindex="-1">Ps 24 (23), 1b-2. 3-4b. 5-6 (R.: por. 6)</button>
           <button role="tab" id="lit-tab-2" aria-controls="lit-panel-2" aria-selected="false" tabindex="-1">Mt 24, 42a. 44</button>
           <button role="tab" id="lit-tab-3" aria-controls="lit-panel-3" aria-selected="false" tabindex="-1">Łk 21, 1-4</button>
+          </div>
         </div>
         <div class="lit-panels">
           <div role="tabpanel" id="lit-panel-0" aria-labelledby="lit-tab-0" tabindex="0"><p class="lit-lead">Czytanie z Apokalipsy Świętego Jana Apostoła</p><p>Ja, Jan, ujrzałem: A oto Baranek stojący na górze Syjon, a z Nim sto czterdzieści cztery tysiące, mające imię Jego i imię Jego Ojca wypisane na czołach. I usłyszałem głos z nieba, jakby głos mnogich wód i jakby głos wielkiego gromu. A głos, który usłyszałem, brzmiał tak, jak gdyby harfiarze uderzali w swe harfy.</p><p>I śpiewają jakby pieśń nową przed tronem i przed czterema Istotami żyjącymi, i przed Starcami: a nikt tej pieśni nie mógł się nauczyć prócz stu czterdziestu czterech tysięcy – wykupionych z ziemi.</p><p>Ci Barankowi towarzyszą, dokądkolwiek idzie; ci spośród ludzi zostali wykupieni na pierwociny dla Boga i dla Baranka, a w ustach ich kłamstwa nie znaleziono: są bez zarzutu.</p></div>
@@ -487,76 +520,62 @@ blockquote{margin:1.6rem 0;padding:0 0 0 1.5rem;border-left:2px solid var(--rubr
     </div>
   </section>
 
-  <!-- ================= O STOWARZYSZENIU ================= -->
   <section class="sec" id="o-stowarzyszeniu">
-    <div class="wrap grid">
-      <div class="rail rv">
-        <span class="label">O Stowarzyszeniu</span>
-        <h2>Historia</h2>
+    <div class="wrap">
+      <div class="head rv">
+        <div><span class="mono">O Stowarzyszeniu</span><h2>Historia</h2></div>
       </div>
-      <div class="main">
-        <div class="about-top rv">
-          <div>
-            <p class="lead"><strong style="font-weight:500">Stowarzyszenie Biblistów Polskich</strong> zostało utworzone 6 grudnia 2003 r. na bazie Statutu zatwierdzonego 1 grudnia 2000 r. przez 309. Zebranie Plenarne Konferencji Episkopatu Polski.</p>
-            <div class="prose" style="margin-top:1.8rem">
-              <p>W posiedzeniu inauguracyjnym, które odbyło się w Warszawie, uczestniczyli członkowie Zarządu Sekcji Biblistów Polskich, wybranego 18 września 2003 r. w Koszalinie podczas 41. Sympozjum Biblistów Polskich na pięcioletnią kadencję (2003-2008). W ciągu pięciu pierwszych lat istnienia i działalności SBP podjęto wiele różnych inicjatyw, które sprostać miały zadaniom wyznaczonym przez Statut Stowarzyszenia. Organizowano kolejne Sympozja Biblistów Polskich, a członkowie Stowarzyszenia, poprzez publikacje i pozostałą działalność naukowo – dydaktyczną, przyczyniali się do rozwoju i pogłębiania znajomości Pisma Świętego w swoich środowiskach i poza nimi. Na V Walnym Zebraniu Stowarzyszenia Biblistów Polskich we Wrocławiu, 16 września 2008 roku, wybrano nowy Zarząd SBP na II., pięcioletnią, kadencję (lata 2008-2013).</p>
-              <p>„Celem Stowarzyszenia jest pogłębianie znajomości Pisma Świętego poprzez badania naukowe i rozpowszechnianie Słowa Bożego zgodnie ze wskazaniami Kościoła, wyrażonymi w sposób szczególny przez Sobór Watykański II” (Statut SBP, art. 6). Podejmując zadania określone w Statucie, Stowarzyszenie uznaje, docenia, podejmuje i pragnie dalej rozwijać wysiłki wielu pokoleń biblistów i teologów polskich, którzy niestrudzenie czytali, objaśniali, tłumaczyli i upowszechniali Pismo Święte oraz propagowali pogłębioną znajomość zawartego w nim przesłania i realiów.</p>
-            </div>
-          </div>
-          <div class="fig"><img src="assets/genesis.webp" width="1600" height="817" loading="lazy" alt=""></div>
-        </div>
-
-        <div class="rv" style="margin-top:3.5rem">
-          <p class="label">Ks. prof. dr hab. Waldemar CHROSTOWSKI</p>
-          <h3 style="font-size:clamp(1.6rem,2.6vw,2.2rem);line-height:1.15;margin:.7rem 0 1.3rem;max-width:36rem">Pięćdziesiąt Sympozjów Biblistów Polskich – bilans i perspektywy</h3>
-          <div class="prose">
-            <p>Pięćdziesiąte Sympozjum Biblistów Polskich (Warszawa, 19-20 września 2012) sprzyja temu, by oglądając się w przeszłość, obejmującą ponad pół wieku najnowszej historii biblistyki polskiej, dokonać próby podsumowania i bilansu oraz zarysować zadania i perspektywy na przyszłość. Wiele do myślenia daje sam fakt, że zaistniała i utrwaliła się piękna tradycja dorocznych spotkań, podczas których naukowa refleksja i dociekania idą w parze z nawiązywaniem znajomości i zacieśnianiem przyjaźni, co na pewno sprzyja lepszym postępom badań naukowych oraz pracy dydaktycznej. Ponad pół wieku to zarazem wystarczająco długi czas, aby dokonać jego periodyzacji, umownie wyznaczając etapy, z których każdy posiada własną specyfikę, odzwierciedlającą zmieniające się uwarunkowania i wyzwania, jakim należało sprostać.</p>
-          </div>
+      <p class="big rv"><strong>Stowarzyszenie Biblistów Polskich</strong> zostało utworzone 6 grudnia 2003 r. na bazie Statutu zatwierdzonego 1 grudnia 2000 r. przez 309. Zebranie Plenarne Konferencji Episkopatu Polski.</p>
+      <div class="strip rv" aria-hidden="true"><img id="strip-img" src="assets/genesis.webp" width="1600" height="817" loading="lazy" alt=""></div>
+      <div class="cols rv">
+        <p>W posiedzeniu inauguracyjnym, które odbyło się w Warszawie, uczestniczyli członkowie Zarządu Sekcji Biblistów Polskich, wybranego 18 września 2003 r. w Koszalinie podczas 41. Sympozjum Biblistów Polskich na pięcioletnią kadencję (2003-2008). W ciągu pięciu pierwszych lat istnienia i działalności SBP podjęto wiele różnych inicjatyw, które sprostać miały zadaniom wyznaczonym przez Statut Stowarzyszenia. Organizowano kolejne Sympozja Biblistów Polskich, a członkowie Stowarzyszenia, poprzez publikacje i pozostałą działalność naukowo – dydaktyczną, przyczyniali się do rozwoju i pogłębiania znajomości Pisma Świętego w swoich środowiskach i poza nimi. Na V Walnym Zebraniu Stowarzyszenia Biblistów Polskich we Wrocławiu, 16 września 2008 roku, wybrano nowy Zarząd SBP na II., pięcioletnią, kadencję (lata 2008-2013).</p>
+        <p>„Celem Stowarzyszenia jest pogłębianie znajomości Pisma Świętego poprzez badania naukowe i rozpowszechnianie Słowa Bożego zgodnie ze wskazaniami Kościoła, wyrażonymi w sposób szczególny przez Sobór Watykański II” (Statut SBP, art. 6). Podejmując zadania określone w Statucie, Stowarzyszenie uznaje, docenia, podejmuje i pragnie dalej rozwijać wysiłki wielu pokoleń biblistów i teologów polskich, którzy niestrudzenie czytali, objaśniali, tłumaczyli i upowszechniali Pismo Święte oraz propagowali pogłębioną znajomość zawartego w nim przesłania i realiów.</p>
+      </div>
+      <div class="essay rv">
+        <div>
+          <p class="mono" style="color:var(--blue)">Ks. prof. dr hab. Waldemar CHROSTOWSKI</p>
+          <h3>Pięćdziesiąt Sympozjów Biblistów Polskich – bilans i perspektywy</h3>
           <div class="dl">
+            <a class="pill solid" href="https://www.stowarzyszenie-biblistow.pl/uploaded/SBP.pdf" target="_blank" rel="noopener">SBP - pobierz <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
             <p>Cały tekst opracowania przeczytasz tutaj »</p>
-            <a class="btn ghost" href="https://www.stowarzyszenie-biblistow.pl/uploaded/SBP.pdf" target="_blank" rel="noopener">SBP - pobierz <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
           </div>
         </div>
+        <p>Pięćdziesiąte Sympozjum Biblistów Polskich (Warszawa, 19-20 września 2012) sprzyja temu, by oglądając się w przeszłość, obejmującą ponad pół wieku najnowszej historii biblistyki polskiej, dokonać próby podsumowania i bilansu oraz zarysować zadania i perspektywy na przyszłość. Wiele do myślenia daje sam fakt, że zaistniała i utrwaliła się piękna tradycja dorocznych spotkań, podczas których naukowa refleksja i dociekania idą w parze z nawiązywaniem znajomości i zacieśnianiem przyjaźni, co na pewno sprzyja lepszym postępom badań naukowych oraz pracy dydaktycznej. Ponad pół wieku to zarazem wystarczająco długi czas, aby dokonać jego periodyzacji, umownie wyznaczając etapy, z których każdy posiada własną specyfikę, odzwierciedlającą zmieniające się uwarunkowania i wyzwania, jakim należało sprostać.</p>
+      </div>
 
-        <div class="board rv" id="zarzad">
-          <div class="board-head">
-            <h3>Zarząd</h3>
-            <p>V kadencja (lata 2023-2028)</p>
-          </div>
-          <ul class="people">
-            <li><span class="label">Przewodniczący:</span><span class="nm">ks. prof. dr hab. Dariusz Kotecki</span></li>
-            <li><span class="label">Wiceprzewodniczący:</span><span class="nm">ks. dr hab. Roman Bogacz</span></li>
-            <li><span class="label">Sekretarz Zarządu:</span><span class="nm">ks. dr Adrian Mętel</span> <span class="nt">(od IX 2026)</span></li>
-            <li><span class="label">Członkowie:</span><span class="nm">dr hab. Barbara Strzałkowska</span></li>
-            <li><span class="label">Członkowie:</span><span class="nm">ks. dr hab. Wojciech Węgrzyniak</span></li>
-            <li><span class="label">Członkowie:</span><span class="nm">ks. prof. dr hab. Janusz Kręcidło</span></li>
-            <li><span class="label">Członkowie:</span><span class="nm">ks. prof. dr hab. Dariusz Dziadosz</span></li>
-            <li><span class="label">Członkowie:</span><span class="nm">ks. prof. dr hab. Sławomir Stasiak</span></li>
-          </ul>
-          <p style="margin-top:1.8rem"><a class="lnk" style="font-weight:600;color:var(--lapis)" href="https://www.stowarzyszenie-biblistow.pl/stowarzyszenie/statut.html">Skład osobowy Zarządów <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a></p>
+      <div class="board rv" id="zarzad">
+        <div class="board-head">
+          <h3>Zarząd</h3>
+          <span class="chip">V kadencja (lata 2023-2028)</span>
         </div>
+        <ul class="people">
+          <li><span class="role">Przewodniczący:</span><span class="nm">ks. prof. dr hab. Dariusz Kotecki</span></li>
+          <li><span class="role">Wiceprzewodniczący:</span><span class="nm">ks. dr hab. Roman Bogacz</span></li>
+          <li><span class="role">Członkowie:</span><span class="nm">dr hab. Barbara Strzałkowska</span></li>
+          <li><span class="role">Członkowie:</span><span class="nm">ks. dr hab. Wojciech Węgrzyniak</span></li>
+          <li><span class="role">Członkowie:</span><span class="nm">ks. prof. dr hab. Janusz Kręcidło</span></li>
+          <li><span class="role">Członkowie:</span><span class="nm">ks. prof. dr hab. Dariusz Dziadosz</span></li>
+          <li><span class="role">Członkowie:</span><span class="nm">ks. prof. dr hab. Sławomir Stasiak</span></li>
+          <li><span class="role">Sekretarz Zarządu:</span><span class="nm">ks. dr Adrian Mętel</span><span class="nt">(od IX 2026)</span></li>
+        </ul>
+        <p style="margin-top:1.6rem"><a class="pill" href="https://www.stowarzyszenie-biblistow.pl/stowarzyszenie/statut.html">Skład osobowy Zarządów <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a></p>
       </div>
     </div>
   </section>
 
-  <!-- ================= SYMPOZJA ================= -->
-  <section class="sec" id="sympozja">
-    <div class="wrap grid">
-      <div class="rail rv">
-        <span class="label">Informacje</span>
-        <h2>Sympozja</h2>
+  <section class="sec" id="sympozja" style="padding-top:0">
+    <div class="wrap">
+      <div class="head rv">
+        <div><span class="mono">Informacje</span><h2>Sympozja</h2></div>
       </div>
-      <div class="main">
-        <div class="sy-hero rv">
-          <div>
-            <p class="label">PROGRAM</p>
-            <h3 style="margin-top:.8rem">63. Sympozjum Stowarzyszenia Biblistów Polskich, SZCZECIN, 17-19 września 2026</h3>
-            <p>Program 63. Sympozjum Stowarzyszenia Biblistów Polskich<br>Szczecin, 17-19 września 2026 roku</p>
-          </div>
-          <div class="fig"><img src="assets/sympozjum.webp" width="1500" height="1120" loading="lazy" alt=""></div>
+      <div class="sy">
+        <div class="sy-left rv">
+          <p class="num" aria-hidden="true">63.</p>
+          <h3>63. Sympozjum Stowarzyszenia Biblistów Polskich, SZCZECIN, 17-19 września 2026</h3>
+          <p>Program 63. Sympozjum Stowarzyszenia Biblistów Polskich<br>Szczecin, 17-19 września 2026 roku</p>
         </div>
         <div class="rv">
-          <div class="sy-tabs" role="tablist" aria-label="PROGRAM">
+          <div class="seg" role="tablist" aria-label="PROGRAM">
             <button role="tab" id="sy-tab-0" aria-controls="sy-panel-0" aria-selected="true">DZIEŃ I: Czwartek, 17 września 2026 r.</button>
             <button role="tab" id="sy-tab-1" aria-controls="sy-panel-1" aria-selected="false" tabindex="-1">DZIEŃ II: Piątek, 18 września 2026 r.</button>
             <button role="tab" id="sy-tab-2" aria-controls="sy-panel-2" aria-selected="false" tabindex="-1">DZIEŃ III: Sobota, 19 września 2026 r.</button>
@@ -567,114 +586,101 @@ blockquote{margin:1.6rem 0;padding:0 0 0 1.5rem;border-left:2px solid var(--rubr
             <div role="tabpanel" id="sy-panel-2" aria-labelledby="sy-tab-2" tabindex="0" hidden><ol class="prog"><li><span class="t">07:45</span><span class="d">Liturgia godzin – oratorium</span></li><li><span class="t">08:00</span><span class="d">Śniadanie</span></li><li class="nt"><span class="d">VI sesja</span></li><li><span class="t">9:00</span><span class="d"><strong>dr hab. Dorota Muszytowska, UKSW: </strong><em>Retoryczna funkcja metafor w Księdze Nahuma</em></span></li><li><span class="t">9:30</span><span class="d"><strong>o. dr Jakub Waszkowiak OFM: </strong><em>Brama Złota w Jerozolimie w świetle badań archeologicznych i tradycji judeochrześcijańskich</em></span></li><li><span class="t">10:00</span><span class="d"><strong>ks. dr Mariusz Szmajdziński: </strong><em>Góra Syjon jako miejsce kary i ocalenia w nauczaniu Dwunastu Proroków </em>10:30 Dyskusja 11:00 Przerwa (kawa/herbata)</span></li><li class="nt"><span class="d">V sesja:</span></li><li><span class="t">11:30</span><span class="d"><strong>ks. dr hab. Cezary Korzec, US: </strong><em>Model predyktywny w dydaktyce konwersatorium „Biblia jako tekst kultury”</em></span></li><li><span class="t">11:50</span><span class="d"><strong>ks. dr Krzysztof Kinowski, KUL: </strong><em>Narracje prorockie w Księgach Królewskich w perspektywie historyczno-krytycznej</em></span></li><li><span class="t">12:10</span><span class="d"><strong>ks. dr hab. Roman Mazur SDB, UPJPII</strong>: <em>Drugie wydanie Słownika Analitycznego do Biblii Greckiej oraz Konkordancja do Biblii Greckiej</em></span></li><li><span class="t">12:25</span><span class="d">Dyskusja</span></li><li><span class="t">12:45</span><span class="d">Komunikaty końcowe, podsumowanie i zakończenie sympozjum</span></li><li><span class="t">13:15</span><span class="d">Msza św. w parafii pw. św. Mikołaja, ul. Golisza 7 (20 minut pieszo) Przewodniczy <strong>ks. bp. Henryk Wejman</strong></span></li><li><span class="t">14:15</span><span class="d">Obiad</span></li></ol></div>
           </div>
         </div>
-        <div class="past rv">
-          <div>
-            <h4>Sympozja</h4>
-            <div class="rows">
-              <a href="https://www.stowarzyszenie-biblistow.pl/informacje/sympozja.html">62. Sympozjum Biblistów Polskich, KRAKÓW, 15-17 września 2025 <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-              <a href="https://www.stowarzyszenie-biblistow.pl/informacje/sympozja.html">61. Sympozjum Biblistów Polskich Bydgoszcz, 16-18.09.2024 r. <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-              <a href="https://www.stowarzyszenie-biblistow.pl/informacje/sympozja.html">60. Sympozjum Biblistów Polskich, TARNÓW, 20-22 września 2023 <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-              <a href="https://www.stowarzyszenie-biblistow.pl/informacje/sympozja.html">59. Sympozjum Biblistów Polskich, WŁOCŁAWEK, 14-16 września 2022 <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-            </div>
-          </div>
-          <div>
-            <h4>Galeria</h4>
-            <div class="rows">
-              <a href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria/63-sympozjum-stowarzyszenia-biblistow-polskich-17-19-09-2026.html">63. Sympozjum Stowarzyszenia Biblistów Polskich 17-19.09.2026 <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-              <a href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria/galeria-podrzedna.html">62. Sympozjum Stowarzyszenia Biblistów Polskich 15-17.09.2025 <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-              <a href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria/57-sympozjum-biblistow-polskich-16-18-09-2019.html">57. Sympozjum Biblistów Polskich 16-18.09.2019 <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-              <a href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria/x-walne-zebranie-stowarzyszenia-biblistow-polskich-17-19-09-2013.html">X. Walne Zebranie Stowarzyszenia Biblistów Polskich 17-19.09.2013 <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ================= PUBLIKACJE ================= -->
-  <section class="sec" id="publikacje">
-    <div class="wrap grid">
-      <div class="rail rv">
-        <span class="label">Publikacje</span>
-        <h2>Zeszyty Naukowe</h2>
-      </div>
-      <div class="main two rv">
-        <div class="fig"><img src="assets/tekst-grecki.webp" width="1600" height="817" loading="lazy" alt=""></div>
-        <div class="issues">
-          <details open>
-            <summary>Zeszyty Naukowe SBP 16/2019 <span class="pm" aria-hidden="true"></span></summary>
-            <div class="toc">
-              <p class="label">SPIS TREŚCI · Część II</p>
-              <p>Marcin Chrostowski, Geografia w służbie orędzia Księgi Judyty</p>
-              <p>Aleksandra Nalewaj, Funkcje kobiet w Janowej Ewangelii w świetle opisu spotkania przy studni (J 4,1-42)</p>
-              <p>Stanisław Sadowski, Udział Piotra w męce, śmierci i zmartwychwstaniu Jezusa – Pana (J 13; 17-21)</p>
-              <p>Adam Kubiś, Starotestamentowe tło piłatowego stwierdzenia Ecce Homo w J 19,5</p>
-              <p>Zdzisław Żywica, Sumienie (syneidēsis) według św. Pawła w świetle Listu do Rzymian</p>
-              <p>Jarosław Kwiatkowski, Koncepcja oddzielenia w narracjach Rdz 1 – 3 i jej recepcja w Rz 1- 8</p>
-            </div>
-          </details>
-          <a class="row" href="https://www.stowarzyszenie-biblistow.pl/publikacje/zeszyty-naukowe.html">Zeszyty Naukowe SBP 15/2018 <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-          <a class="row" href="https://www.stowarzyszenie-biblistow.pl/publikacje/zeszyty-naukowe.html">Zeszyty Naukowe SBP 14/2017 <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-          <a class="row" href="https://www.stowarzyszenie-biblistow.pl/publikacje/zeszyty-naukowe.html">Zeszyty Naukowe SBP 13/2016 <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-          <a class="row" href="https://www.stowarzyszenie-biblistow.pl/publikacje/zeszyty-naukowe.html">Zeszyty Naukowe SBP 12/2015 <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= NAGRODA ================= -->
-  <section class="sec" id="nagroda">
-    <div class="wrap grid">
-      <div class="rail rv">
-        <span class="label">O Stowarzyszeniu</span>
-        <h2>Nagroda SBP</h2>
-      </div>
-      <div class="main award rv">
-        <div class="fig"><img src="assets/nagroda.webp" width="1200" height="1607" loading="lazy" alt=""></div>
+      <div class="lists rv">
         <div>
-          <p class="lead">Nagroda SBP jest przyznawana za wybitną pozycję książkową wydaną w ciągu ostatnich trzech lat, za ważne dla biblistyki polskiej publikacje w czasopismach lub za wyróżniającą się działalność duszpasterską bądź inną działalność związaną z popularyzowaniem Biblii. (z regulaminu Nagrody SBP)</p>
-          <ul class="laur">
-            <li>Nagroda Stowarzyszenia Biblistów Polskich za rok 2007 - ks. prof. Janusz A. Frankowski</li>
-            <li>Nagroda Stowarzyszenia Biblistów Polskich za rok 2004 - ks. dr Piotr Ostański za publikację: Bibliografia Biblistyki Polskiej 1945-2002, tt. 1-2, Poznań 2002.</li>
-          </ul>
-          <ul class="docs">
-            <li><span>Regulamin nagrody Stowarzyszenia Biblistów Polskich »</span><a href="http://sbp.net.pl/wp-content/uploads/2019/11/Regulamin-nagrody-SBP.pdf" target="_blank" rel="noopener">Pobierz</a></li>
-            <li><span>Uchwała w sprawie ustanowienia nagrody Stowarzyszenia Biblistów Polskich »</span><a href="http://sbp.net.pl/wp-content/uploads/2019/11/Uchwala-w-sprawie-ustanowienia-nagrody-SBP.pdf" target="_blank" rel="noopener">Pobierz</a></li>
-          </ul>
+          <h4>Sympozja</h4>
+          <div class="rows">
+            <a href="https://www.stowarzyszenie-biblistow.pl/informacje/sympozja.html">62. Sympozjum Biblistów Polskich, KRAKÓW, 15-17 września 2025 <span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a>
+            <a href="https://www.stowarzyszenie-biblistow.pl/informacje/sympozja.html">61. Sympozjum Biblistów Polskich Bydgoszcz, 16-18.09.2024 r. <span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a>
+            <a href="https://www.stowarzyszenie-biblistow.pl/informacje/sympozja.html">60. Sympozjum Biblistów Polskich, TARNÓW, 20-22 września 2023 <span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a>
+            <a href="https://www.stowarzyszenie-biblistow.pl/informacje/sympozja.html">59. Sympozjum Biblistów Polskich, WŁOCŁAWEK, 14-16 września 2022 <span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a>
+          </div>
+        </div>
+        <div>
+          <h4>Galeria</h4>
+          <div class="rows">
+            <a href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria/63-sympozjum-stowarzyszenia-biblistow-polskich-17-19-09-2026.html">63. Sympozjum Stowarzyszenia Biblistów Polskich 17-19.09.2026 <span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a>
+            <a href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria/galeria-podrzedna.html">62. Sympozjum Stowarzyszenia Biblistów Polskich 15-17.09.2025 <span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a>
+            <a href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria/57-sympozjum-biblistow-polskich-16-18-09-2019.html">57. Sympozjum Biblistów Polskich 16-18.09.2019 <span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a>
+            <a href="https://www.stowarzyszenie-biblistow.pl/informacje/galeria/x-walne-zebranie-stowarzyszenia-biblistow-polskich-17-19-09-2013.html">X. Walne Zebranie Stowarzyszenia Biblistów Polskich 17-19.09.2013 <span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= CZŁONKOSTWO ================= -->
-  <section class="sec join" id="czlonkostwo">
-    <div class="wrap grid">
-      <div class="rail rv">
-        <span class="label">Członkostwo</span>
-        <h2>Zasady członkostwa</h2>
+  <section class="sec" id="publikacje" style="padding-top:0">
+    <div class="wrap">
+      <div class="head rv">
+        <div><span class="mono">Publikacje</span><h2>Zeszyty Naukowe</h2></div>
       </div>
-      <div class="main rv">
-        <p class="lead">Regulamin członkostwa określa, że członkami zwyczajnymi SBP mogą zostać wykładowcy Pisma Świętego, którzy posiadają co najmniej stopień licencjata teologii biblijnej lub analogiczny tytuł naukowy w pokrewnej dziedzinie. Habilitowani pracownicy naukowi uzyskują członkostwo na podstawie indywidualnie złożonego pisemnego akcesu, natomiast od pozostałych pracowników naukowo-dydaktycznych jest wymagana rekomendacja udzielona przez dwóch członków zwyczajnych.</p>
-        <div class="prose" style="margin-top:1.8rem">
-          <p>Poniżej znajdą Państwo dwa typy formularza: dla samodzielnych oraz niesamodzielnych pracowników naukowych – należy wydrukować i ręcznie wypełnić wraz z podpisem odpowiedni formularz wraz z niżej załączoną ankietą, i przesłać go na załączony w Kontaktach adres SBP. (Proszę zauważyć, ze niesamodzielni pracownicy naukowi musza posiadać rekomendacje dwóch członków zwyczajnych SBP – którzy muszą podpisać ich deklarację).</p>
+      <div class="shelf rv" tabindex="0" aria-label="Zeszyty Naukowe">
+        <a class="cover c1" href="https://www.stowarzyszenie-biblistow.pl/publikacje/zeszyty-naukowe.html"><span class="no" aria-hidden="true">16<small>/2019</small></span><span class="ttl"><span>Zeszyty Naukowe SBP 16/2019</span><span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></span></a>
+        <div class="toc">
+          <p class="mono">SPIS TREŚCI · Część II</p>
+          <p>Marcin Chrostowski, Geografia w służbie orędzia Księgi Judyty</p>
+          <p>Aleksandra Nalewaj, Funkcje kobiet w Janowej Ewangelii w świetle opisu spotkania przy studni (J 4,1-42)</p>
+          <p>Stanisław Sadowski, Udział Piotra w męce, śmierci i zmartwychwstaniu Jezusa – Pana (J 13; 17-21)</p>
+          <p>Adam Kubiś, Starotestamentowe tło piłatowego stwierdzenia Ecce Homo w J 19,5</p>
+          <p>Zdzisław Żywica, Sumienie (syneidēsis) według św. Pawła w świetle Listu do Rzymian</p>
+          <p>Jarosław Kwiatkowski, Koncepcja oddzielenia w narracjach Rdz 1 – 3 i jej recepcja w Rz 1- 8</p>
         </div>
-        <p class="label" style="margin-top:3rem">Formularze członkostwa</p>
-        <div class="forms" style="margin-top:1rem">
-          <a href="https://www.stowarzyszenie-biblistow.pl/czlonkostwo/formularze-czlonkostwa.html">Deklaracja samodzielnych pracowników naukowych <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-          <a href="https://www.stowarzyszenie-biblistow.pl/czlonkostwo/formularze-czlonkostwa.html">Deklaracja niesamodzielnych pracowników naukowych <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-          <a href="https://www.stowarzyszenie-biblistow.pl/czlonkostwo/formularze-czlonkostwa.html">Ankieta kandydata na członka SBP <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
+        <a class="cover c2" href="https://www.stowarzyszenie-biblistow.pl/publikacje/zeszyty-naukowe.html"><span class="no" aria-hidden="true">15<small>/2018</small></span><span class="ttl"><span>Zeszyty Naukowe SBP 15/2018</span><span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></span></a>
+        <a class="cover c3" href="https://www.stowarzyszenie-biblistow.pl/publikacje/zeszyty-naukowe.html"><span class="no" aria-hidden="true">14<small>/2017</small></span><span class="ttl"><span>Zeszyty Naukowe SBP 14/2017</span><span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></span></a>
+        <a class="cover c4" href="https://www.stowarzyszenie-biblistow.pl/publikacje/zeszyty-naukowe.html"><span class="no" aria-hidden="true">13<small>/2016</small></span><span class="ttl"><span>Zeszyty Naukowe SBP 13/2016</span><span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></span></a>
+        <a class="cover c5" href="https://www.stowarzyszenie-biblistow.pl/publikacje/zeszyty-naukowe.html"><span class="no" aria-hidden="true">12<small>/2015</small></span><span class="ttl"><span>Zeszyty Naukowe SBP 12/2015</span><span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec dark" id="nagroda">
+    <div class="wrap">
+      <div class="head rv">
+        <div><span class="mono">O Stowarzyszeniu</span><h2>Nagroda SBP</h2></div>
+      </div>
+      <div class="award">
+        <div class="rv">
+          <p class="big">Nagroda SBP jest przyznawana za wybitną pozycję książkową wydaną w ciągu ostatnich trzech lat, za ważne dla biblistyki polskiej publikacje w czasopismach lub za wyróżniającą się działalność duszpasterską bądź inną działalność związaną z popularyzowaniem Biblii. (z regulaminu Nagrody SBP)</p>
+          <div class="docs">
+            <a href="http://sbp.net.pl/wp-content/uploads/2019/11/Regulamin-nagrody-SBP.pdf" target="_blank" rel="noopener"><span>Regulamin nagrody Stowarzyszenia Biblistów Polskich »</span><b>Pobierz</b></a>
+            <a href="http://sbp.net.pl/wp-content/uploads/2019/11/Uchwala-w-sprawie-ustanowienia-nagrody-SBP.pdf" target="_blank" rel="noopener"><span>Uchwała w sprawie ustanowienia nagrody Stowarzyszenia Biblistów Polskich »</span><b>Pobierz</b></a>
+          </div>
         </div>
-        <ul class="docs">
-          <li><span>Regulamin członkostwa zwyczajnego SBP -</span><a href="https://www.stowarzyszenie-biblistow.pl/uploaded/Regulamin-czlonkostwa-zwyczajnego-SBP.pdf" target="_blank" rel="noopener">POBIERZ</a></li>
+        <ul class="laur rv">
+          <li><span class="yr" aria-hidden="true">2007</span><p>Nagroda Stowarzyszenia Biblistów Polskich za rok 2007 - ks. prof. Janusz A. Frankowski</p></li>
+          <li><span class="yr" aria-hidden="true">2004</span><p>Nagroda Stowarzyszenia Biblistów Polskich za rok 2004 - ks. dr Piotr Ostański za publikację: Bibliografia Biblistyki Polskiej 1945-2002, tt. 1-2, Poznań 2002.</p></li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- ================= NARZĘDZIA ================= -->
-  <nav class="toolsbar" aria-label="Inne">
-    <div class="wrap rv">
-      <ul>
+  <section class="sec blue" id="czlonkostwo">
+    <div class="wrap">
+      <div class="head rv">
+        <div><span class="mono">Członkostwo</span><h2>Zasady członkostwa</h2></div>
+      </div>
+      <p class="big rv">Regulamin członkostwa określa, że członkami zwyczajnymi SBP mogą zostać wykładowcy Pisma Świętego, którzy posiadają co najmniej stopień licencjata teologii biblijnej lub analogiczny tytuł naukowy w pokrewnej dziedzinie. Habilitowani pracownicy naukowi uzyskują członkostwo na podstawie indywidualnie złożonego pisemnego akcesu, natomiast od pozostałych pracowników naukowo-dydaktycznych jest wymagana rekomendacja udzielona przez dwóch członków zwyczajnych.</p>
+      <div class="join rv">
+        <p class="txt">Poniżej znajdą Państwo dwa typy formularza: dla samodzielnych oraz niesamodzielnych pracowników naukowych – należy wydrukować i ręcznie wypełnić wraz z podpisem odpowiedni formularz wraz z niżej załączoną ankietą, i przesłać go na załączony w Kontaktach adres SBP. (Proszę zauważyć, ze niesamodzielni pracownicy naukowi musza posiadać rekomendacje dwóch członków zwyczajnych SBP – którzy muszą podpisać ich deklarację).</p>
+        <div>
+          <p class="mono" style="margin-bottom:.9rem;opacity:.75">Formularze członkostwa</p>
+          <div class="forms">
+            <a href="https://www.stowarzyszenie-biblistow.pl/czlonkostwo/formularze-czlonkostwa.html">Deklaracja samodzielnych pracowników naukowych <span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a>
+            <a href="https://www.stowarzyszenie-biblistow.pl/czlonkostwo/formularze-czlonkostwa.html">Deklaracja niesamodzielnych pracowników naukowych <span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a>
+            <a href="https://www.stowarzyszenie-biblistow.pl/czlonkostwo/formularze-czlonkostwa.html">Ankieta kandydata na członka SBP <span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a>
+          </div>
+          <div class="docs" style="margin-top:.6rem">
+            <a href="https://www.stowarzyszenie-biblistow.pl/uploaded/Regulamin-czlonkostwa-zwyczajnego-SBP.pdf" target="_blank" rel="noopener"><span>Regulamin członkostwa zwyczajnego SBP -</span><b>POBIERZ</b></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="sec" aria-label="Inne" style="padding-block:clamp(2.5rem,5vw,4.5rem)">
+    <div class="wrap">
+      <ul class="links rv">
         <li><a href="https://www.stepbible.org" target="_blank" rel="noopener"><b>Analiza językowa</b><small>stepbible.org</small></a></li>
         <li><a href="https://www.die-bibel.de/en" target="_blank" rel="noopener"><b>Teksty oryginalne</b><small>die-bibel.de</small></a></li>
         <li><a href="https://ixtheo.de" target="_blank" rel="noopener"><b>Bibliografia naukowa</b><small>ixtheo.de</small></a></li>
@@ -688,43 +694,32 @@ blockquote{margin:1.6rem 0;padding:0 0 0 1.5rem;border-left:2px solid var(--rubr
   </nav>
 </main>
 
-<!-- ================= KONTAKT + STOPKA ================= -->
-<footer class="sec contact" id="kontakt">
+<footer class="sec dark" id="kontakt">
   <div class="wrap">
-    <div class="grid">
-      <div class="rail rv">
-        <span class="label">Kontakt</span>
-        <h2>Dane kontaktowe</h2>
+    <div class="head rv">
+      <div><span class="mono">Kontakt</span><h2>Dane kontaktowe</h2></div>
+    </div>
+    <div id="mailbox" class="rv"><a class="mailbig" id="mailbig" href="mailto:stowarzyszeniebiblistow@gmail.com">stowarzyszeniebiblistow@gmail.com</a></div>
+    <div class="cgrid rv">
+      <div>
+        <span class="mono">Adres:</span>
+        <p class="lg">Stowarzyszenie Biblistów Polskich<br>ul. Dewajtis 5<br>01-815 Warszawa</p>
+        <a class="pill" href="https://www.google.com/maps/dir//Dewajtis+5,+01-815+Warszawa/" target="_blank" rel="noopener">Wyznacz trasę dojazdu <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
       </div>
-      <div class="main rv">
-        <div class="cgrid">
-          <div>
-            <span class="label">Adres:</span>
-            <p class="big">Stowarzyszenie Biblistów Polskich<br>ul. Dewajtis 5<br>01-815 Warszawa</p>
-            <a class="btn ghost" href="https://www.google.com/maps/dir//Dewajtis+5,+01-815+Warszawa/" target="_blank" rel="noopener">Wyznacz trasę dojazdu <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-          </div>
-          <div>
-            <span class="label">E-mail:</span>
-            <p class="big"><a class="lnk mail" href="mailto:stowarzyszeniebiblistow@gmail.com">stowarzyszeniebiblistow@gmail.com</a></p>
-            <p class="mut" style="margin-top:1.4rem">Sekretarz Zarządu SBP:</p>
-            <p>ks. dr Adrian Mętel<br><a class="lnk mail" href="mailto:adrian.metel19@gmail.com">adrian.metel19@gmail.com</a></p>
-            <a class="btn fill" href="https://www.stowarzyszenie-biblistow.pl/kontakt.html">Wyślij wiadomość <svg class="arrow" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 7h22M16 1l6 6-6 6"/></svg></a>
-          </div>
-          <div>
-            <span class="label">Numer rachunku SBP:</span>
-            <p class="mut">Donacje na rzecz stowarzyszenia można wpłacać na poniższe konto bankowe</p>
-            <p class="acct">96 1020 3176 0000 5602 0253 2604</p>
-            <p class="mut">Nazwa posiadacza rachunku:</p>
-            <p>Stowarzyszenie Biblistów Polskich;<br>Adres: ul. Dewajtis 5, 01-815 Warszawa</p>
-          </div>
-        </div>
+      <div>
+        <span class="mono">Sekretarz Zarządu SBP:</span>
+        <p class="lg">ks. dr Adrian Mętel</p>
+        <p><a class="u" href="mailto:adrian.metel19@gmail.com">adrian.metel19@gmail.com</a></p>
+        <a class="pill solid" href="https://www.stowarzyszenie-biblistow.pl/kontakt.html">Wyślij wiadomość <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
+      </div>
+      <div>
+        <span class="mono">Numer rachunku SBP:</span>
+        <p class="acct">96 1020 3176 0000 5602 0253 2604</p>
+        <p class="mut">Donacje na rzecz stowarzyszenia można wpłacać na poniższe konto bankowe</p>
+        <p class="mut">Nazwa posiadacza rachunku: Stowarzyszenie Biblistów Polskich; Adres: ul. Dewajtis 5, 01-815 Warszawa</p>
       </div>
     </div>
     <div class="foot">
-      <a class="brand" href="#start">
-        <img src="assets/logo-jasne.png" width="360" height="234" alt="Logo SBP">
-        <span>Stowarzyszenie<br>Biblistów Polskich</span>
-      </a>
       <ul>
         <li><a href="https://www.stowarzyszenie-biblistow.pl/spisy-czlonkow.html">Strefa dla członków</a></li>
         <li><a href="https://www.facebook.com/bibliscipolscy" target="_blank" rel="noopener">Facebook</a></li>
@@ -734,49 +729,84 @@ blockquote{margin:1.6rem 0;padding:0 0 0 1.5rem;border-left:2px solid var(--rubr
         <li><a href="https://www.stowarzyszenie-biblistow.pl/inne.html">Inne</a></li>
         <li><a href="https://www.stowarzyszenie-biblistow.pl/cookies.html">Rodo</a></li>
       </ul>
-      <p>Jesteś naszym 33572 gościem<br>© 2026 <a href="https://tech-studio.pl/" target="_blank" rel="noopener">Tech-Studio</a> · <a href="https://www.parochialis.pl/" target="_blank" rel="noopener">Parochialis.pl</a> · <a href="https://www.ecmentarze.pl/" target="_blank" rel="noopener">eCmentarze.pl</a></p>
+      <p>Jesteś naszym 33572 gościem · © 2026 <a href="https://tech-studio.pl/" target="_blank" rel="noopener">Tech-Studio</a> · <a href="https://www.parochialis.pl/" target="_blank" rel="noopener">Parochialis.pl</a> · <a href="https://www.ecmentarze.pl/" target="_blank" rel="noopener">eCmentarze.pl</a></p>
     </div>
   </div>
 </footer>
 
+<dialog class="sheet" id="n115" aria-labelledby="n115-t">
+  <div class="sheet-top"><h3 id="n115-t">Zaproszenia do udziału w międzynarodowej konferencji biblijnej: The Faces of Suffering: Exploring the Lives of Biblical Figures</h3><button type="button" class="x" data-close aria-label="X"></button></div>
+  <div class="sheet-body"><div class="prose"><p><strong>Oblicza cierpienia w Biblii – zaproszenie do zgłaszania referatów na konferencję w Lublinie</strong></p> <p><strong>21–22 października 2027 r.</strong> w Lublinie odbędzie się międzynarodowa konferencja biblijna „The Faces of Suffering: Exploring the Lives of Biblical Figures”. Organizatorzy zapraszają biblistów do zgłaszania referatów <strong>do 15 lutego 2027 r.</strong></p> <p>Jak postacie biblijne przeżywają cierpienie fizyczne, psychiczne, moralne czy duchowe? Jak interpretują to doświadczenie i jak na nie odpowiadają? Te pytania wyznaczają temat spotkania, które odbędzie się w Instytucie Nauk Biblijnych Katolickiego Uniwersytetu Lubelskiego Jana Pawła II przy Alejach Racławickich 14.</p> <p><strong>Zgłoszenia referatów i udział w konferencji</strong></p> <ul> <li><strong>Zgłoszenie referatu.</strong> Do 15 lutego 2027 r. należy przesłać tytuł i abstrakt za pomocą formularza zgłoszeniowego. Organizatorzy poinformują autorów o wynikach kwalifikacji <strong>1 marca 2027 r.</strong></li> <li><strong>Język i czas wystąpienia.</strong> Referaty będą wygłaszane w języku angielskim. Na każde wystąpienie przewidziano <strong>25 minut</strong>.</li> <li><strong>Forma udziału.</strong> Obrady odbędą się przede wszystkim stacjonarnie. Osoby, które nie mogą przyjechać do Lublina, będą mogły wygłosić referat online.</li> <li><strong>Rejestracja.</strong> Udział jest bezpłatny. Wcześniejsza rejestracja obowiązuje zarówno prelegentów, jak i słuchaczy.</li> </ul> <p>Konferencję organizują wspólnie Papieski Instytut Biblijny w Rzymie, Greckokatolicki Wydział Teologiczny Uniwersytetu Preszowskiego, Instytut Nauk Biblijnych Katolickiego Uniwersytetu Lubelskiego Jana Pawła II oraz Stowarzyszenie „Verbum Sacrum”.</p> <p><a href="https://forms.gle/NctMh8G8kbYEzR9K9" target="_blank" rel="noopener"><strong>Zgłoś referat lub zarejestruj się jako słuchacz</strong></a></p> <p><a href="https://conference.verbumsacrum.pl/" target="_blank" rel="noopener">Strona konferencji</a> · <a href="mailto:conference@verbumsacrum.pl">Kontakt z organizatorami</a></p></div></div>
+</dialog>
+<dialog class="sheet" id="n114" aria-labelledby="n114-t">
+  <div class="sheet-top"><h3 id="n114-t">Jesienne Dni Biblijne 2026 - But Where Shall Wisdom Be Found?</h3><button type="button" class="x" data-close aria-label="X"></button></div>
+  <div class="sheet-body"><div class="prose"><p>Instytut Nauk Biblijnych Katolickiego Uniwersytetu Lubelskiego Jana Pawła II zaprasza na międzynarodową konferencję naukową z cyklu <strong>Jesienne Dni Biblijne</strong>, która odbędzie się <strong>26–27 października 2026 r.</strong> Tematem tegorocznego spotkania będzie<strong> „Divine and Human Wisdom in the Bible and Ancient Non-Biblical Texts”.</strong> Obrady zostaną przeprowadzone <strong>online, w języku angielskim</strong>.</p> <p>Hasło przewodnie konferencji – <strong>„But Where Shall Wisdom Be Found?”</strong> – nawiązuje do pytania z Księgi Hioba (Hi 28,12a). Badacze reprezentujący polskie i zagraniczne ośrodki naukowe podejmą refleksję nad mądrością Bożą i ludzką, jej źródłami oraz znaczeniem w tradycjach biblijnych i literaturze świata starożytnego.</p> <p>Program obejmuje sześć sesji naukowych. Wśród poruszanych zagadnień znajdą się m.in. mądrość w Księdze Hioba, Księdze Syracha i Księdze Tobiasza, tradycje mądrościowe w Psalmach, starożytne egipskie pouczenia oraz teksty z Qumran. Różnorodność tematów pozwoli spojrzeć na biblijną mądrość w szerokim kontekście religijnym, literackim i kulturowym.</p> <p>Serdecznie zapraszamy biblistów, teologów, studentów oraz wszystkich zainteresowanych Biblią i dziedzictwem starożytności do udziału w tym wydarzeniu.</p></div>
+    <a class="poster" href="https://www.stowarzyszenie-biblistow.pl/uploaded/IMG_1061.png" target="_blank" rel="noopener"><img src="assets/plakat-jesienne-dni-biblijne.webp" width="706" height="1000" loading="lazy" alt="Jesienne Dni Biblijne 2026 - But Where Shall Wisdom Be Found?"></a></div>
+</dialog>
+<dialog class="sheet" id="n113" aria-labelledby="n113-t">
+  <div class="sheet-top"><h3 id="n113-t">INTERDYSCYPLINARNE SYMPOZJUM  ŚWIAT BIBLII. BIBLIA W KULTURZE ŚWIATA IV EDYCJA</h3><button type="button" class="x" data-close aria-label="X"></button></div>
+  <div class="sheet-body"><a class="poster" href="https://www.stowarzyszenie-biblistow.pl/start.html#parishNewses" target="_blank" rel="noopener"><img src="assets/plakat-swiat-biblii.webp" width="706" height="1000" loading="lazy" alt="INTERDYSCYPLINARNE SYMPOZJUM ŚWIAT BIBLII. BIBLIA W KULTURZE ŚWIATA IV EDYCJA"></a></div>
+</dialog>
+<dialog class="sheet" id="n112" aria-labelledby="n112-t">
+  <div class="sheet-top"><h3 id="n112-t">Życzenia Przewodniczącego SBP w dniu wspomnienia św. Hieronima</h3><button type="button" class="x" data-close aria-label="X"></button></div>
+  <div class="sheet-body"><a class="poster" href="https://www.stowarzyszenie-biblistow.pl/start.html#parishNewses" target="_blank" rel="noopener"><img src="assets/zyczenia-sw-hieronim.webp" width="900" height="1350" loading="lazy" alt="Życzenia Przewodniczącego SBP w dniu wspomnienia św. Hieronima"></a></div>
+</dialog>
+<dialog class="sheet" id="n111" aria-labelledby="n111-t">
+  <div class="sheet-top"><h3 id="n111-t">Sympozjum o proroku Eliaszu - Warszawa, 16-17 października 2026 r.</h3><button type="button" class="x" data-close aria-label="X"></button></div>
+  <div class="sheet-body"><div class="prose"><p>Zapraszamy na międzynarodowe sympozjum naukowe „The Wording of the Elijah Cycle and Its Early Reception”, które odbędzie się <strong>16–17 października 2026 r. w Collegium Bobolanum – Akademii Katolickiej w Warszawie</strong>.</p> <p>Spotkanie będzie poświęcone językowi, interpretacji i wczesnej recepcji biblijnego cyklu o proroku Eliaszu. W programie przewidziano wystąpienia badaczy z polskich i zagranicznych ośrodków naukowych oraz dyskusje.</p> <p>Wydarzenie odbywa się pod patronatem <strong>Stowarzyszenia Biblistów Polskich</strong>. Wstęp wolny. Szczegółowy program zamieszczono na plakacie.</p></div>
+    <a class="poster" href="https://www.stowarzyszenie-biblistow.pl/galerie/1/26-09-24-21-38-14-poster-elijah.png" target="_blank" rel="noopener"><img src="assets/plakat-eliasz.webp" width="667" height="1000" loading="lazy" alt="Sympozjum o proroku Eliaszu - Warszawa, 16-17 października 2026 r."></a></div>
+</dialog>
+
 <script>
 (function(){
-  var d=document, root=d.documentElement, top=d.getElementById('top'), bar=d.getElementById('progress');
+  var d=document, root=d.documentElement, bar=d.getElementById('progress');
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* nagłówek + pasek postępu */
-  var tick=false;
-  function onScroll(){
-    if(tick) return; tick=true;
-    requestAnimationFrame(function(){
-      var y=window.scrollY||root.scrollTop, h=root.scrollHeight-window.innerHeight;
-      top.classList.toggle('solid', y>60);
-      bar.style.transform='scaleX('+(h>0?Math.min(1,y/h):0)+')';
-      tick=false;
-    });
-  }
+  /* nagłówek na całą szerokość: najdłuższy wiersz = szerokość kolumny */
+  function fitH1(){ var box=d.getElementById('h1box'); if(!box) return; var ln=box.querySelector('.ln'); if(!ln) return;
+    var w=box.clientWidth, fs=100; if(!w) return;
+    for(var i=0;i<4;i++){ box.style.setProperty('--h1fs',fs+'px'); var sw=ln.getBoundingClientRect().width; if(!sw) return; fs=fs*w/sw*0.998; }
+    box.style.setProperty('--h1fs',fs+'px'); }
+  fitH1(); if(d.fonts&&d.fonts.ready) d.fonts.ready.then(fitH1); window.addEventListener('resize',fitH1); window.addEventListener('load',fitH1);
+
+  /* adres e-mail na całą szerokość */
+  function fitMail(){ var el=d.getElementById('mailbig'), box=d.getElementById('mailbox'); if(!el||!box) return;
+    var w=box.clientWidth, fs=60; if(!w) return;
+    for(var i=0;i<4;i++){ el.style.fontSize=fs+'px'; var sw=el.getBoundingClientRect().width; if(!sw) return; fs=Math.min(fs*w/sw*0.995,200); }
+    el.style.fontSize=fs+'px'; }
+  fitMail(); if(d.fonts&&d.fonts.ready) d.fonts.ready.then(fitMail); window.addEventListener('resize',fitMail); window.addEventListener('load',fitMail);
+  if(d.fonts&&d.fonts.load){ d.fonts.load('800 100px "Bricolage Grotesque"').then(function(){fitH1();fitMail()}).catch(function(){}); }
+  if('ResizeObserver' in window){ var lastW={}; var ro=new ResizeObserver(function(en){ en.forEach(function(e){ var k=e.target.id||'ln', w=Math.round(e.contentRect.width);
+      if(lastW[k]===w) return; lastW[k]=w; if(k==='mailbig') fitMail(); else fitH1(); }); });
+    var l0=d.querySelector('#h1box .ln'); if(l0) ro.observe(l0); var mb=d.getElementById('mailbig'); if(mb) ro.observe(mb); }
+
+  /* taśma: druga kopia dla płynnej pętli */
+  var tape=d.getElementById('tape'); if(tape){ tape.appendChild(tape.firstElementChild.cloneNode(true)); }
+
+  /* postęp czytania + ruch pasa ze zdjęciem */
+  var strip=d.getElementById('strip-img'), tick=false;
+  function onScroll(){ if(tick) return; tick=true; requestAnimationFrame(function(){
+    var y=window.scrollY||root.scrollTop, hh=root.scrollHeight-window.innerHeight;
+    bar.style.transform='scaleX('+(hh>0?Math.min(1,y/hh):0)+')';
+    if(strip && !reduce){ var r=strip.parentNode.getBoundingClientRect(); if(r.bottom>0 && r.top<window.innerHeight){
+      var p=(r.top+r.height/2-window.innerHeight/2)/window.innerHeight; strip.style.transform='translateY('+(-11.5-p*18)+'%)'; } }
+    tick=false; }); }
   window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
 
   /* menu */
   var burger=d.getElementById('burger');
   function closeMenu(){root.classList.remove('menu-open');burger.setAttribute('aria-expanded','false')}
-  burger.addEventListener('click',function(){
-    var o=root.classList.toggle('menu-open'); burger.setAttribute('aria-expanded',o?'true':'false');
-  });
-  d.querySelectorAll('.nav>li>button').forEach(function(b){
-    b.addEventListener('click',function(){
-      var li=b.parentNode, o=!li.classList.contains('open');
-      d.querySelectorAll('.nav>li.open').forEach(function(x){x.classList.remove('open');x.firstElementChild.setAttribute('aria-expanded','false')});
-      if(o){li.classList.add('open');b.setAttribute('aria-expanded','true')}
-    });
-  });
+  burger.addEventListener('click',function(){var o=root.classList.toggle('menu-open');burger.setAttribute('aria-expanded',o?'true':'false')});
+  d.querySelectorAll('.nav>li>button').forEach(function(b){ b.addEventListener('click',function(){
+    var li=b.parentNode, o=!li.classList.contains('open');
+    d.querySelectorAll('.nav>li.open').forEach(function(x){x.classList.remove('open');x.firstElementChild.setAttribute('aria-expanded','false')});
+    if(o){li.classList.add('open');b.setAttribute('aria-expanded','true')} }); });
   d.querySelectorAll('.navbox a').forEach(function(a){a.addEventListener('click',closeMenu)});
-  d.addEventListener('keydown',function(e){ if(e.key==='Escape'){closeMenu();
-    d.querySelectorAll('.nav>li.open').forEach(function(x){x.classList.remove('open')});} });
+  d.addEventListener('keydown',function(e){ if(e.key==='Escape'){closeMenu(); d.querySelectorAll('.nav>li.open').forEach(function(x){x.classList.remove('open')});} });
 
   /* A+ / A- */
   var fs=0; try{fs=parseInt(localStorage.getItem('sbp-fs')||'0',10)||0}catch(e){}
-  function setFs(n){fs=Math.max(0,Math.min(2,n)); if(fs) root.setAttribute('data-fs',fs); else root.removeAttribute('data-fs'); try{localStorage.setItem('sbp-fs',fs)}catch(e){}}
+  function setFs(n){fs=Math.max(0,Math.min(2,n)); if(fs) root.setAttribute('data-fs',fs); else root.removeAttribute('data-fs'); try{localStorage.setItem('sbp-fs',fs)}catch(e){} fitMail();}
   setFs(fs);
   d.getElementById('fs-up').addEventListener('click',function(){setFs(fs+1)});
   d.getElementById('fs-down').addEventListener('click',function(){setFs(fs-1)});
@@ -784,40 +814,27 @@ blockquote{margin:1.6rem 0;padding:0 0 0 1.5rem;border-left:2px solid var(--rubr
   /* zakładki */
   d.querySelectorAll('[role=tablist]').forEach(function(list){
     var tabs=[].slice.call(list.querySelectorAll('[role=tab]'));
-    function pick(t,focus){
-      tabs.forEach(function(x){
-        var on=x===t; x.setAttribute('aria-selected',on?'true':'false'); x.tabIndex=on?0:-1;
-        d.getElementById(x.getAttribute('aria-controls')).hidden=!on;
-      });
-      if(focus) t.focus();
-    }
+    function pick(t,focus){ tabs.forEach(function(x){ var on=x===t; x.setAttribute('aria-selected',on?'true':'false'); x.tabIndex=on?0:-1;
+      d.getElementById(x.getAttribute('aria-controls')).hidden=!on; }); if(focus) t.focus(); }
     tabs.forEach(function(t,i){
       t.addEventListener('click',function(){pick(t)});
       t.addEventListener('keydown',function(e){
-        var n=e.key==='ArrowRight'?i+1:e.key==='ArrowLeft'?i-1:e.key==='Home'?0:e.key==='End'?tabs.length-1:null;
-        if(n===null) return; e.preventDefault(); pick(tabs[(n+tabs.length)%tabs.length],true);
-      });
+        var n=(e.key==='ArrowRight'||e.key==='ArrowDown')?i+1:(e.key==='ArrowLeft'||e.key==='ArrowUp')?i-1:e.key==='Home'?0:e.key==='End'?tabs.length-1:null;
+        if(n===null) return; e.preventDefault(); pick(tabs[(n+tabs.length)%tabs.length],true); });
     });
   });
 
-  /* film w nagłówku */
-  var v=d.getElementById('hero-video');
-  if(v && !reduce){
-    v.addEventListener('playing',function(){v.classList.add('on')});
-    var p=v.play(); if(p&&p.catch) p.catch(function(){});
-    if('IntersectionObserver' in window){
-      new IntersectionObserver(function(en){ en[0].isIntersecting ? v.play().catch(function(){}) : v.pause(); },{threshold:.05}).observe(v);
-    }
-  }
+  /* wpisy w wysuwanym oknie */
+  d.querySelectorAll('[data-sheet]').forEach(function(b){ b.addEventListener('click',function(){
+    var s=d.getElementById(b.getAttribute('data-sheet')); if(s&&s.showModal){ s.showModal(); s.querySelector('.sheet-body').scrollTop=0; } }); });
+  d.querySelectorAll('dialog.sheet').forEach(function(s){
+    s.addEventListener('click',function(e){ if(e.target===s || e.target.closest('[data-close]')) s.close(); });
+  });
 
   /* wejścia przy przewijaniu — tylko to, co poniżej pierwszego ekranu */
   if(!reduce && 'IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(en){
-      en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.remove('rv-wait'); io.unobserve(e.target);} });
-    },{rootMargin:'0px 0px -8% 0px',threshold:.05});
-    d.querySelectorAll('.rv').forEach(function(el){
-      if(el.getBoundingClientRect().top>window.innerHeight*0.92){ el.classList.add('rv-wait'); io.observe(el); }
-    });
+    var io=new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.remove('rv-wait'); io.unobserve(e.target);} }); },{rootMargin:'0px 0px -6% 0px',threshold:.04});
+    d.querySelectorAll('.rv').forEach(function(el){ if(el.getBoundingClientRect().top>window.innerHeight*0.95){ el.classList.add('rv-wait'); io.observe(el); } });
   }
 })();
 </script>
